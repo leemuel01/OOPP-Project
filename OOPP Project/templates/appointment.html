@@ -2,13 +2,17 @@
 {% block content %}
 <div class="container-fluid">
     <div class="row justify-content-center">
-        <div class="col-6">
-            <form class="form-inline">
-                <div class="form-group">
-                    <label for="postalcode">Enter Postal Code:</label>
-                    <input type="text" class="form-control" id="postalcode">
-                </div>
-                <button type="submit" class="btn btm-primary">Submit</button>
-            </form>
-</div>
+        <div class="col-6 ">
+            <div class="jumbotron jumbotron-fluid text-center">
+                <form class="form-inline justify-content-center" action="">
+                    <div class="form-group">
+                        <label for="postalcode">Enter Postal Code:</label>
+                        <input type="text" class="form-control" name="postalcode" id="" aria-describedby="helpId" placeholder="123456">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}
