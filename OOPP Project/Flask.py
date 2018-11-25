@@ -9,6 +9,10 @@ def index():
 
     return render_template("home.html", title=title )
 
+@app.route("/templates/appointment.html", methods=['GET', 'POST'])
+def appointment():
+    return render_template("appointment.html")
+
 @app.route("/results", methods = ['POST', 'GET'])
 
 def profile():
