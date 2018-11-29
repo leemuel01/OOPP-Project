@@ -1,0 +1,17 @@
+*{
+    padding: 0px;
+    margin: 0px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+body {
+	background-color: rgb(255, 236, 212);
+
+}
+
+#modalstuff{
+    background-image: url("../static/images/Word\ 2.png");
+    background-size: cover;
+    background-position: right;
+    background-repeat: no-repeat;
+}

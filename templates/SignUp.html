@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/oldsignup.css') }}" />
+
+<div id="nav" class="container-fluid">
+    <a href="/">
+        <img src="../images/logo.png">
+    </a>
+</div>
+
+<div id="signup" class="container-fluid">
+
+    <p>Sign Up</p>
+    <p class="signupinv">Please fill in the form</p>
+
+    <form id="signupform" method="post" onsubmit="signup()" action="">
+
+        <div class="form-group">
+            <label for="username"> Username:</label>
+            <input type="text" name="name" id="username" placeholder="Username" required autofocus>
+        </div>
+
+        <div class="form-group">
+            <label for="password"> Password: </label>
+            <input type="password" name="pw" id="password" placeholder="Password" required>
+        </div>
+
+        <div class="form-group">
+            <label for="confirmPassword"> Confirm Password: </label>
+            <input type="password" name="pw" id="confirmPassword" placeholder="Confirm Password" required>
+        </div>
+        <div class="form-group">
+            <label for="email"> Email Address: </label>
+            <input type="email" name="email" id="email" placeholder="Email" required>
+        </div>
+        <div class="form-group">
+            <label for="email"> Full Name: </label>
+            <input type="text" name="fullname" id="fullname" placeholder="Full name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="email"> NRIC: </label>
+            <input type="text" name="nric" id="nric" placeholder="NRIC" required>
+        </div>
+
+        <button type="submit" value="Sign Up" class="btn btn-block">Continue</button>
+    </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+
+    {% if title %}
+    <title>Flask Test - {{ title }}</title>
+    {% else %}
+    <title>Flask Test </title>
+    {% endif %}
+
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/home.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/signup.css') }}" />
+
+</head>
+
+<body>
+
+    {% if title == "Sign Up" %}
+
+    {% else %}
+
+    <!-- Nav tabs -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+        <a class="navbar-brand" href="/">MedFriend</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Appointment</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/templates/Symptom Checker.html">Symptom Checker</a>
+                </li>
+
+                <li class="nav-item active">
+                    <a class="nav-link" href="/templates/trivia.html">Medical Trivia</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/templates/medical teacher.html">Medical Tutor</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/templates/feedback.html">Feedback</a>
+                </li>
+
+            </ul>
+            <ul class="navbar-nav float-right">
+                <li class="nav-item" id="loginbutton" data-toggle="modal" data-target="#myModal">
+                    <a href="#" class="nav-link btn btn-warning">Login</a>
+                </li>
+            </ul>
+            <!-- <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form> -->
+
+        </div>
+    </nav>
+    {% endif %}
+    <div class="container-fluid ">
+        {% block content %}{% endblock content%}
+    </div>
+
+
+    <div class="modal fade" id="myModal">
+        <div class="modal-dialog">
+
+            <div class="modal-content" id="modal_sign_in">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Login</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+
+                <div class="modal-body">
+
+                    <!-- This only shows up when they can't log in
+                    <p class="invalid"> Incorrect Username or Password</p> -->
+
+                    <!-- The form for log in-->
+                    <form>
+                        <div class="form-group">
+                            <label for="username1"> Username: </label>
+                            <input type="text" placeholder="Enter Username" id="username1" class="form-control"
+                                onkeydown="checkEnter(event)" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password"> Password: </label>
+                            <input type="password" placeholder="Enter Password" class="form-control" id="password"
+                                onkeydown="checkEnter(event)" required>
+                        </div>
+
+                    </form>
+
+                    <hr>
+
+                    <!-- Logs in -->
+                    <button type="button" class="btn btn-warning btn-block" onclick="gologin()"> Log in </button>
+
+                    <br>
+
+                    <!-- Signs up -->
+                    <p class="text-muted text-center small"> Don't have an account yet? </p>
+                    <!-- <a href="templates/SignUp.html"> -->
+                    <button type="button" id="toSignup" class="btn btn-warning btn-block" onclick="showsignup()">
+                        Sign Up </button>
+                    <!-- </a> -->
+                    <br>
+
+                    <a href="Forgotpassword.html">
+                        <p class="text-center">Forgot your password? </p>
+                    </a>
+
+                </div>
+
+
+            </div>
+
+            <div class="modal-content" id="modal_sign_up">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Sign Up</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <form action="">
+                        <div class="signuptab row justify-content-between">
+                            <div class="form-group col-12">
+                                <input type="text" name="name" id="username" placeholder="Username" class="form-control"
+                                    required autofocus>
+                            </div>
+
+                            <div class="form-group col-12">
+                                <input type="password" name="pw" id="password" placeholder="Password" class="form-control"
+                                    required>
+                            </div>
+
+                            <div class="form-group col-12">
+                                <input type="password" name="pw" id="confirmPassword" placeholder="Confirm Password"
+                                    class="form-control" required>
+                            </div>
+
+                            <button class="btn btn-success col-3" onclick=""> Previous </button>
+                            <button class="btn btn-success col-3" onclick="nextPrev(1)"> Next </button>
+                        </div>
+
+
+
+                        <div class="signuptab row">
+                            <div class="form-group col-12">
+                                <input type="email" name="email" id="email" placeholder="Email address" class="form-control"
+                                    required>
+                            </div>
+                            <div class="form-group col-12">
+                                <input type="text" name="fullname" id="fullname" placeholder="Full name" class="form-control"
+                                    required>
+                            </div>
+
+                            <div class="form-group col-12">
+                                <input type="text" name="nric" id="nric" placeholder="NRIC" class="form-control"
+                                    required>
+                            </div>
+                            <button class="btn btn-success col-3" onclick="nextPrev(-1)"> Previous </button>
+                            <button type="submit" value="Sign Up" class="btn btn-warning btn-block col-3">Continue</button>
+                        </div>
+
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
+
+        <!-- Javascript stuff -->
+        <script src="../static/js/signup.js"></script>
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            crossorigin="anonymous"></script>
+
+</body>
+
+</html>
