@@ -19,30 +19,29 @@ mysql = MySQL(app)
 def index():
     title = "Home"
 
+    if request.method == "POST":
+        #Fetch the form data
+        results = request.form
+        username = results["name"]
+        password = results["pw"]
+        email = results["email"]
+        fullname = results["fullname"]
+        nric = results["nric"]
+
+        # return 'success'
+
+        cur = mysql.connection.cursor()
+        cur.execute("INSERT INTO Users(Username, Password, Email, Full_Name, NRIC) VALUES(%s, %s, %s, %s, %s)", (username, password, email, fullname, nric))
+        mysql.connection.commit()
+        cur.close()
 
     return render_template("home.html", title=title )
 
 @app.route("/results", methods = ['POST', 'GET'])
 
-def profile():
-
-
-    if request.method == "POST":
-        #Fetch the form data
-        results = request.form
-        name = results["Name"]
-        grades = results["Grades"]
-        email = results["Gender"]
-
-        return 'success'
-
-        # cur = mysql.connection.cursor()
-        # cur.execute("INSERT INTO users(name, email) VALUES(%s, %s)", (name, email))
-        # mysql.connection.commit()
-        # cur.close()
-
-
-    return render_template("info.html",  result=results)
+# def profile():
+#
+#     return render_template("info.html",  result=results)
 
 
 

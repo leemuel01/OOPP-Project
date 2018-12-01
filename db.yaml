@@ -1,4 +1,4 @@
 mysql_host: 'sql12.freemysqlhosting.net'
 mysql_user: 'sql12267203'
 mysql_password: 'kfsUS7ipW3'
-mysql_db: 'flaskapp'
+mysql_db: 'sql12267203'
