@@ -41,7 +41,7 @@
             <ul class="navbar-nav mr-auto">
 
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Appointment</a>
+                    <a class="nav-link" href="/templates/Appointment.html">Appointment</a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="/templates/Symptom Checker.html">Symptom Checker</a>
@@ -105,28 +105,28 @@
                             <label for="password"> Password: </label>
                             <input type="password" placeholder="Enter Password" class="form-control" id="password"
                                 onkeydown="checkEnter(event)" required>
+                            <a href="Forgotpassword.html">
+                                <small class="text-center">Forgot your password? </small>
+                            </a>
                         </div>
 
                     </form>
 
-                    <hr>
-
                     <!-- Logs in -->
                     <button type="button" class="btn btn-warning btn-block" onclick="gologin()"> Log in </button>
 
-                    <br>
+                    <hr class="hr-text" data-content="OR">
 
                     <!-- Signs up -->
-                    <p class="text-muted text-center small"> Don't have an account yet? </p>
+                    <!-- <p class="text-muted text-center small"> Don't have an account yet? </p> -->
                     <!-- <a href="templates/SignUp.html"> -->
+
                     <button type="button" id="toSignup" class="btn btn-warning btn-block" onclick="show_signup_or_login()">
                         Sign Up </button>
                     <!-- </a> -->
                     <br>
 
-                    <a href="Forgotpassword.html">
-                        <p class="text-center">Forgot your password? </p>
-                    </a>
+
 
                 </div>
 
@@ -141,49 +141,71 @@
                 </div>
                 <!-- Modal body -->
                 <div class="modal-body">
+
+
+
                     <form action="">
-                        <div class="signuptab row justify-content-between">
-                            <div class="form-group col-12">
-                                <input type="text" name="name" id="username" placeholder="Username" class="form-control"
-                                    required autofocus>
-                            </div>
+                        <div class="signuptab">
+                            <div class="row justify-content-between">
 
-                            <div class="form-group col-12">
-                                <input type="password" name="pw" id="password" placeholder="Password" class="form-control"
-                                    required>
-                            </div>
+                                <div class="form-group col-12">
+                                    <!-- <label for="username">Username:</label> -->
+                                    <input type="text" name="name" id="username" placeholder="Username" class="form-control"
+                                        required autofocus>
+                                </div>
 
-                            <div class="form-group col-12">
-                                <input type="password" name="pw" id="confirmPassword" placeholder="Confirm Password"
-                                    class="form-control" required>
-                            </div>
+                                <div class="form-group col-12">
+                                    <input type="password" name="pw" id="password" placeholder="Password" class="form-control"
+                                        required>
+                                </div>
 
-                            <button class="btn btn-success col-3" onclick="show_signup_or_login()"> Previous </button>
-                            <button class="btn btn-success col-3" onclick="nextPrev(1)"> Next </button>
+                                <div class="form-group col-12">
+                                    <input type="password" name="pw" id="confirmPassword" placeholder="Confirm Password"
+                                        class="form-control" required>
+                                </div>
+
+                                <div class="col-5">
+                                    <button class="btn btn-warning col-md-12" onclick="show_signup_or_login()">
+                                        Previous </button>
+                                </div>
+
+                                <div class="col-5">
+                                    <button class="btn btn-warning col-md-12" onclick="nextPrev(1)"> Next </button>
+                                </div>
+                            </div>
                         </div>
 
+                        <div class="signuptab">
+                            <div class="row justify-content-between">
+
+                                <div class="form-group col-12">
+                                    <input type="email" name="email" id="email" placeholder="Email address" class="form-control"
+                                        required>
+                                </div>
+                                <div class="form-group col-12">
+                                    <input type="text" name="fullname" id="fullname" placeholder="Full name" class="form-control"
+                                        required>
+                                </div>
+
+                                <div class="form-group col-12">
+                                    <input type="text" name="nric" id="nric" placeholder="NRIC" class="form-control"
+                                        required>
+                                </div>
 
 
-                        <div class="signuptab row">
-                            <div class="form-group col-12">
-                                <input type="email" name="email" id="email" placeholder="Email address" class="form-control"
-                                    required>
-                            </div>
-                            <div class="form-group col-12">
-                                <input type="text" name="fullname" id="fullname" placeholder="Full name" class="form-control"
-                                    required>
-                            </div>
+                                <div class="col-5">
+                                    <button class="btn btn-warning col-12" onclick="nextPrev(-1)"> Previous </button>
+                                </div>
 
-                            <div class="form-group col-12">
-                                <input type="text" name="nric" id="nric" placeholder="NRIC" class="form-control"
-                                    required>
+                                <div class="col-5">
+                                    <button class="btn btn-success btn-block col-12" type="submit">Continue</button>
+                                </div>
+
                             </div>
-                            <button class="btn btn-success col-3" onclick="nextPrev(-1)"> Previous </button>
-                            <button type="submit" value="Sign Up" class="btn btn-warning btn-block col-3">Continue</button>
                         </div>
-
 
                     </form>
+
                 </div>
 
             </div>
@@ -194,7 +216,7 @@
         <script type="text/JavaScript" src="{{ url_for('static', filename='js/signup.js') }}"></script>
 
 
-        
+
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

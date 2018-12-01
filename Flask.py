@@ -71,13 +71,11 @@ def feedback():
 
 
 
-@app.route("/templates/SignUp.html", methods = ['POST', 'GET'])
-def signup():
-    title = "Sign Up"
+@app.route("/templates/Appointment.html", methods = ['POST', 'GET'])
+def appointment():
+    title = "Appointment"
 
-    if request.method == "POST":
-        results = request.form
-    return render_template("SignUp.html", title=title)
+    return render_template("appointment.html", title=title)
 
 form= Feedback("joe","the lazy fox jumped into a ditch")
 print(form.get_date())

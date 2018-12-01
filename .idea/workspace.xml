@@ -3,7 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="c439e86f-cd57-4d86-a59a-b238d22b113e" name="Default Changelist" comment="Jesus christ I've been editing the wrong files no wonder things were not working.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hello.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flask.py" beforeDir="false" afterPath="$PROJECT_DIR$/Flask.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/signup.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/signup.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/signup.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/signup.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/layout.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/layout.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -13,7 +15,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/OOPP_Project$Flask.coverage" NAME="Flask Coverage Results" MODIFIED="1543663761503" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/OOPP_Project$Flask.coverage" NAME="Flask Coverage Results" MODIFIED="1543670846731" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/OOPP_Project$Student.coverage" NAME="Student Coverage Results" MODIFIED="1543143159892" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/OOPP Project" />
   </component>
   <component name="FUSProjectUsageTrigger">
@@ -57,11 +59,12 @@
     <session id="1143349022">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="3" />
-          <entry key="project.open.time.0" value="2" />
+          <entry key="project.closed" value="5" />
+          <entry key="project.open.time.0" value="3" />
           <entry key="project.open.time.13" value="1" />
+          <entry key="project.open.time.7" value="1" />
           <entry key="project.open.time.8" value="1" />
-          <entry key="project.opened" value="4" />
+          <entry key="project.opened" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages">
@@ -90,12 +93,14 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
+          <entry key="py" value="46" />
           <entry key="txt" value="85" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="85" />
+          <entry key="Python" value="46" />
         </counts>
       </usages-collector>
     </session>
@@ -105,8 +110,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Flask.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="555">
-              <caret line="87" lean-forward="true" selection-start-line="87" selection-end-line="87" />
+            <state relative-caret-position="238">
+              <caret line="73" column="24" selection-start-line="73" selection-start-column="24" selection-end-line="73" selection-end-column="24" />
               <folding>
                 <element signature="e#0#75#0" expanded="true" />
               </folding>
@@ -127,8 +132,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/layout.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3349">
-              <caret line="197" column="36" selection-start-line="197" selection-start-column="36" selection-end-line="197" selection-end-column="36" />
+            <state relative-caret-position="3400">
+              <caret line="219" column="36" selection-start-line="219" selection-start-column="36" selection-end-line="219" selection-end-column="36" />
             </state>
           </provider>
         </entry>
@@ -137,7 +142,7 @@
         <entry file="file://$PROJECT_DIR$/static/js/signup.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="578">
-              <caret line="34" column="46" selection-start-line="34" selection-start-column="46" selection-end-line="34" selection-end-column="46" />
+              <caret line="48" column="46" selection-start-line="48" selection-start-column="46" selection-end-line="48" selection-end-column="46" />
             </state>
           </provider>
         </entry>
@@ -199,6 +204,7 @@
         <option value="$PROJECT_DIR$/OOPP Project/templates/appointment.html" />
         <option value="$PROJECT_DIR$/templates/layout.html" />
         <option value="$PROJECT_DIR$/static/js/signup.js" />
+        <option value="$PROJECT_DIR$/Flask.py" />
       </list>
     </option>
   </component>
@@ -217,7 +223,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -229,11 +234,13 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunDashboard">
@@ -300,13 +307,14 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2738255" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2852349" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32907802" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49932885" visible="true" weight="0.32907802" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -314,7 +322,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50067115" side_tool="true" weight="0.32907802" />
       <window_info anchor="bottom" id="Terminal" order="11" />
       <window_info anchor="bottom" id="Python Console" order="12" />
       <window_info anchor="bottom" id="SVN Repositories" order="13" weight="0.32907802" />
@@ -350,8 +358,8 @@
     <entry file="file://$PROJECT_DIR$/Hello.txt" />
     <entry file="file://$PROJECT_DIR$/Flask.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="555">
-          <caret line="87" lean-forward="true" selection-start-line="87" selection-end-line="87" />
+        <state relative-caret-position="238">
+          <caret line="73" column="24" selection-start-line="73" selection-start-column="24" selection-end-line="73" selection-end-column="24" />
           <folding>
             <element signature="e#0#75#0" expanded="true" />
           </folding>
@@ -368,15 +376,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/layout.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3349">
-          <caret line="197" column="36" selection-start-line="197" selection-start-column="36" selection-end-line="197" selection-end-column="36" />
+        <state relative-caret-position="3400">
+          <caret line="219" column="36" selection-start-line="219" selection-start-column="36" selection-end-line="219" selection-end-column="36" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/static/js/signup.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="578">
-          <caret line="34" column="46" selection-start-line="34" selection-start-column="46" selection-end-line="34" selection-end-column="46" />
+          <caret line="48" column="46" selection-start-line="48" selection-start-column="46" selection-end-line="48" selection-end-column="46" />
         </state>
       </provider>
     </entry>

@@ -16,18 +16,32 @@ function showtab(n) {
 }
 
 function nextPrev(a) {
+    if (validate()) {
+        current_tab = current_tab + a
 
-    current_tab = current_tab + a
+        if (current_tab > tab.length) {
+            current_tab = 0
+        }
+        else if (current_tab < 0) {
+            current_tab = tab.length
+        }
 
-    if (current_tab > tab.length) {
-        current_tab = 0
+        showtab(current_tab)
     }
-    else if (current_tab < 0) {
-        current_tab = tab.length
+
+
+}
+
+function validate() {
+    inputs = tab[current_tab].getElementsByTagName("input")
+
+    for (i = 0; i < inputs.length; i++) {
+        if (inputs[i].value == "") {
+            return false
+        }
     }
 
-    showtab(current_tab)
-
+    return true
 }
 
 showtab(current_tab)
