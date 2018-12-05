@@ -1,4 +1,9 @@
-mysql_host: 'sql12.freemysqlhosting.net'
-mysql_user: 'sql12267203'
-mysql_password: 'kfsUS7ipW3'
-mysql_db: 'sql12267203'
+#mysql_host: 'sql12.freemysqlhosting.net'
+#mysql_user: 'sql12267203'
+#mysql_password: 'kfsUS7ipW3'
+#mysql_db: 'sql12267203'
+
+mysql_host: 'localhost'
+mysql_user: 'id8008035_emedusers'
+mysql_password: 'databasepassword'
+mysql_db: 'id8008035_users'
