@@ -1,0 +1,28 @@
+#=========================flask-mysqldb database=====================================
+
+from flask_mysqldb import MySQL
+import yaml
+#Configure database login and stuff
+db = yaml.load(open("db.yaml"))
+app.config['MYSQL_HOST'] = db['mysql_host']
+app.config['MYSQL_USER'] = db['mysql_user']
+app.config['MYSQL_PASSWORD'] = db['mysql_password']
+app.config['MYSQL_DB'] = db['mysql_db']
+mysql = MySQL(app)
+
+===========================================Login info=============================
+
+mysql_host: 'sql12.freemysqlhosting.net'
+mysql_user: 'sql12268696'
+mysql_password: 'IJVyyjLFMa'
+mysql_db: 'sql12268696'
+
+mysql_host: 'sql12.freemysqlhosting.net'
+mysql_user: 'sql12267203'
+mysql_password: 'kfsUS7ipW3'
+mysql_db: 'sql12267203'
+
+mysql_host: 'localhost'
+mysql_user: 'id8008035_emedusers'
+mysql_password: 'databasepassword'
+mysql_db: 'id8008035_users'

@@ -1,0 +1,109 @@
+<div class="modal fade" id="myModal">
+        <div class="modal-dialog">
+
+            <div class="modal-content" id="modal_sign_in">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Login</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+
+                <div class="modal-body">
+
+                    <!-- This only shows up when they can't log in
+                    <p class="invalid"> Incorrect Username or Password</p> -->
+
+                    <!-- The form for log in-->
+                    <form>
+                        <fieldset>
+
+
+                            <div class="form-group">
+                                {{ form.username.label(class="form-control-label") }}
+
+                                {% if form.username.errors %}
+
+                                {{ form.username(class="form-control form-control-lg is-invalid") }}
+
+                                <div class="invalid-feedback">
+                                    {% for error in form.username.errors %}
+                                    <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+
+                                {% else %}
+
+                                {{ form.username(class="form-control form-control-lg") }}
+
+                                {% endif %}
+                            </div>
+                            <!-- <div class="form-group">
+                            <label for="username1"> Username: </label>
+                            <input type="text" placeholder="Enter Username" id="username1" class="form-control"
+                                onkeydown="checkEnter(event)" required>
+                        </div> -->
+
+                            <div class="form-group">
+
+                                {{ form.password.label(class="form-control-label") }}
+
+                                {% if form.password.errors %}
+
+                                {{ form.password(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.password.errors %}
+                                    <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                                {% else %}
+                                {{ form.password(class="form-control form-control-lg") }}
+                                {% endif %}
+                            </div>
+
+                            <div class="form-check">
+                                {{ form.remember(class="form-check-input") }}
+                                {{ form.remember.label(class="form-check-label") }}
+                            </div>
+                            <!-- <div class="form-group">
+                            <label for="password"> Password: </label>
+                            <input type="password" placeholder="Enter Password" class="form-control" id="password"
+                                onkeydown="checkEnter(event)" required>
+                            <a href="Forgotpassword.html">
+                                <small class="text-center">Forgot your password? </small>
+                            </a>
+                        </div> -->
+                        </fieldset>
+
+                        <br>
+
+                        <div class="form-group">
+                            {{ form.submit(class="btn btn-success btn-block col-12") }}
+                            <a href="Forgotpassword.html" class="text-center">
+                                <small class="text-center">Forgot your password? </small>
+                            </a>
+                        </div>
+                    </form>
+
+                    <!-- Logs in -->
+                    <!-- <button type="submit" class="btn btn-warning btn-block"> Log in </button> -->
+                    <hr class="hr-text" data-content="OR">
+
+                    <!-- Signs up -->
+                    <!-- <p class="text-muted text-center small"> Don't have an account yet? </p> -->
+                    <a href="templates/register.html">
+                        <button type="button" id="toSignup" class="btn btn-warning btn-block">
+                            Sign Up </button>
+                    </a>
+                    <br>
+
+
+
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>

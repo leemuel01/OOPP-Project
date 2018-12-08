@@ -1,0 +1,7 @@
+#navbarSupportedContent .nav-link{
+    font-size:1em;
+}
+
+.nav-link, .navbar-brand{
+    margin: 0px 10px;
+}
