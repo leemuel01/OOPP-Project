@@ -1,0 +1,213 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/profile.css') }}" />
+
+<div id="profilecontainer" class="container-fluid">
+
+    <!-- <div class="row justify-content-around">
+        <h1 class="text-center" class="col-12"> Profile </h1>
+    </div> -->
+
+
+    <div class="row justify-content-start">
+        <div id="picture" class="col-lg-1">
+            <img id="userprofilepic" src="{{ image_file }}" class="img-fluid img-thumbnail" data-toggle="modal"
+                data-target="#picchange">
+        </div>
+
+        <div class="col">
+            <p>
+                <b>Username:</b>
+                {{ current_user.username }}
+            </p>
+            <p>
+                <b> Email:</b>
+                {{ current_user.email }}
+            </p>
+        </div>
+
+        <div class="col">
+            {% if current_user.full_name %}
+            <p>
+                <b>Full Name:</b>
+                {{ current_user.full_name }}
+            </p>
+            {% endif %}
+
+            {% if current_user.nric %}
+            <p>
+                <b>NRIC:</b>
+                {{ current_user.nric }}
+            </p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div id="moreinfo">
+    <!--=================================== Navvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv =======================-->
+    <nav>
+        <ul class="nav nav-tabs nav-justified">
+            <li class="nav-item">
+                <a id="remindernav" class="nav-link active" href="#" onclick="clickmedhist(0)">Reminders</a>
+            </li>
+            <li class="nav-item">
+                <a id="medicalhistorynav" class="nav-link" href="#" onclick="clickmedhist(1)">Medical History</a>
+            </li>
+            <li class="nav-item">
+                <a id="userinfonav" class="nav-link" href="#" onclick="clickmedhist(2)">Edit User Info</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div id="reminders" class="col-12">
+        <h1 class="text-center"> No reminders for now </h1>
+    </div>
+
+    <div id="medicalhistory" class="row justify-content-center col-12" style="display: none;">
+        <h1 class="text-center col-12"> You have no medical history. </h1>
+        <div class="text-center">
+            <button class="btn btn-info col-4"> Set up one here </button>
+        </div>
+
+    </div>
+
+    <div id="updateuserinfo" style="display: none;" class="col-12">
+
+        <form action="" method="post" enctype="multipart/form-data">
+
+            {{ form.hidden_tag() }}
+            <!-- Adds a CSRF token to help with security -->
+
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4"> Account info </legend>
+
+                <div class="form-group">
+                    {{ form.username.label(class="form-control-label") }}
+
+                    {% if form.username.errors %}
+
+                    {{ form.username(class="form-control form-control-lg is-invalid") }}
+
+                    <div class="invalid-feedback">
+                        {% for error in form.username.errors %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+
+                    {% else %}
+
+                    {{ form.username(class="form-control form-control-lg") }}
+
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    {{ form.email.label(class="form-control-label") }}
+
+                    {% if form.email.errors %}
+                    {{ form.email(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.email.errors %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+
+                    {% else %}
+                    {{ form.email(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    {{ form.full_name.label(class="form-control-label") }}
+                    {% if form.full_name.errors %}
+
+                    {{ form.full_name(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.full_name.errors %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+
+                    {% else %}
+                    {{ form.full_name(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    {{ form.nric.label(class="form-control-label") }}
+                    {% if form.nric.errors %}
+
+                    {{ form.nric(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.nric.errors %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+
+                    {% else %}
+                    {{ form.nric(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    {{ form.picture.label() }}
+                    {{ form.picture(class="form-control-file") }}
+
+                    {% if form.picture.errors %}
+                    {% for error in form.picture.errors %}
+                    <span class="text-danger">{{ error }}</span><br>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+            </fieldset>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-success btn-block col-12") }}
+            </div>
+
+        </form>
+    </div>
+
+</div>
+
+
+
+
+</div>
+<!-- ======================================================= Right Side =========================================================== -->
+
+<!-- <div id="col2" class="col-lg-6 col-sm-12">
+
+        <div id="reminders" class="row justify-content-center">
+
+            <h1 class="text-center col-12"> Reminders </h1>
+
+            <div id="activites" class="col-10">
+                <br>
+
+            </div>
+
+
+        </div>
+
+
+        <div id="medical_history" class="row justify-content-center">
+
+            <h1 class="text-center col-12"> Medical History </h1>
+
+            <div id="medicalhistory" class="container-fluid col-11 col-xs-12">
+
+            </div>
+
+            <button class="btn btn-success col-11">Show All</button>
+            <br>
+        </div>
+
+
+
+
+    </div> -->
+<script src="{{ url_for('static', filename='js/profile.js') }}"></script>
+
+{% endblock %}

@@ -1,0 +1,12 @@
+/* body{
+    background-color: rgb(255, 119, 78);
+} */
+
+#profilecontainer{
+    background-color: white;
+    padding: 20px;
+}
+
+#profilecontainer p{
+    /* color: #007BFF; */
+}

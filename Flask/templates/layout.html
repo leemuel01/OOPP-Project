@@ -25,9 +25,10 @@
 <body>
 
     <!-- Navbar tabs -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-center">
+    <nav id="#navbarSupportedContent" class="navbar navbar-expand-lg navbar-light bg-light justify-content-center">
+
         <a class="navbar-brand mr-0" href="{{ url_for('index') }}" id="brandlogo">
-            <img src="../static/images/Logo.png" alt="" class="img-fluid" style="height:50px">
+            <img src="../static/images/Logo.png" alt="" class="img-fluid" style="height:8vh">
         </a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -63,8 +64,25 @@
                 <a class="nav-link active" href="{{ url_for('feedback') }}">Feedback</a>
                 </li>
             </ul>
-            <ul class="nav navbar-nav flex-row justify-content-center flex-nowrap">
-                <a href="{{ url_for('login') }}" class="nav-link active"> Login </a>
+
+            <ul id="rightside" class="nav navbar-nav flex-row justify-content-center flex-nowrap">
+                {% if current_user.is_authenticated %}
+                <li class="nav-item dropdown active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{ current_user.username }}
+                </li>
+                
+                
+                <ul class="dropdown-menu dropdown-menu-right">
+                    <li>
+                        <a href="{{ url_for('account') }}" class="nav-link active"> Profile </a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('logout') }}" class="nav-link active"> Logout </a>
+                    </li>    
+                </ul>
+                {% else %}
+                    <a href="{{ url_for('login') }}" class="nav-link active"> Login </a>
+                {% endif %}
             </ul>
 
         </div>

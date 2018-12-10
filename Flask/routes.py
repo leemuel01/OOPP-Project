@@ -1,9 +1,14 @@
-from flask import render_template, flash, url_for, redirect
+import secrets
+import os
+from PIL import Image
+from flask import render_template, flash, url_for, redirect, request
 from Flask import app, db, bcrypt
 
-from Flask.Forms import Registration_Form, Login_Form   #Form classes
-from Flask.Feedback import Feedback
+
+
+from Flask.Forms import Registration_Form, Login_Form, Update_Account_Form   #Form classes
 from Flask.Models import User, History
+from flask_login import login_user, current_user, logout_user, login_required
 
 #Flask pages
 @app.route("/", methods=['GET', 'POST'])
@@ -13,7 +18,8 @@ def index():
 
 @app.route("/templates/register.html", methods = ['POST', 'GET'])
 def register():
-
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
     form = Registration_Form()
     if form.validate_on_submit():
 
@@ -49,17 +55,80 @@ def register():
 
 @app.route("/Login", methods = ['POST', 'GET'])
 def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
 
     form = Login_Form()
     if form.validate_on_submit():
-        if form.username.data == 'test' and form.password.data == '12345678':
-            flash('You have been logged in!', 'success')
-            return redirect(url_for("index"))
+        user = User.query.filter_by(username=form.username.data).first()
 
+        if user and bcrypt.check_password_hash(user.password, form.password.data):
+            login_user(user, remember=form.remember.data)
+            next_page = request.args.get('next')
+            return redirect(next_page) if next_page else redirect(url_for("index"))
         else:
-            flash('Login unsuccessful.', 'danger')
+            flash('Login unsuccessful. Please check username and password', 'danger')
 
     return render_template("login.html",  title="Login", form=form)
+
+@app.route("/logout", methods = ['POST', 'GET'])
+def logout():
+    logout_user()
+    return redirect(url_for("index"))
+
+
+def save_picture(form_picture):
+    #saving image and making the image name random
+    random_hex = secrets.token_hex(8)
+    _, f_ext = os.path.splitext(form_picture.filename)
+    picture_fn = random_hex + f_ext
+    picture_path = os.path.join(app.root_path, 'static/images/Profile_Picture', picture_fn)
+
+    #resizes image to 200x200 px so it gets smaller. Saves memory too.
+    output_size = (200,200)
+    i = Image.open(form_picture)
+    i.thumbnail(output_size)
+
+    i.save(picture_path)
+
+    return picture_fn
+
+
+@app.route("/account", methods = ['POST', 'GET'])
+@login_required
+def account():
+
+    form = Update_Account_Form()
+    if form.validate_on_submit():
+        if form.picture.data:
+            picture_file = save_picture(form.picture.data)
+            current_user.image_file = picture_file
+        current_user.username = form.username.data
+        current_user.email = form.email.data
+        current_user.full_name = form.full_name.data
+        current_user.nric = form.nric.data
+        db.session.commit()
+        flash('Your account has been updated!', 'success')
+        return redirect(url_for('account'))
+    elif request.method == 'GET':
+        form.username.data = current_user.username
+        form.email.data = current_user.email
+        form.full_name.data = current_user.full_name
+        form.nric.data = current_user.nric
+
+    image_files = url_for('static', filename=f"images/Profile_Picture/{current_user.image_file}")
+
+    return render_template("profile.html", title="Profile",
+                           image_file=image_files, form = form)
+
+
+@app.route("/History", methods = ['POST', 'GET'])
+@login_required
+def Medical_History():
+    return render_template('edit medical history.html', title="Edit Medical History")
+
+
+
 
 
 @app.route("/Symptom Checker", methods = ['POST', 'GET'])
