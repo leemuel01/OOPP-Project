@@ -1,19 +1,19 @@
 from flask import Flask, render_template, request, flash, url_for, redirect
-from Student import Student
-app = Flask(__name__)
 
+from feedback import Feedback
+app = Flask(__name__)
+app.config['SECRET_KEY']="12345"
 @app.route("/", methods=['GET', 'POST'])
 def index():
     title = "Home"
+
+
     return render_template("home.html", title=title )
 
-@app.route("/templates/appointment.html", methods=['GET', 'POST'])
-def appointment():
-    return render_template("appointment.html")
-
 @app.route("/results", methods = ['POST', 'GET'])
+
 def profile():
-    student1 = Student("Test", "Male", "12345X")
+    # student1 = Student("Test", "Male", "12345X")
     # student1.set_mark("70")
 
     if request.method == "POST":
@@ -39,7 +39,18 @@ def teacher():
 @app.route("/templates/feedback.html", methods = ['POST', 'GET'])
 def feedback():
     title = "Feedback"
-    return render_template("feedback.html", title=title )
+    form = Feedback()
+    if form.validate_on_submit():
+        flash(f'feedback submitted.', "success")
+    return render_template("feedback.html", title=title, form = form)
+
+
+# form = Feedback("joe","the lazy fox jumped into a ditch")
+# print(form.get_date())
+# print(form.get_wordcount())
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+
+
