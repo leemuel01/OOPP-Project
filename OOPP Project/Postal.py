@@ -73,6 +73,12 @@ class Postalcode():
         else:
             return 'Error'
 
+    def getnearbyclinictest(self):
+        if self.__postalarea < 50:
+            return ''
+        else:
+            return ''
+
 
 test=Postalcode(6)
 print(test.getpostalarea())

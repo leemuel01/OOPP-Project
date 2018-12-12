@@ -13,9 +13,10 @@ def index():
 def appointment():
     return render_template("appointment.html")
 
-@app.route("/nearby.html", methods=['GET'])
+@app.route("/nearby.html", methods=['POST'])
 def nearby():
-    return render_template("nearby.html")
+    objuserpostal=Postalcode(request.form['postalcode'])
+    return render_template("nearby.html",userlocation=objuserpostal.generallocation())
 
 @app.route("/results", methods = ['POST', 'GET'])
 def profile():
