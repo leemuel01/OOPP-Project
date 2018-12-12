@@ -1,23 +1,26 @@
 {% extends "layout.html" %}
 {% block content %}
+<div class="text-center row justify-content-center">
+
+</div>
 <div class="container-fluid">
     <div class="row justify-content-center">
         <div class="col-6">
-            <form action="">
+            <form action="" method="post">
+                {{ form.hidden_tag() }}
                 <div class="form-group">
-                    <label for="">Title</label>
-                    <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
-                    <small id="helpId" class="form-text text-muted">Help text</small>
+                    {{ form.subject.label(class="form-control-label") }}
+                    {{ form.subject(class="form-control") }}
                 </div>
                 <div class="form-group">
-                    <label for="">Subject</label>
-                    <textarea class="form-control" name="" id="" rows="3"></textarea>
+                    {{ form.content.label(class="form-control-label") }}
+                    {{ form.content(class="form-control form-control-lg") }}
                 </div>
-                <button type="submit" class="btn btn-primary|secondary|success|danger|warning|info|light|dark|link">Submit</button>
+                <div class="form-group">
+                    {{ form.submit(class="btn btn-outline-info") }}
+                </div>
             </form>
         </div>
     </div>
-
-
 </div>
 {% endblock %}

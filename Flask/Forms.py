@@ -80,12 +80,12 @@ class Update_Account_Form(FlaskForm):
             user = User.query.filter_by(email=email.data).first()
             if user:
                 raise ValidationError("Email is already taken.")
-
-    def validate_nric(self, nric):
-        if nric.data != current_user.nric:
-            user = User.query.filter_by(nric=nric.data).first()
-            if user:
-                raise ValidationError("NRIC is already taken.")
+    #
+    # def validate_nric(self, nric):
+    #     if nric.data != current_user.nric:
+    #         user = User.query.filter_by(nric=nric.data).first()
+    #         if user:
+    #             raise ValidationError("NRIC is already taken.")
 
 
 #====================================================================================================================================
@@ -108,3 +108,10 @@ class Personal_Profile_Form(FlaskForm):
     address = TextAreaField("Address", validators=[])
 
     submit = SubmitField('Update')
+
+class Feedback(FlaskForm):
+    subject = StringField("Subject", validators=[DataRequired()])
+
+    content = TextAreaField("Content", validators=[DataRequired(),Length(max=255)])
+
+submit = SubmitField("Submit")

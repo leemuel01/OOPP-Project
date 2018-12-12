@@ -6,8 +6,8 @@ from Flask import app, db, bcrypt
 
 
 
-from Flask.Forms import Registration_Form, Login_Form, Update_Account_Form, Personal_Profile_Form   #Form classes
-from Flask.Models import User, Personal_Profile
+from Flask.Forms import Registration_Form, Login_Form, Update_Account_Form, Personal_Profile_Form, Feedback   #Form classes
+from Flask.Models import User, Personal_Profile, Content
 from flask_login import login_user, current_user, logout_user, login_required
 
 #Flask pages
@@ -213,8 +213,16 @@ def teacher():
 @app.route("/Feedback", methods = ['POST', 'GET'])
 def feedback():
     title = "Feedback"
-    return render_template("feedback.html", title=title )
+    form = Feedback()
+    if form.validate_on_submit():
+        content = Content(subject=form.subject.data, content=form.content.data)
+        db.session.add(content)
+        db.session.commit()
 
+
+        flash(f'feedback submitted.', "success")
+
+    return render_template("feedback.html", title=title, form = form)
 
 
 #====================================== Appointment Page =========================================

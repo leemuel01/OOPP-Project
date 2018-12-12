@@ -73,16 +73,19 @@
             </li>
         </ul>
     </nav>
+    
+    <div class="container-fluid">
+            {% if title == "History" %}
+            {% include 'profile_medhist.html' %}
+        
+            {% elif title == "Reminder" %}
+            {% include 'profile_reminder.html' %}
+        
+            {% elif title == "Edit" %}
+            {% include 'profile_edit.html' %}
+            {% endif %}
+    </div>
 
-    {% if title == "History" %}
-    {% include 'profile_medhist.html' %}
-
-    {% elif title == "Reminder" %}
-    {% include 'profile_reminder.html' %}
-
-    {% elif title == "Edit" %}
-    {% include 'profile_edit.html' %}
-    {% endif %}
 
 
 </div>
