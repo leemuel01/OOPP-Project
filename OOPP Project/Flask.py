@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, flash, url_for, redirect
-
+from feedback import Content
 from feedback import Feedback
 app = Flask(__name__)
 app.config['SECRET_KEY']="12345"
@@ -41,6 +41,9 @@ def feedback():
     title = "Feedback"
     form = Feedback()
     if form.validate_on_submit():
+
+
+
         flash(f'feedback submitted.', "success")
     return render_template("feedback.html", title=title, form = form)
 
