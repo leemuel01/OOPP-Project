@@ -50,103 +50,47 @@
     <nav>
         <ul class="nav nav-tabs nav-justified">
             <li class="nav-item">
-                <a id="remindernav" class="nav-link active" href="#" onclick="clickmedhist(0)">Reminders</a>
+                {% if title == "Reminder" or title == "Profile" %}
+                <a id="remindernav" class="nav-link active" href="{{ url_for('profile_reminder') }}">Reminders</a>
+                {% else %}
+                <a id="remindernav" class="nav-link" href="{{ url_for('profile_reminder') }}">Reminders</a>
+                {% endif %}
             </li>
             <li class="nav-item">
-                <a id="medicalhistorynav" class="nav-link" href="#" onclick="clickmedhist(1)">Medical History</a>
+                {% if title == "History" %}
+                <a id="medicalhistorynav" class="nav-link active" href="{{ url_for('profile_history') }}">Medical History</a>
+                {% else %}
+                <a id="medicalhistorynav" class="nav-link" href="{{ url_for('profile_history') }}">Medical History</a>
+                {% endif %}
+
             </li>
             <li class="nav-item">
-                <a id="userinfonav" class="nav-link" href="#" onclick="clickmedhist(2)">Personal Particulars</a>
+                {% if title == "Edit" %}
+                <a id="userinfonav" class="nav-link active" href="{{ url_for('profile_edit') }}">Personal Particulars</a>
+                {% else %}
+                <a id="userinfonav" class="nav-link" href="{{ url_for('profile_edit') }}">Personal Particulars</a>
+                {% endif %}
             </li>
         </ul>
     </nav>
 
-    <div id="reminders" class="col-12">
-        <h1 class="text-center"> No reminders for now </h1>
-    </div>
+    {% if title == "History" %}
+    {% include 'profile_medhist.html' %}
 
-    <div id="medicalhistory" class="row justify-content-center col-12" style="display: none;">
-        <h1 class="text-center col-12"> You have no medical history. </h1>
-        <div class="text-center">
-            <a href="{{ url_for('Medical_History') }}">
-                <button class="btn btn-info col-4"> Set up one here </button>
-            </a>
+    {% elif title == "Reminder" %}
+    {% include 'profile_reminder.html' %}
 
-        </div>
-
-    </div>
-
-    <div id="updateuserinfo" style="display: none;" class="col-12">
-        <form action="" method="post" enctype="multipart/form-data">
-
-            {{ form.hidden_tag() }}
-            <!-- Adds a CSRF token to help with security -->
-
-            <fieldset class="form-group">
-
-                <!-- <legend class="border-bottom mb-4"> Account info </legend> -->
-
-                <div class="form-group">
-                    {{ form.username.label(class="form-control-label") }}
-
-                    {% if form.username.errors %}
-
-                    {{ form.username(class="form-control form-control-lg is-invalid") }}
-
-                    <div class="invalid-feedback">
-                        {% for error in form.username.errors %}
-                        <span>{{ error }}</span>
-                        {% endfor %}
-                    </div>
-
-                    {% else %}
-
-                    {{ form.username(class="form-control form-control-lg") }}
-
-                    {% endif %}
-                </div>
-
-                <div class="form-group">
-                    {{ form.email.label(class="form-control-label") }}
-
-                    {% if form.email.errors %}
-                    {{ form.email(class="form-control form-control-lg is-invalid") }}
-                    <div class="invalid-feedback">
-                        {% for error in form.email.errors %}
-                        <span>{{ error }}</span>
-                        {% endfor %}
-                    </div>
-
-                    {% else %}
-                    {{ form.email(class="form-control form-control-lg") }}
-                    {% endif %}
-                </div>
-
-                <div class="form-group">
-                    {{ form.picture.label() }}
-                    {{ form.picture(class="form-control-file") }}
-
-                    {% if form.picture.errors %}
-                    {% for error in form.picture.errors %}
-                    <span class="text-danger">{{ error }}</span><br>
-                    {% endfor %}
-                    {% endif %}
-                </div>
-            </fieldset>
-
-            <div class="form-group">
-                {{ form.submit(class="btn btn-success btn-block col-12") }}
-            </div>
-
-        </form>
-    </div>
-
-</div>
-
-
+    {% elif title == "Edit" %}
+    {% include 'profile_edit.html' %}
+    {% endif %}
 
 
 </div>
+
+
+
+
+
 <!-- ======================================================= Right Side =========================================================== -->
 
 <!-- <div id="col2" class="col-lg-6 col-sm-12">
@@ -180,6 +124,6 @@
 
 
     </div> -->
-<script src="{{ url_for('static', filename='js/profile.js') }}"></script>
+<!-- <script src="{{ url_for('static', filename='js/profile.js') }}"></script> -->
 
 {% endblock %}

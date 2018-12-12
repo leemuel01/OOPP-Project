@@ -80,6 +80,7 @@ def logout():
     return redirect(url_for("index"))
 
 
+
 def save_picture(form_picture):
     #saving image and making the image name random
     random_hex = secrets.token_hex(8)
@@ -97,11 +98,36 @@ def save_picture(form_picture):
     return picture_fn
 
 
-@app.route("/account", methods = ['POST', 'GET'])
+@app.route("/Profile", methods = ['POST', 'GET'])
 @login_required
 def account():
 
+    image_files = url_for('static', filename=f"images/Profile_Picture/{current_user.image_file}")
+
+    return render_template("profile.html", title="Profile",
+                           image_file=image_files)
+
+
+@app.route("/Profile/Reminder", methods = ['POST', 'GET'])
+@login_required
+def profile_reminder():
+    image_files = url_for('static', filename=f"images/Profile_Picture/{current_user.image_file}")
+    return render_template("profile.html", title="Reminder", image_file=image_files)
+
+
+@app.route("/Profile/History", methods = ['POST', 'GET'])
+@login_required
+def profile_history():
+    image_files = url_for('static', filename=f"images/Profile_Picture/{current_user.image_file}")
+    return render_template("profile.html", title="History", image_file=image_files)
+
+
+@app.route("/Profile/Edit", methods = ['POST', 'GET'])
+@login_required
+def profile_edit():
+
     form = Update_Account_Form()
+
     if form.validate_on_submit():
         if form.picture.data:
             picture_file = save_picture(form.picture.data)
@@ -109,8 +135,6 @@ def account():
 
         current_user.username = form.username.data
         current_user.email = form.email.data
-        # current_user.full_name = form.full_name.data
-        # current_user.nric = form.nric.data
 
         db.session.commit()
         flash('Your account has been updated!', 'success')
@@ -119,13 +143,12 @@ def account():
     elif request.method == 'GET':
         form.username.data = current_user.username
         form.email.data = current_user.email
-        # form.full_name.data = current_user.full_name
-        # form.nric.data = current_user.nric
+
 
     image_files = url_for('static', filename=f"images/Profile_Picture/{current_user.image_file}")
 
-    return render_template("profile.html", title="Profile",
-                           image_file=image_files, form = form)
+    return render_template("profile.html", title="Edit", image_file=image_files, form=form)
+
 
 
 @app.route("/History", methods = ['POST', 'GET'])
@@ -137,20 +160,28 @@ def Medical_History():
 
     if form.validate_on_submit():
         if user.personal_profile == None:
-            history = Personal_Profile(full_name=form.full_name.data, nric=form.nric.data, user_id=current_user.id)
+            history = Personal_Profile(full_name=form.full_name.data,
+                                       nric=form.nric.data,
+                                       age=form.birthday.data,
+                                       sex=form.sex.data,
+                                       address=form.address.data,
+                                       user_id=current_user.id)
             db.session.add(history)
 
         else:
             current_user.personal_profile.nric = form.nric.data
             current_user.personal_profile.full_name = form.full_name.data
+            current_user.personal_profile.age = form.birthday.data
+            current_user.personal_profile.sex = form.sex.data
+            current_user.personal_profile.address = form.address.data
 
         db.session.commit()
         flash(f'Your personal details have been updated', 'success')
         return redirect(url_for('account'))
 
-    elif user.personal_profile != None and request.method == 'GET':
-        form.full_name.data = user.personal_profile.full_name
-        form.nric.data = user.personal_profile.nric
+    # elif user.personal_profile != None and request.method == 'GET':
+    #     form.full_name.data = user.personal_profile.full_name
+    #     form.nric.data = user.personal_profile.nric
 
     return render_template('edit medical history.html', title="Edit Medical History", form=form)
 

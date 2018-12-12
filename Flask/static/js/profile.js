@@ -19,5 +19,6 @@ function clickmedhist(n) {
     }
     navs[n].className = "nav-link active"
     content[n].style.display = "block"
+    content[n].className = "row justify-content-center"
 
 }

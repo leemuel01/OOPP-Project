@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
 from flask_login import current_user
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, DateTimeField, SelectField, TextAreaField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, DateTimeField, SelectField, TextAreaField, DateField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 
 from Flask.Models import User
@@ -101,10 +101,10 @@ class Personal_Profile_Form(FlaskForm):
                            # Length(min=9, max=9, message="Please enter a valid NRIC")
                        ])
 
-    # birthday = DateTimeField('Date of Birth', format='%m/%d/%y')
-    #
-    # sex = SelectField("Sex", choices=[('m', 'Male'), ('f', 'Female'), ('o', 'Others')])
-    #
-    # address = TextAreaField("Address", validators=[])
+    birthday = DateField('Date of Birth', format='%d/%m/%Y')
+
+    sex = SelectField("Sex", choices=[('Male', 'Male'), ('Female', 'Female'), ('Others', 'Others')])
+
+    address = TextAreaField("Address", validators=[])
 
     submit = SubmitField('Update')
