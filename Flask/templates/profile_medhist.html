@@ -1,0 +1,49 @@
+
+<div id="medicalhistory" class="row justify-content-center">
+    {% if current_user.personal_profile %}
+    <div class="col-12">
+        <h3 class="text-center">Personal Profile</h3>
+    </div>
+    <div class="col-lg-4">
+        <p>
+            <b>Full Name:</b>
+            {{ current_user.personal_profile.full_name }}
+        </p>
+
+        <p>
+            <b>NRIC:</b>
+            {{ current_user.personal_profile.nric }}
+        </p>
+
+
+    </div>
+
+    <div class="col-lg-4">
+        <p>
+            <b>Age:</b>
+            {{ current_user.personal_profile.age }}
+        </p>
+
+        <p>
+            <b>Sex:</b>
+            {{ current_user.personal_profile.sex }}
+        </p>
+
+        <p>
+            <b>Address:</b>
+            {{ current_user.personal_profile.address }}
+        </p>
+    </div>
+
+    {% else %}
+
+    {% endif %}
+    <h1 class="text-center col-12"> You have no medical history. </h1>
+    
+    <div class="text-center">
+        <a href="{{ url_for('Medical_History') }}">
+            <button class="btn btn-info col-12"> Set up one here </button>
+        </a>
+    </div>
+</div>
+
