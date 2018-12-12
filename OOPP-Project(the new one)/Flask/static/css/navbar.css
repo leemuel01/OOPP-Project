@@ -1,0 +1,17 @@
+    /* .navbar-custom {
+        background-color: #b4b4b4;
+    } */
+
+#navbarSupportedContent .nav-link{
+    font-size:1em;
+    /* color: #007BFF; */
+    font-weight: 500;
+}
+
+.nav-link, .navbar-brand{
+    margin: 0px 10px;
+}
+
+#rightside:hover{
+    cursor: pointer;
+}
