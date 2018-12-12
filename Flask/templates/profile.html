@@ -28,17 +28,17 @@
         </div>
 
         <div class="col">
-            {% if current_user.full_name %}
+            {% if current_user.personal_profile.full_name %}
             <p>
                 <b>Full Name:</b>
-                {{ current_user.full_name }}
+                {{ current_user.personal_profile.full_name }}
             </p>
             {% endif %}
 
-            {% if current_user.nric %}
+            {% if current_user.personal_profile.nric %}
             <p>
                 <b>NRIC:</b>
-                {{ current_user.nric }}
+                {{ current_user.personal_profile.nric }}
             </p>
             {% endif %}
         </div>
@@ -56,7 +56,7 @@
                 <a id="medicalhistorynav" class="nav-link" href="#" onclick="clickmedhist(1)">Medical History</a>
             </li>
             <li class="nav-item">
-                <a id="userinfonav" class="nav-link" href="#" onclick="clickmedhist(2)">Edit User Info</a>
+                <a id="userinfonav" class="nav-link" href="#" onclick="clickmedhist(2)">Personal Particulars</a>
             </li>
         </ul>
     </nav>
@@ -68,20 +68,23 @@
     <div id="medicalhistory" class="row justify-content-center col-12" style="display: none;">
         <h1 class="text-center col-12"> You have no medical history. </h1>
         <div class="text-center">
-            <button class="btn btn-info col-4"> Set up one here </button>
+            <a href="{{ url_for('Medical_History') }}">
+                <button class="btn btn-info col-4"> Set up one here </button>
+            </a>
+
         </div>
 
     </div>
 
     <div id="updateuserinfo" style="display: none;" class="col-12">
-
         <form action="" method="post" enctype="multipart/form-data">
 
             {{ form.hidden_tag() }}
             <!-- Adds a CSRF token to help with security -->
 
             <fieldset class="form-group">
-                <legend class="border-bottom mb-4"> Account info </legend>
+
+                <!-- <legend class="border-bottom mb-4"> Account info </legend> -->
 
                 <div class="form-group">
                     {{ form.username.label(class="form-control-label") }}
@@ -120,38 +123,6 @@
                 </div>
 
                 <div class="form-group">
-                    {{ form.full_name.label(class="form-control-label") }}
-                    {% if form.full_name.errors %}
-
-                    {{ form.full_name(class="form-control form-control-lg is-invalid") }}
-                    <div class="invalid-feedback">
-                        {% for error in form.full_name.errors %}
-                        <span>{{ error }}</span>
-                        {% endfor %}
-                    </div>
-
-                    {% else %}
-                    {{ form.full_name(class="form-control form-control-lg") }}
-                    {% endif %}
-                </div>
-
-                <div class="form-group">
-                    {{ form.nric.label(class="form-control-label") }}
-                    {% if form.nric.errors %}
-
-                    {{ form.nric(class="form-control form-control-lg is-invalid") }}
-                    <div class="invalid-feedback">
-                        {% for error in form.nric.errors %}
-                        <span>{{ error }}</span>
-                        {% endfor %}
-                    </div>
-
-                    {% else %}
-                    {{ form.nric(class="form-control form-control-lg") }}
-                    {% endif %}
-                </div>
-
-                <div class="form-group">
                     {{ form.picture.label() }}
                     {{ form.picture(class="form-control-file") }}
 
@@ -162,6 +133,7 @@
                     {% endif %}
                 </div>
             </fieldset>
+
             <div class="form-group">
                 {{ form.submit(class="btn btn-success btn-block col-12") }}
             </div>

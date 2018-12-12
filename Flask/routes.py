@@ -6,8 +6,8 @@ from Flask import app, db, bcrypt
 
 
 
-from Flask.Forms import Registration_Form, Login_Form, Update_Account_Form   #Form classes
-from Flask.Models import User, History
+from Flask.Forms import Registration_Form, Login_Form, Update_Account_Form, Personal_Profile_Form   #Form classes
+from Flask.Models import User, Personal_Profile
 from flask_login import login_user, current_user, logout_user, login_required
 
 #Flask pages
@@ -21,24 +21,27 @@ def register():
     if current_user.is_authenticated:
         return redirect(url_for('index'))
     form = Registration_Form()
+
     if form.validate_on_submit():
 
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8') #encryption password
 
-        user = User(username=form.username.data, email=form.email.data, password=hashed_password, full_name=form.full_name.data, nric=form.nric.data)
+        user = User(username=form.username.data, email=form.email.data, password=hashed_password)
+        #full_name=form.full_name.data, nric=form.nric.data
 
         #adding the user to database
         db.session.add(user)
         db.session.commit()
 
-        flash(f'Your account has been created! You are not able to log in.', 'success')
+        flash(f'Your account has been created! You are now able to log in.', 'success')
 
         #get form data
-        username = form.username.data
-        password = form.password.data
-        email = form.email.data
-        fullname = form.full_name.data
-        nric = form.nric.data
+        # username = form.username.data
+        # password = form.password.data
+        # email = form.email.data
+
+        # fullname = form.full_name.data
+        # nric = form.nric.data
 
 
         # #flask-mysqldb stuff
@@ -103,18 +106,21 @@ def account():
         if form.picture.data:
             picture_file = save_picture(form.picture.data)
             current_user.image_file = picture_file
+
         current_user.username = form.username.data
         current_user.email = form.email.data
-        current_user.full_name = form.full_name.data
-        current_user.nric = form.nric.data
+        # current_user.full_name = form.full_name.data
+        # current_user.nric = form.nric.data
+
         db.session.commit()
         flash('Your account has been updated!', 'success')
         return redirect(url_for('account'))
+
     elif request.method == 'GET':
         form.username.data = current_user.username
         form.email.data = current_user.email
-        form.full_name.data = current_user.full_name
-        form.nric.data = current_user.nric
+        # form.full_name.data = current_user.full_name
+        # form.nric.data = current_user.nric
 
     image_files = url_for('static', filename=f"images/Profile_Picture/{current_user.image_file}")
 
@@ -124,8 +130,29 @@ def account():
 
 @app.route("/History", methods = ['POST', 'GET'])
 @login_required
+
 def Medical_History():
-    return render_template('edit medical history.html', title="Edit Medical History")
+    user = User.query.filter_by(username=current_user.username).first()
+    form = Personal_Profile_Form()
+
+    if form.validate_on_submit():
+        if user.personal_profile == None:
+            history = Personal_Profile(full_name=form.full_name.data, nric=form.nric.data, user_id=current_user.id)
+            db.session.add(history)
+
+        else:
+            current_user.personal_profile.nric = form.nric.data
+            current_user.personal_profile.full_name = form.full_name.data
+
+        db.session.commit()
+        flash(f'Your personal details have been updated', 'success')
+        return redirect(url_for('account'))
+
+    elif user.personal_profile != None and request.method == 'GET':
+        form.full_name.data = user.personal_profile.full_name
+        form.nric.data = user.personal_profile.nric
+
+    return render_template('edit medical history.html', title="Edit Medical History", form=form)
 
 
 

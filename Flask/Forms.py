@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
 from flask_login import current_user
-from wtforms import StringField, PasswordField, SubmitField, BooleanField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, DateTimeField, SelectField, TextAreaField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 
 from Flask.Models import User
@@ -20,11 +20,7 @@ class Registration_Form(FlaskForm):
     email = StringField('Email',
                         validators=[DataRequired(), Email()])
 
-    full_name = StringField("Full Name",
-                            validators=[DataRequired()])
 
-    nric = StringField("NRIC",
-                       validators=[DataRequired(), Length(min=9, max=9, message="Please enter a valid NRIC")])
 
     submit = SubmitField('Sign Up')
 
@@ -40,10 +36,10 @@ class Registration_Form(FlaskForm):
         if user:
             raise ValidationError("Email is already taken.")
 
-    def validate_nric(self, nric):
-        user = User.query.filter_by(nric=nric.data).first()
-        if user:
-            raise ValidationError("NRIC is already taken.")
+    # def validate_nric(self, nric):
+    #     user = User.query.filter_by(nric=nric.data).first()
+    #     if user:
+    #         raise ValidationError("NRIC is already taken.")
 
 
 
@@ -66,12 +62,6 @@ class Update_Account_Form(FlaskForm):
 
     email = StringField('Email',
                         validators=[DataRequired(), Email()])
-
-    full_name = StringField("Full Name",
-                            validators=[DataRequired()])
-
-    nric = StringField("NRIC",
-                       validators=[DataRequired(), Length(min=9, max=9, message="Please enter a valid NRIC")])
 
     picture = FileField('Update Profile Picture', validators=[FileAllowed(['jpg', 'png', 'gif'])])
 
@@ -102,6 +92,19 @@ class Update_Account_Form(FlaskForm):
 #====================================================================================================================================
 #====================================================================================================================================
 
-class Medical_History(FlaskForm):
-    pass
+class Personal_Profile_Form(FlaskForm):
+    full_name = StringField("Full Name",
+                            validators=[])
 
+    nric = StringField("NRIC",
+                       validators=[
+                           # Length(min=9, max=9, message="Please enter a valid NRIC")
+                       ])
+
+    # birthday = DateTimeField('Date of Birth', format='%m/%d/%y')
+    #
+    # sex = SelectField("Sex", choices=[('m', 'Male'), ('f', 'Female'), ('o', 'Others')])
+    #
+    # address = TextAreaField("Address", validators=[])
+
+    submit = SubmitField('Update')

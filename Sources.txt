@@ -1,0 +1,14 @@
+Flask tutorial:
+https://www.youtube.com/playlist?list=PL-osiE80TeTs4UjLw5MM6OjgkjFeUxCYH
+
+Creating One-To-Many Relationships in Flask-SQLAlchemy:
+https://www.youtube.com/watch?v=juPQ04_twtA
+
+WTForms Documentation:
+https://wtforms.readthedocs.io/en/stable/index.html#
+
+
+
+
+Medical History:
+https://upload.wikimedia.org/wikipedia/commons/a/ad/Hx_in_PEDz.pdf
