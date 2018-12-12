@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request, flash, url_for, redirect
 from Student import Student
+from Postal import Postalcode
+
 app = Flask(__name__)
 
 @app.route("/", methods=['GET', 'POST'])
@@ -7,9 +9,13 @@ def index():
     title = "Home"
     return render_template("home.html", title=title )
 
-@app.route("/templates/appointment.html", methods=['GET', 'POST'])
+@app.route("/appointment.html", methods=['GET', 'POST'])
 def appointment():
     return render_template("appointment.html")
+
+@app.route("/nearby.html", methods=['GET'])
+def nearby():
+    return render_template("nearby.html")
 
 @app.route("/results", methods = ['POST', 'GET'])
 def profile():
