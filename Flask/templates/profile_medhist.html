@@ -1,0 +1,131 @@
+<div class="row justify-content-around">
+<div class="col-2">
+    <div class="row justify-content-center">
+        <div class="col-12">
+            <br>
+            <h3 class="text-center">Personal Profile</h3>
+            <hr>
+        </div>
+        {% if current_user.personal_profile %}
+
+    </div>
+
+    <p>
+        <b>Full Name:</b>
+        {{ current_user.personal_profile.full_name }}
+    </p>
+
+    <p>
+        <b>NRIC:</b>
+        {{ current_user.personal_profile.nric }}
+    </p>
+
+
+
+
+
+    <p>
+        <b>Age:</b>
+        {{ current_user.personal_profile.age }}
+    </p>
+
+    <p>
+        <b>Sex:</b>
+        {{ current_user.personal_profile.sex }}
+    </p>
+
+
+
+
+    <p>
+        <b>Address:</b>
+        {{ current_user.personal_profile.address }}
+    </p>
+
+
+
+    <div class="row justify-content-center">
+        <div class="text-center">
+            <a href="{{ url_for('Personal_Details') }}">
+                <button class="btn btn-info col"> Update </button>
+            </a>
+        </div>
+    </div>
+
+    {% else %}
+    <div class="row justify-content-center">
+        <h4 class="text-center col-12"> You have no personal profile recorded. </h4>
+
+        <div class="text-center">
+            <a href="{{ url_for('Personal_Details') }}">
+                <button class="btn btn-info col"> Set up one here </button>
+            </a>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+
+
+
+<div class="col-9">
+
+    <div class="row justify-content-center">
+        <div class="col-12">
+            <br>
+            <h3 class="text-center">Past Medical History</h3>
+            <hr>
+        </div>
+        {% if current_user.past_medical_history %}
+
+    </div>
+    <div class="row justify-content-start">
+
+        <div class="col">
+            <p>
+                <b>Previous Admissions:</b>
+                {{ current_user.past_medical_history.previous_admissions }}
+            </p>
+
+            <p>
+                <b>Previous Surgeries:</b>
+                {{ current_user.past_medical_history.previous_surgeries }}
+            </p>
+
+
+        </div>
+
+        <div class="col">
+            <p>
+                <b>History of Blood Transfusion:</b>
+                {{ current_user.past_medical_history.blood_transfusion_history }}
+            </p>
+
+            <p>
+                <b>History of Allergies:</b>
+                {{ current_user.past_medical_history.allergy_history }}
+            </p>
+
+        </div>
+
+        <div class="col">
+            <p>
+                <b>Address:</b>
+                {{ current_user.personal_profile.address }}
+            </p>
+        </div>
+    </div>
+
+    {% else %}
+    <div class="row justify-content-center">
+        <h4 class="text-center col-12"> You have no past medical history recorded. </h4>
+
+        <div class="text-center">
+            <a href="{{ url_for('Previous_Admissions') }}">
+                <button class="btn btn-info col"> Set up one here </button>
+            </a>
+        </div>
+    </div>
+    {% endif %}
+</div>
+</div>
