@@ -1,0 +1,101 @@
+===============Personal Profile==========
+name
+age
+sex
+address
+
+admission through
+time of admission
+source of info
+
+================Systemic Review==============
+
+General
+Eye
+Ear
+Neck
+
+CVS - cardiovascular system
+Infectious
+Respiratory
+Mouth
+Skin
+
+CNS - central nervous system
+MSS - Musculoskeletal System
+UGS - Urogenital Sinus
+GI - gastrointestinal
+
+================Past Medical History===========
+Previous admission
+Previous surgeries
+History of blood transfusion
+History of allergy
+Accidents, injuries
+Previous investigations
+
+================Perinatal History================
+-Prenatal
+Mother's age
+Maternal fever or rash
+Maternal diabetes
+Drugs taking
+Exposure to radiation
+Antenatal care
+Prolonged rupture of membrane > 18-24h
+Duration of pregnancy
+
+-Natal
+Delivery mode
+Crying
+Birth wt
+
+-Post-natal
+Neonatal admissions
+Neonatal jaundice
+
+====================Nutrition History=============
+Breast feeding(frequency, duration)
+Bottle feeding(frequency, amount, reason for bottle)
+Wt gain
+Weaning
+Table food(type, amount)
+
+=================Developmental History===========
+Gross motor
+Fine motor
+Language
+Social
+School performance
+
+=================Vaccination History===============
+Type of vaccine
+Age of vaccine
+ACcording JNP, UNRWA
+complication
+
+====================Family History=================
+Mother's age
+Father's age
+Consanguinity
+Number of children and similar conditions
+Genetic diseases
+Early deaths
+
+====================Social History=================
+
+House (rooms, ventilation)
+Occupation of father
+Income
+Insurance
+Animals
+Smoking
+ 
+====================Psychiatric History============
+Anxiety
+Emotional problem
+Temper
+School refusal
+Mental problem
+Behavioral problem
+Mood disorders
