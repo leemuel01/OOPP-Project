@@ -1,13 +1,44 @@
-<!DOCTYPE html>
-<html>
-<title>
-first aid
-</title>
-<body>
-	<img src="..."><p>simple first aid</p>
-		<video width="320" height="240" controls>
-		<source src="..." type="video/mp4">
-		<source src="..." type="video/ogg">
-		</video>
-</body>
-</html>
+{% extends "layout.html" %}
+
+{% block content %}
+    <img src="..."><p>simple first aid</p>
+    <video width="320" height="240" controls>
+        <source src="..." type="video/mp4">
+        <source src="..." type="video/ogg">
+    </video>
+
+    <form action="" method="post">
+
+        {{ form.hidden_tag() }} <!-- Adds a CSRF token to help with security -->
+
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Leave a comment. Like and Subscribe. Smash that bell button.</legend>
+
+            <div class="form-group">
+                {{ form.comment.label(class="form-control-label") }}
+
+                {% if form.comment.errors %}
+
+                    {{ form.comment(class="form-control form-control-lg is-invalid") }}
+
+                    <div class="invalid-feedback">
+                        {% for error in form.comment.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+
+                {% else %}
+
+                    {{ form.comment(class="form-control form-control-lg") }}
+
+                {% endif %}
+            </div>
+
+
+        </fieldset>
+
+        {{ form.submit(class="btn btn-success btn-block col-12") }}
+    </form>
+
+    {{ comments.content }}
+{% endblock %}

@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
 from flask_login import current_user
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, DateTimeField, SelectField, TextAreaField, DateField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, DateTimeField, SelectField, TextAreaField, DateField, RadioField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 
 from Flask.Models import User
@@ -109,9 +109,52 @@ class Personal_Profile_Form(FlaskForm):
 
     submit = SubmitField('Update')
 
+class Previous_Admissions_Form(FlaskForm):
+    date = DateField('Admission Date', format='%d/%m/%Y')
+    place = TextAreaField("Place", validators=[])
+    comment = TextAreaField("Comment", validators=[])
+    submit = SubmitField("Update")
+
+class Previous_Surgeries_Form(FlaskForm):
+    surgery_type = StringField('Surgery Type', validators=[])
+    date = DateField('Date', format='%d/%m/%Y')
+    place = TextAreaField("Place", validators=[])
+    comment = TextAreaField("Comment", validators=[])
+    submit = SubmitField("Update")
+
+class Blood_Transfusion_History_Form(FlaskForm):
+    blood_type = StringField('Blood Type', validators=[])
+    date = DateField('Date', format='%d/%m/%Y')
+    place = TextAreaField("Place", validators=[])
+    comment = TextAreaField("Comment", validators=[])
+    submit = SubmitField("Update")
+
+class Allergy_History_Form(FlaskForm):
+    allergy_type = StringField('Blood Type', validators=[])
+    date_diagnosed = DateField('Admission Date', format='%d/%m/%Y')
+    submit = SubmitField("Update")
+
+
+
+
+
+
+class ReviewForm(FlaskForm):
+    comment = StringField('Leave a review',
+                          validators=[DataRequired()])
+submit = SubmitField('Submit')
+
+
+
 class Feedback(FlaskForm):
     subject = StringField("Subject", validators=[DataRequired()])
 
     content = TextAreaField("Content", validators=[DataRequired(),Length(max=255)])
 
-submit = SubmitField("Submit")
+    submit = SubmitField("Submit")
+
+
+class Symptom_Checker_Form(FlaskForm):
+    answers = RadioField('Label', choices=[('value', 'one'), ('value_two', 'two'),
+                                           ('value_three', 'three'), ('value_four', 'four')])
+    submit = SubmitField("Submit")

@@ -20,7 +20,7 @@ class User(db.Model, UserMixin):
 
     image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
 
-    # history = db.relationship('History', backref='person', lazy=True)
+    past_medical_history = db.relationship('Past_Medical_History', backref='person', lazy=True, uselist=False)
 
     personal_profile = db.relationship('Personal_Profile', backref='person', uselist=False)
 
@@ -44,6 +44,82 @@ class Personal_Profile(db.Model):
         return f"Personal_Profile('{self.age}', '{self.sex}', '{self.address}', '{self.full_name}', '{self.nric}')"
 
 
+class Past_Medical_History(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+
+    previous_admissions = db.relationship('Previous_Admissions', backref="PastMedHist", lazy=True)
+    previous_surgeries = db.relationship('Previous_Surgeries', backref="PastMedHist", lazy=True)
+    blood_transfusion_history = db.relationship('Blood_Transfusion_History', backref="PastMedHist", lazy=True)
+    allergy_history = db.relationship('Allergy_History', backref="PastMedHist", lazy=True)
+
+class Previous_Admissions(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+
+    date = db.Column(db.DateTime, nullable=True, default=datetime.utcnow)
+
+    place = db.Column(db.String(100), nullable=True)
+
+    comments = db.Column(db.String(100), nullable=True)
+
+    PastMedHist_id = db.Column(db.Integer, db.ForeignKey('past__medical__history.id'), nullable=False)
+
+class Previous_Surgeries(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+
+    surgery_type = db.Column(db.String(100), nullable=True)
+
+    date = db.Column(db.DateTime, nullable=True, default=datetime.utcnow)
+
+    place = db.Column(db.String(100), nullable=True)
+
+    comments = db.Column(db.String(100), nullable=True)
+
+    PastMedHist_id = db.Column(db.Integer, db.ForeignKey('past__medical__history.id'),
+                          nullable=False)
+
+
+class Blood_Transfusion_History(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+
+    blood_type = db.Column(db.String(100), nullable=True)
+
+    date = db.Column(db.DateTime, nullable=True, default=datetime.utcnow)
+
+    place = db.Column(db.String(100), nullable=True)
+
+    comments = db.Column(db.String(100), nullable=True)
+
+    PastMedHist_id = db.Column(db.Integer, db.ForeignKey('past__medical__history.id'),
+                         nullable=False)
+
+
+class Allergy_History(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+
+    allergy = db.Column(db.String(100), nullable=True)
+
+    date_diagnosed = db.Column(db.DateTime, nullable=True)
+
+    PastMedHist_id = db.Column(db.Integer, db.ForeignKey('past__medical__history.id'),
+                         nullable=False)
+
+
+
+
+
+
+#review
+class Post_review(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    content = db.Column(db.String(), nullable=False)
+    date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow())
+
+    def __repr__(self):
+        return f"Post_review('{self.content}', '{self.date_posted}')"
+
+
 #feedback
 class Content(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -53,100 +129,3 @@ class Content(db.Model):
 
     def __repr__(self):
         return f"Content('{self.subject}')"
-
-
-
-
-# class History(db.Model):
-#
-#     id = db.Column(db.Integer, primary_key=True)
-#
-#     disease_name = db.Column(db.String(100), nullable=False)
-#
-#     symptoms = db.Column(db.String(100), nullable=False)
-#
-#     date_contracted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-#
-#     date_cured = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-#
-#     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-#
-#     def __repr__(self):
-#         return f"History('{self.symptom}', '{self.date_posted}'')"
-
-
-
-
-
-
-
-# class Systemic_Review(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#
-#     pass
-#
-#
-#
-#
-# class Past_Medical_History(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#
-#     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-#
-#     previous_admissions = db.relationship('Previous_Admissions', backref="PastMedHist", lazy=True)
-#     previous_surgeries = db.relationship('Previous_Surgeries', backref="PastMedHist", lazy=True)
-#     blood_transfusion_history = db.relationship('Blood_Transfusion_History', backref="PastMedHist", lazy=True)
-#     allergy_history = db.relationship('Allergy_History', backref="PastMedHist", lazy=True)
-#
-#
-# class Previous_Admissions(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#
-#     date = db.Column(db.DateTime, nullable=True, default=datetime.utcnow)
-#
-#     place = db.Column(db.String(100), nullable=True)
-#
-#     comments = db.Column(db.String(100), nullable=True)
-#
-#     past_med = db.Column(db.Integer, db.ForeignKey('PastMedHist.id'),
-#                           nullable=False)
-#
-# class Previous_Surgeries(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#
-#     date = db.Column(db.DateTime, nullable=True, default=datetime.utcnow)
-#
-#     place = db.Column(db.String(100), nullable=True)
-#
-#     surgery_type = db.Column(db.String(100), nullable=True)
-#
-#     comments = db.Column(db.String(100), nullable=True)
-#
-#     past_med = db.Column(db.Integer, db.ForeignKey('PastMedHist.id'),
-#                           nullable=False)
-#
-#
-# class Blood_Transfusion_History(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#
-#     date = db.Column(db.DateTime, nullable=True, default=datetime.utcnow)
-#
-#     place = db.Column(db.String(100), nullable=True)
-#
-#     blood_type = db.Column(db.String(100), nullable=True)
-#
-#     comments = db.Column(db.String(100), nullable=True)
-#
-#     past_med = db.Column(db.Integer, db.ForeignKey('PastMedHist.id'),
-#                          nullable=False)
-#
-#
-# class Allergy_History(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#
-#     date_diagnosed = db.Column(db.DateTime, nullable=True)
-#
-#     allergy = db.Column(db.String(100), nullable=True)
-#
-#     past_med = db.Column(db.Integer, db.ForeignKey('PastMedHist.id'),
-#                          nullable=False)

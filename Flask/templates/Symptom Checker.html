@@ -1,38 +1,48 @@
-  
-  {% extends "layout.html" %}
-  {% block content %}
-  <div class="container-fluid">
-    <div class="row justify-content-center">
-        <div class="overall">
-            <h1 class="center">Question</h1>
-            <div class="form">
-              <div class="form-check">
-                <label class="form-check-label">
-                  <input type="radio" class="form-check-input" name="" id="" value="checkedValue" checked>
-                  Answer
-                </label>
-              </div>
-              <div class="form-check">
-                <label class="form-check-label">
-                  <input type="radio" class="form-check-input" name="" id="" value="checkedValue" checked>
-                  Answer
-                </label>
-              </div>
-              <div class="form-check">
-                <label class="form-check-label">
-                  <input type="radio" class="form-check-input" name="" id="" value="checkedValue" checked>
-                  Answer
-                </label>
-              </div>
-              <div class="form-check">
-                <label class="form-check-label">
-                  <input type="radio" class="form-check-input" name="" id="" value="checkedValue" checked>
-                  Answer
-                </label>
-              </div>
-              <button type="submit" class="btn btn-primary|secondary|success|danger|warning|info|light|dark|link">Submit</button>
-            </div>
+{% extends "layout.html" %}
+
+{% block content %}
+    <div class="container">
+            <div class="col-8">
+                    <form action="" method="post">
+            
+                        {{ form.hidden_tag() }} <!-- Adds a CSRF token to help with security -->
+                        
+                        <fieldset class="form-check">
+                            <legend class="border-bottom mb-4">Answer</legend>
+            
+                            <div class="form-group">
+                                {{ form.answers.label(class="form-check-labell") }}
+            
+                                {% if form.answers.errors %}
+                                
+                                    {{ form.answers(class="form-check form-check-lg is-invalid") }}
+            
+                                    <div class="invalid-feedback">
+                                        {% for error in form.answers.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                
+                                {% else %}
+                                    
+                                    {{ form.answers(class="form-check form-check-lg") }}
+            
+                                {% endif %}
+                            </div>
+            
+
+                        </fieldset>
+                        <br>
+                        <br>
+                        <br>
+                        <div>
+                            {{ form.submit(class="btn btn-success btn-block col-12") }}
+                        </div>
+
+                    </form>
+                </div>
+
     </div>
-  </div>
- 
-    {% endblock %}
+
+
+{% endblock %}
