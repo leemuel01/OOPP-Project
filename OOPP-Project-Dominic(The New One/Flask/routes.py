@@ -195,8 +195,13 @@ def symptom_checker():
 
     if form.validate_on_submit():
         flash("banana", 'success')
-        return redirect(url_for('index'))
+        return redirect(url_for('symptom'))
     return render_template("Symptom Checker.html", title="Symptom Checker", form = form)
+
+@app.route("/templates/Symptom.html", methods = ['POST', 'GET'])
+def symptom():
+    title = "Symptom"
+    return render_template("Symptom.html", title=title )
 
 @app.route("/templates/trivia.html", methods = ['POST', 'GET'])
 def trivia():

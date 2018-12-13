@@ -109,6 +109,7 @@ class Personal_Profile_Form(FlaskForm):
 
     submit = SubmitField('Update')
 
+
 class Form(FlaskForm):
     answers = RadioField('Label', choices=[('value', 'one'), ('value_two', 'two'),
                                            ('value_three', 'three'), ('value_four', 'four')])
