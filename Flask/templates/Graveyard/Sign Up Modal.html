@@ -1,0 +1,246 @@
+<!-- Modal sign up code that failed because of validation issues -->
+
+<div class="modal fade" id="myModal">
+        <div class="modal-dialog">
+
+            <div class="modal-content" id="modal_sign_in">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Login</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+
+                <div class="modal-body">
+
+                    <!-- This only shows up when they can't log in
+                    <p class="invalid"> Incorrect Username or Password</p> -->
+
+                    <!-- The form for log in-->
+                    <form>
+                        <div class="form-group">
+                            <label for="username1"> Username: </label>
+                            <input type="text" placeholder="Enter Username" id="username1" class="form-control"
+                                onkeydown="checkEnter(event)" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password"> Password: </label>
+                            <input type="password" placeholder="Enter Password" class="form-control" id="password"
+                                onkeydown="checkEnter(event)" required>
+                            <a href="Forgotpassword.html">
+                                <small class="text-center">Forgot your password? </small>
+                            </a>
+                        </div>
+
+                    </form>
+
+                    <!-- Logs in -->
+                    <button type="button" class="btn btn-warning btn-block" onclick="gologin()"> Log in </button>
+
+                    <hr class="hr-text" data-content="OR">
+
+                    <!-- Signs up -->
+                    <!-- <p class="text-muted text-center small"> Don't have an account yet? </p> -->
+                    <!-- <a href="templates/SignUp.html"> -->
+
+                    <button type="button" id="toSignup" class="btn btn-warning btn-block" onclick="show_signup_or_login()">
+                        Sign Up </button>
+                    <!-- </a> -->
+                    <br>
+
+
+
+                </div>
+
+
+            </div>
+
+            <div class="modal-content" id="modal_sign_up">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Sign Up</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+
+
+
+                    <form action="javascript:void(0)" method="POST">
+                        {{ form.hidden_tag() }}
+
+                        <div class="signuptab">
+                            <div class="row justify-content-between">
+
+                                <div class="form-group col-12">
+                                    <!-- <label for="username">Username:</label> -->
+                                    <!-- <input type="text" name="name" id="username" placeholder="Username" class="form-control"
+                                        required autofocus> -->
+                                    {{ form.username.label(class="form-control-label") }}
+
+                                    {% if form.username.errors %}
+
+                                    {{ form.username(class="form-control form-control-lg is-invalid") }}
+
+                                    <div class="invalid-feedback">
+                                        {% for error in form.username.errors %}
+                                        <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+
+                                    {% else %}
+
+                                    {{ form.username(class="form-control form-control-lg") }}
+
+                                    {% endif %}
+
+                                </div>
+
+                                <div class="form-group col-12">
+                                    <!-- <input type="password" name="pw" id="password" placeholder="Password" class="form-control"
+                                        required> -->
+                                        {{ form.password.label(class="form-control-label") }}
+
+                                        {% if form.password.errors %}
+    
+                                        {{ form.password(class="form-control form-control-lg is-invalid") }}
+    
+                                        <div class="invalid-feedback">
+                                            {% for error in form.password.errors %}
+                                            <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+    
+                                        {% else %}
+    
+                                        {{ form.password(class="form-control form-control-lg") }}
+    
+                                        {% endif %}
+                                </div>
+
+                                <div class="form-group col-12">
+                                    <!-- <input type="password" name="cpw" id="confirmPassword" placeholder="Confirm Password"
+                                        class="form-control" required> -->
+                                        {{ form.confirm_password.label(class="form-control-label") }}
+
+                                        {% if form.confirm_password.errors %}
+    
+                                        {{ form.confirm_password(class="form-control form-control-lg is-invalid") }}
+    
+                                        <div class="invalid-feedback">
+                                            {% for error in form.confirm_password.errors %}
+                                            <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+    
+                                        {% else %}
+    
+                                        {{ form.confirm_password(class="form-control form-control-lg") }}
+    
+                                        {% endif %}
+                                </div>
+
+                                <div class="col-5">
+                                    <button class="btn btn-warning col-md-12" onclick="show_signup_or_login()">
+                                        Previous </button>
+                                </div>
+
+                                <div class="col-5">
+                                    <button class="btn btn-warning col-md-12" onclick="nextPrev(1)"> Next </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="signuptab">
+                            <div class="row justify-content-between">
+
+                                <div class="form-group col-12">
+                                    <!-- <input type="email" name="email" id="email" placeholder="Email address" class="form-control"
+                                        required> -->
+                                        {{ form.email.label(class="form-control-label") }}
+
+                                        {% if form.email.errors %}
+    
+                                        {{ form.email(class="form-control form-control-lg is-invalid") }}
+    
+                                        <div class="invalid-feedback">
+                                            {% for error in form.email.errors %}
+                                            <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+    
+                                        {% else %}
+    
+                                        {{ form.email(class="form-control form-control-lg") }}
+    
+                                        {% endif %}
+                                </div>
+                                <div class="form-group col-12">
+                                    <!-- <input type="text" name="fullname" id="fullname" placeholder="Full name" class="form-control"
+                                        required> -->
+                                        {{ form.full_name.label(class="form-control-label") }}
+
+                                        {% if form.full_name.errors %}
+    
+                                        {{ form.full_name(class="form-control form-control-lg is-invalid") }}
+    
+                                        <div class="invalid-feedback">
+                                            {% for error in form.full_name.errors %}
+                                            <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+    
+                                        {% else %}
+    
+                                        {{ form.full_name(class="form-control form-control-lg") }}
+    
+                                        {% endif %}
+                                </div>
+
+                                <div class="form-group col-12">
+                                    <!-- <input type="text" name="nric" id="nric" placeholder="NRIC" class="form-control"
+                                        required> -->
+                                        {{ form.nric.label(class="form-control-label") }}
+
+                                        {% if form.nric.errors %}
+    
+                                        {{ form.nric(class="form-control form-control-lg is-invalid") }}
+    
+                                        <div class="invalid-feedback">
+                                            {% for error in form.nric.errors %}
+                                            <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+    
+                                        {% else %}
+    
+                                        {{ form.nric(class="form-control form-control-lg") }}
+    
+                                        {% endif %}
+                                </div>
+
+
+                                <div class="col-5">
+                                    <button class="btn btn-warning col-12" onclick="Prevtab(-1)"> Previous </button>
+                                </div>
+
+                                <div class="col-5">
+                                    <!-- <button class="btn btn-success btn-block col-12" type="submit">Continue</button> -->
+                                    {{ form.submit(class="btn btn-success btn-block col-12")}}
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+        <!-- <script type="text/JavaScript" src="{{ url_for('static', filename='js/signup.js') }}"></script> -->
+    
