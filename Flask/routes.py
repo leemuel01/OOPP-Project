@@ -160,6 +160,7 @@ def Personal_Details():
                                        sex=form.sex.data,
                                        address=form.address.data,
                                        user_id=current_user.id)
+
             db.session.add(history)
 
         else:
@@ -187,18 +188,23 @@ def Previous_Admissions():
     user = User.query.filter_by(username=current_user.username).first()
     form = Previous_Admissions_Form()
 
+    if user.past_medical_history == None:
+        history = Past_Medical_History()
+        db.session.add(history)
+        db.session.commit()
+
     if form.validate_on_submit():
-        if user.past_medical_history == None:
-            admissions = Previous_Admissions(date=form.date.data, place=form.place.data, comments=form.comment.data, PastMedHist_id=current_user.past_medical_history.id)
-            db.session.add(admissions)
+        # if user.past_medical_history == None:
+        #     admissions = Previous_Admissions(date=form.date.data, place=form.place.data, comments=form.comment.data, PastMedHist_id=current_user.past_medical_history.user_id)
+        #     db.session.add(admissions)
 
         # else:
         #     current_user.previous_admissions.date = form.date.data
         #     current_user.previous_admissions.place = form.place.data
         #     current_user.previous_admissions.comments = form.comment.data
 
-        db.session.commit()
-        flash(f'Your {user.past_medical_history} personal details have been updated', 'success')
+        # db.session.commit()
+            flash(f'Your {user.past_medical_history} personal details have been updated', 'success')
         # return redirect(url_for('account'))
 
     return render_template('update forms.html', title="Update Previous Admissions", form=form)
