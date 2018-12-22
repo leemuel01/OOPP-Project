@@ -49,10 +49,13 @@ class Past_Medical_History(db.Model):
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
+    banana = db.Column(db.String(100), default="banana")
+
     previous_admissions = db.relationship('Previous_Admissions', backref="PastMedHist", lazy=True)
-    previous_surgeries = db.relationship('Previous_Surgeries', backref="PastMedHist", lazy=True)
-    blood_transfusion_history = db.relationship('Blood_Transfusion_History', backref="PastMedHist", lazy=True)
-    allergy_history = db.relationship('Allergy_History', backref="PastMedHist", lazy=True)
+
+    # previous_surgeries = db.relationship('Previous_Surgeries', backref="PastMedHist", lazy=True)
+    # blood_transfusion_history = db.relationship('Blood_Transfusion_History', backref="PastMedHist", lazy=True)
+    # allergy_history = db.relationship('Allergy_History', backref="PastMedHist", lazy=True)
 
 class Previous_Admissions(db.Model):
     id = db.Column(db.Integer, primary_key=True)
