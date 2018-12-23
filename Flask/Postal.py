@@ -1,3 +1,5 @@
+#test
+
 class Postalcode():
     def __init__(self,postalcode):
         self.__postalarea=int(str(postalcode)[0:2]) #cant manipulate without converting#
