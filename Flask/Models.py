@@ -20,10 +20,14 @@ class User(db.Model, UserMixin):
 
     image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
 
-    past_medical_history = db.relationship('Past_Medical_History', backref='person', lazy=True, uselist=False)
+    # past_medical_history = db.relationship('Past_Medical_History', backref='person', lazy=True, uselist=False)
 
-    personal_profile = db.relationship('Personal_Profile', backref='person', uselist=False)
+    personal_profile = db.relationship('Personal_Profile', backref='person')
 
+    admissions = db.relationship('Admissions', backref="person")
+    surgeries = db.relationship('Surgeries', backref="person")
+    blood_transfusions = db.relationship('Blood_Transfusions', backref='person')
+    allergies = db.relationship('Allergies', backref="person")
     def __repr__(self):
         return f"User('{self.username}', '{self.email}', '{self.image_file}')"
 
@@ -34,7 +38,7 @@ class Personal_Profile(db.Model):
 
     full_name = db.Column(db.String(60), nullable=True)
     nric = db.Column(db.String(9), unique=True, nullable=True)
-    age = db.Column(db.Integer, nullable=True)
+    birthday = db.Column(db.DateTime, nullable=True)
     sex = db.Column(db.String(20), nullable=True)
     address = db.Column(db.String(100), nullable=True)
 
@@ -43,32 +47,21 @@ class Personal_Profile(db.Model):
     def __repr__(self):
         return f"Personal_Profile('{self.age}', '{self.sex}', '{self.address}', '{self.full_name}', '{self.nric}')"
 
+class Admissions(db.Model):
 
-class Past_Medical_History(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+
+    place = db.Column(db.String(100), nullable=True)
+    date = db.Column(db.DateTime, nullable=True, default=datetime.utcnow())
+    comments = db.Column(db.String(100), nullable=True)
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
-    banana = db.Column(db.String(100), default="banana")
+    def __repr__(self):
+        return f"Previous_Admissions('{self.place}', '{self.date}', '{self.comments}')"
 
-    previous_admissions = db.relationship('Previous_Admissions', backref="PastMedHist", lazy=True)
 
-    # previous_surgeries = db.relationship('Previous_Surgeries', backref="PastMedHist", lazy=True)
-    # blood_transfusion_history = db.relationship('Blood_Transfusion_History', backref="PastMedHist", lazy=True)
-    # allergy_history = db.relationship('Allergy_History', backref="PastMedHist", lazy=True)
-
-class Previous_Admissions(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-
-    date = db.Column(db.DateTime, nullable=True, default=datetime.utcnow)
-
-    place = db.Column(db.String(100), nullable=True)
-
-    comments = db.Column(db.String(100), nullable=True)
-
-    PastMedHist_id = db.Column(db.Integer, db.ForeignKey('past__medical__history.id'), nullable=False)
-
-class Previous_Surgeries(db.Model):
+class Surgeries(db.Model):
     id = db.Column(db.Integer, primary_key=True)
 
     surgery_type = db.Column(db.String(100), nullable=True)
@@ -79,11 +72,12 @@ class Previous_Surgeries(db.Model):
 
     comments = db.Column(db.String(100), nullable=True)
 
-    PastMedHist_id = db.Column(db.Integer, db.ForeignKey('past__medical__history.id'),
-                          nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'),nullable=False)
 
+    def __repr__(self):
+        return f"Previous_Admissions('{self.surgery_type}','{self.place}', '{self.date}', '{self.comments}')"
 
-class Blood_Transfusion_History(db.Model):
+class Blood_Transfusions(db.Model):
     id = db.Column(db.Integer, primary_key=True)
 
     blood_type = db.Column(db.String(100), nullable=True)
@@ -94,41 +88,39 @@ class Blood_Transfusion_History(db.Model):
 
     comments = db.Column(db.String(100), nullable=True)
 
-    PastMedHist_id = db.Column(db.Integer, db.ForeignKey('past__medical__history.id'),
-                         nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
+    def __repr__(self):
+        return f"Previous_Admissions('{self.blood_type}','{self.place}', '{self.date}', '{self.comments}')"
 
-class Allergy_History(db.Model):
+class Allergies(db.Model):
     id = db.Column(db.Integer, primary_key=True)
 
     allergy = db.Column(db.String(100), nullable=True)
 
-    date_diagnosed = db.Column(db.DateTime, nullable=True)
+    date = db.Column(db.DateTime, nullable=True)
 
-    PastMedHist_id = db.Column(db.Integer, db.ForeignKey('past__medical__history.id'),
-                         nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
-
-
-
-
+    def __repr__(self):
+        return f"Previous_Admissions('{self.allergy}','{self.date_diagnosed}')"
 
 #review
-class Post_review(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    content = db.Column(db.String(), nullable=False)
-    date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow())
-
-    def __repr__(self):
-        return f"Post_review('{self.content}', '{self.date_posted}')"
-
-
-#feedback
-class Content(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    subject = db.Column(db.String(50), nullable=False)
-    content = db.Column(db.Text, nullable=False)
-
-
-    def __repr__(self):
-        return f"Content('{self.subject}')"
+# class Post_review(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+#     content = db.Column(db.String(), nullable=False)
+#     date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow())
+#
+#     def __repr__(self):
+#         return f"Post_review('{self.content}', '{self.date_posted}')"
+#
+#
+# #feedback
+# class Content(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+#     subject = db.Column(db.String(50), nullable=False)
+#     content = db.Column(db.Text, nullable=False)
+#
+#
+#     def __repr__(self):
+#         return f"Content('{self.subject}')"

@@ -93,15 +93,54 @@
         </fieldset>
 
 
-        {% elif title == "Update Previous Admissions" %}
+        {% elif title in ["Update Admissions", "Update Surgeries", "Update Blood Transfusion"] %}
+        
         <fieldset class="form-group">
-            <legend class="border-bottom mb-4">Personal Profile</legend>
+            <legend class="border-bottom mb-4">
+                {{title}}
+            </legend>
+
+            {% if title == "Update Surgeries" %}
+            <div class="form-group">
+                {{ form.surgery_type.label(class="form-control-label") }}
+                {% if form.surgery_type.errors %}
+
+                {{ form.surgery_type(class="form-control form-control-lg is-invalid", placeholder="Heart Surgery") }}
+                <div class="invalid-feedback">
+                    {% for error in form.surgery_type.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+
+                {% else %}
+                {{ form.surgery_type(class="form-control form-control-lg", placeholder="Heart Surgery") }}
+                {% endif %}
+            </div>
+            {% elif title == "Update Blood Transfusion" %}
+            <div class="form-group">
+                {{ form.blood_type.label(class="form-control-label") }}
+                {% if form.blood_type.errors %}
+
+                {{ form.blood_type(class="form-control form-control-lg is-invalid", placeholder="Blood Type A") }}
+                <div class="invalid-feedback">
+                    {% for error in form.blood_type.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+
+                {% else %}
+                {{ form.blood_type(class="form-control form-control-lg", placeholder="Blood Type A") }}
+                {% endif %}
+            </div>
+            {% endif %}
+
 
             <div class="form-group">
                 {{ form.place.label(class="form-control-label") }}
                 {% if form.place.errors %}
 
-                {{ form.place(class="form-control form-control-lg is-invalid", placeholder="Singapore General Hospital") }}
+                {{ form.place(class="form-control form-control-lg is-invalid", placeholder="Singapore General
+                Hospital") }}
                 <div class="invalid-feedback">
                     {% for error in form.place.errors %}
                     <span>{{ error }}</span>
@@ -112,6 +151,7 @@
                 {{ form.place(class="form-control form-control-lg", placeholder="Singapore General Hospital") }}
                 {% endif %}
             </div>
+
 
             <div class="form-group">
                 {{ form.date.label(class="form-control-label") }}
@@ -150,6 +190,50 @@
 
 
         </fieldset>
+
+        {% elif title == "Update Allergies" %}
+        
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">
+                {{title}}
+            </legend>
+
+            <div class="form-group">
+                {{ form.allergy_type.label(class="form-control-label") }}
+
+                {% if form.allergy_type.errors %}
+
+                    {{ form.allergy_type(class="form-control form-control-lg is-invalid", placeholder="Peanut Allergy") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.allergy_type.errors %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+
+                {% else %}
+                    {{ form.allergy_type(class="form-control form-control-lg", placeholder="Peanut Allergy") }}
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                {{ form.date.label(class="form-control-label") }}
+                {% if form.date.errors %}
+
+                {{ form.date(class="form-control form-control-lg is-invalid", placeholder="dd/mm/yyyy") }}
+                <div class="invalid-feedback">
+                    {% for error in form.date.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+
+                {% else %}
+                {{ form.date(class="form-control form-control-lg", placeholder="dd/mm/yyyy") }}
+                {% endif %}
+            </div>
+
+
+        </fieldset>
+
         {% endif %}
 
         {{ form.submit(class="btn btn-success btn-block col-12") }}
