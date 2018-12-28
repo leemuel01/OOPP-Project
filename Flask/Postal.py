@@ -2,7 +2,17 @@
 
 class Postalcode():
     def __init__(self,postalcode):
-        self.__postalarea=int(str(postalcode)[0:2]) #cant manipulate without converting#
+        self.__postalarea=int(str(postalcode)[0:2])  # cant manipulate without converting#
+        self.__location_dict={
+
+        }
+        for i in range(1,7):  # 1 to 6
+            self.__location_dict[i]="Raffles Place, Cecil, Marina, Peoples Park"
+        for i in range(7,9):
+            self.__location_dict[i]="Anson, Tanjong Pagar"
+        for i in range(9,11):
+            self.__location_dict[i]="Telok Blangah, Harbourfront"
+
 
     def getpostalarea(self):
         return self.__postalarea

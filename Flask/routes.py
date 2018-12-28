@@ -4,8 +4,6 @@ from PIL import Image
 from flask import render_template, flash, url_for, redirect, request
 from Flask import app, db, bcrypt
 
-
-
 from Flask.Forms import Registration_Form, \
     Login_Form, \
     Update_Account_Form, \
