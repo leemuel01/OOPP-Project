@@ -4,6 +4,8 @@ from flask_bcrypt import Bcrypt #password encryption stuff
 from flask_login import LoginManager #Login stuff
 app = Flask(__name__)
 
+
+
 #Security stuff so no cookie configuration
 app.config["SECRET_KEY"] = '49dc263f9ebdbf0510c9273e5320e7df'
 

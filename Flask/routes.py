@@ -3,7 +3,7 @@ import os, datetime
 from PIL import Image
 from flask import render_template, flash, url_for, redirect, request
 from Flask import app, db, bcrypt
-
+from sqlalchemy import func
 
 
 from Flask.Forms import Registration_Form, \
@@ -184,9 +184,15 @@ def Personal_Details():
     return render_template('edit personal details.html', title="Update Personal Details", form=form)
 
 
+
+
+
 @app.route("/UpdateAdmissions", methods = ['POST', 'GET'])
 @login_required
 def Previous_Admissions():
+
+
+
     form = Previous_Admissions_Form()
 
     if form.validate_on_submit():
@@ -199,18 +205,32 @@ def Previous_Admissions():
         db.session.add(admission)
         db.session.commit()
         flash(f'Your personal details have been updated', 'success')
-        return redirect(url_for('account'))
+        return redirect(url_for('Previous_Admissions'))
     else:
         form.date.data = datetime.datetime.utcnow()
 
+
     return render_template('update forms.html', title="Update Admissions", form=form)
+
+@app.route("/UpdateAdmissions/<int:item_id>", methods = ['POST', 'GET'])
+@login_required
+def delete_item(item_id):
+    # def delete_item(itemid):
+    #
+    #     flash(f'{item}', 'success')
+    #     redirect(url_for('account'))
+    item = Admissions.query.filter_by(id=item_id).first()
+    db.session.delete(item)
+    db.session.commit()
+    flash(f'Admission has been successfully deleted!', 'success')
+    return redirect(url_for('Previous_Admissions'))
+
 
 
 @app.route("/UpdateSurgeries", methods = ['POST', 'GET'])
 @login_required
 def Previous_Surgeries():
     form = Previous_Surgeries_Form()
-
     if form.validate_on_submit():
 
         surgery = Surgeries(date=form.date.data,
@@ -249,6 +269,7 @@ def Blood_Transfusion_History():
         form.date.data = datetime.datetime.utcnow()
 
     return render_template('update forms.html', title="Update Blood Transfusion", form=form)
+
 
 @app.route("/UpdateAllergies", methods = ['POST', 'GET'])
 @login_required

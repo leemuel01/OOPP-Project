@@ -1,101 +1,12 @@
-<div class="row justify-content-around">
-    <div class="col-2">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/profile.css') }}" />
+<br> 
+<div class="row justify-content-center ">
+    <div id="histories" class="row col-12 justify-content-around">
 
-        <div class="row justify-content-center">
-            <div class="col-12">
-                <br>
-                <h3 class="text-center">Personal Profile</h3>
-                <hr>
-            </div>
-
-
-        </div>
-        {% if current_user.personal_profile %}
-
-        <p>
-            <b>Full Name:</b>
-            {% if current_user.personal_profile[0].full_name == '' %}
-            Not Set
-            {% else %}
-            {{ current_user.personal_profile[0].full_name }}
-            {% endif %}
-
-        </p>
-
-        <p>
-            <b>NRIC:</b>
-            {% if current_user.personal_profile[0].nric == '' %}
-            Not Set
-            {% else %}
-            {{ current_user.personal_profile[0].nric }}
-            {% endif %}
-
-        </p>
-
-        <p>
-            <b>Date of Birth:</b>
-            {% if current_user.personal_profile[0].birthday == None %}
-            Not Set
-            {% else %}
-            {{ current_user.personal_profile[0].birthday.strftime('%d/%m/%Y') }}
-            {% endif %}
-        </p>
-
-        <p>
-            <b>Sex:</b>
-            {{ current_user.personal_profile[0].sex }}
-        </p>
-
-        <p>
-            <b>Address:</b>
-            {% if current_user.personal_profile[0].address == '' %}
-            Not Set
-            {% else %}
-            {{ current_user.personal_profile[0].address }}
-            {% endif %}
-
-        </p>
-
-        <div class="row justify-content-center">
-            <div class="text-center">
-                <a href="{{ url_for('Personal_Details') }}">
-                    <button class="btn btn-info col"> Update </button>
-                </a>
-            </div>
-        </div>
-
-        {% else %}
-
-        <div class="row justify-content-center">
-            <h4 class="text-center col-12"> You have no personal profile recorded. </h4>
-
-            <div class="text-center">
-                <a href="{{ url_for('Personal_Details') }}">
-                    <button class="btn btn-info col"> Set up one here </button>
-                </a>
-            </div>
-        </div>
-
-        {% endif %}
-    </div>
-
-
-
-
-    <div class="col-9">
-
-        <div class="row justify-content-center">
-            <div class="col-12">
-                <br>
-                <h3 class="text-center">Past Medical History</h3>
-                <hr>
-            </div>
-
-        </div>
-
-        <div class="row justify-content-start">
+        <div class="row justify-content-start col-3">
             {% if current_user.admissions %}
-            <div class="col">
+            <div class="col vh-history">
+                <br>
                 <p>
                     <b>Previous Admissions:</b>
                     {% for i in range(5) %}
@@ -104,40 +15,44 @@
                         {{ current_user.admissions[i].place }} on {{
                         current_user.admissions[i].date.strftime('%d/%m/%Y') }}
 
-                        {% if current_user.admissions[i].comments != '' %}
-                        ({{ current_user.admissions[i].comments }})
-                        {% endif %}
                     </p>
                     {% endif %}
                     {% endfor %}
 
                 </p>
+            </div>
 
-                <div class="text-center">
-                    <a href="{{ url_for('Previous_Admissions') }}">
-                        <button class="btn btn-info col"> Update Admissions </button>
-                    </a>
-                </div>
-
+            <div class="text-center col-12">
+                <a href="{{ url_for('Previous_Admissions') }}">
+                    <button class="btn btn-info col"> View All </button>
+                </a>
             </div>
             {% else %}
             <div class="row justify-content-center">
-                <h4 class="text-center col-12"> You have no past medical history recorded. </h4>
+                <h4 class="text-center col-12"> You have no past admissions recorded. </h4>
 
                 <div class="text-center">
                     <a href="{{ url_for('Previous_Admissions') }}">
-                        <button class="btn btn-info col"> Set up one here </button>
+                        <button class="btn btn-info col"> Record </button>
                     </a>
                 </div>
             </div>
             {% endif %}
         </div>
 
-        <div class="row justify-content-start">
+        <div class="row justify-content-start col-3">
+
             {% if current_user.surgeries %}
-            <div class="col">
+            <div class="col vh-history">
+                <br>
                 <p>
-                    <b>Previous Surgeries:</b>
+                    <b>
+                        Previous Surgeries:
+                    </b>
+                </p>
+
+                <p>
+
                     {% for i in range(5) %}
                     {% if current_user.surgeries[i] %}
                     <p>
@@ -145,79 +60,74 @@
                         {{ current_user.surgeries[i].place }} on
                         {{current_user.surgeries[i].date.strftime('%d/%m/%Y') }}
 
-                        {% if current_user.surgeries[i].comments != '' %}
-                        ({{ current_user.surgeries[i].comments }})
-                        {% endif %}
                     </p>
                     {% endif %}
                     {% endfor %}
 
                 </p>
+            </div>
 
-                <div class="text-center">
-                    <a href="{{ url_for('Previous_Surgeries') }}">
-                        <button class="btn btn-info col"> Update Surgeries </button>
-                    </a>
-                </div>
-
+            <div class="text-center col-12">
+                <a href="{{ url_for('Previous_Surgeries') }}">
+                    <button class="btn btn-info col"> Update </button>
+                </a>
             </div>
             {% else %}
             <div class="row justify-content-center">
-                <h4 class="text-center col-12"> You have no past medical history recorded. </h4>
+                <h4 class="text-center col-12"> You have no past surgeries recorded. </h4>
 
                 <div class="text-center">
                     <a href="{{ url_for('Previous_Surgeries') }}">
-                        <button class="btn btn-info col"> Set up one here </button>
+                        <button class="btn btn-info col"> Record </button>
                     </a>
                 </div>
             </div>
             {% endif %}
         </div>
 
-        <div class="row justify-content-start">
+        <div class="row justify-content-start col-2">
+            <br>
             {% if current_user.blood_transfusions %}
-            <div class="col">
+            <div class="col vh-history">
+                <br>
                 <p>
-                    <b>Previous Blood Transfusions:</b>
+                    <b> Blood Transfusions:</b>
                     {% for i in range(5) %}
                     {% if current_user.blood_transfusions[i] %}
                     <p>
-                        {{ current_user.blood_transfusions[i].surgery_type }} at
+                        {{ current_user.blood_transfusions[i].blood_type }} at
                         {{ current_user.blood_transfusions[i].place }} on
                         {{current_user.blood_transfusions[i].date.strftime('%d/%m/%Y') }}
-
-                        {% if current_user.blood_transfusions[i].comments != '' %}
-                        ({{ current_user.blood_transfusions[i].comments }})
-                        {% endif %}
                     </p>
                     {% endif %}
                     {% endfor %}
 
                 </p>
-
-                <div class="text-center">
-                    <a href="{{ url_for('Blood_Transfusion_History') }}">
-                        <button class="btn btn-info col"> Update Blood Transfusion </button>
-                    </a>
-                </div>
-
+            </div>
+            <br>
+            <div class="text-center col-12">
+                <a href="{{ url_for('Blood_Transfusion_History') }}">
+                    <button class="btn btn-info col"> Update </button>
+                </a>
             </div>
             {% else %}
             <div class="row justify-content-center">
-                <h4 class="text-center col-12"> You have no blood recorded. </h4>
+                <h4 class="text-center col-12"> You have no blood transfusions recorded. </h4>
 
                 <div class="text-center">
                     <a href="{{ url_for('Blood_Transfusion_History') }}">
-                        <button class="btn btn-info col"> Set up one here </button>
+                        <button class="btn btn-info col"> Record </button>
                     </a>
                 </div>
             </div>
             {% endif %}
         </div>
 
-        <div class="row justify-content-start">
+        <div class="row justify-content-start col-2">
+            <br>
             {% if current_user.allergies %}
-            <div class="col">
+            <div class="col vh-history">
+                <br>
                 <p>
                     <b>Allergies:</b>
                     {% for i in range(5) %}
@@ -232,24 +142,28 @@
                     {% endfor %}
 
                 </p>
-
-                <div class="text-center">
-                    <a href="{{ url_for('Update_Allergies') }}">
-                        <button class="btn btn-info col"> Update Allergies </button>
-                    </a>
-                </div>
-
             </div>
+            <br>
+
+            <div class="text-center col-12">
+                <a href="{{ url_for('Update_Allergies') }}">
+                    <button class="btn btn-info col"> Update </button>
+                </a>
+            </div>
+
             {% else %}
             <div class="row justify-content-center">
                 <h4 class="text-center col-12"> You have no allergies recorded. </h4>
 
                 <div class="text-center">
                     <a href="{{ url_for('Update_Allergies') }}">
-                        <button class="btn btn-info col"> Set up one here </button>
+                        <button class="btn btn-info col"> Record </button>
                     </a>
                 </div>
             </div>
             {% endif %}
+
+
         </div>
     </div>
+</div>

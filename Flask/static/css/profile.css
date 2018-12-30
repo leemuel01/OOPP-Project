@@ -10,3 +10,13 @@
 #profilecontainer p{
     /* color: #007BFF; */
 }
+
+#histories > div{
+    /* border: 1px solid rgb(60, 74, 119); */
+    background-color: rgb(224, 226, 240);
+    border-radius: 10px;
+}
+
+.vh-history{
+    min-height: 40vh
+}

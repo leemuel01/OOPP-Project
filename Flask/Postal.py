@@ -80,6 +80,6 @@ class Postalcode():
             return ''
 
 
-test=Postalcode(6)
-print(test.getpostalarea())
-print(test.generallocation())
+# test=Postalcode(6)
+# print(test.getpostalarea())
+# print(test.generallocation())
