@@ -2,8 +2,8 @@
 
 from datetime import datetime
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
-
-from Flask import db, login_manager, app
+from flask import current_app
+from Flask import db, login_manager
 from flask_login import UserMixin
 
 
@@ -34,12 +34,12 @@ class User(db.Model, UserMixin):
 
     #For password reset
     def get_reset_token(self, expires_sec=1800): #1800 sec is 30 mins
-        s = Serializer(app.config['SECRET_KEY'], expires_sec)
+        s = Serializer(current_app.config['SECRET_KEY'], expires_sec)
         return s.dumps({'user_id':self.id}).decode('utf-8')
 
     @staticmethod #to inform python there's no self argument and only token is accepted as argument
     def verify_reset_token(token):
-        s = Serializer(app.config['SECRET_KEY'])
+        s = Serializer(current_app.config['SECRET_KEY'])
         try:
             user_id = s.loads(token)['user_id']
         except:
@@ -124,21 +124,21 @@ class Allergies(db.Model):
         return f"Previous_Admissions('{self.allergy}','{self.date_diagnosed}')"
 
 #review
-# class Post_review(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     content = db.Column(db.String(), nullable=False)
-#     date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow())
-#
-#     def __repr__(self):
-#         return f"Post_review('{self.content}', '{self.date_posted}')"
-#
-#
-# #feedback
-# class Content(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     subject = db.Column(db.String(50), nullable=False)
-#     content = db.Column(db.Text, nullable=False)
-#
-#
-#     def __repr__(self):
-#         return f"Content('{self.subject}')"
+class Post_review(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    content = db.Column(db.String(), nullable=False)
+    date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow())
+
+    def __repr__(self):
+        return f"Post_review('{self.content}', '{self.date_posted}')"
+
+
+#feedback
+class Content(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    subject = db.Column(db.String(50), nullable=False)
+    content = db.Column(db.Text, nullable=False)
+
+
+    def __repr__(self):
+        return f"Content('{self.subject}')"

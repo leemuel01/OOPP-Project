@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-6 ">
+            <div class="jumbotron jumbotron-fluid text-center">
+                <form name="test11" class="form-inline justify-content-center" action="nearby.html" method="post">
+
+                    <div class="form-group">
+
+                        <label for="postalcode">Enter Postal Code:</label>
+                        <input type="text" class="form-control ml-1" name="postalcode" id="postalcode" aria-describedby="helpId"
+                            placeholder="123456">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary ml-2">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    {% endblock %}
