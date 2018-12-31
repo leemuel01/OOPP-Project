@@ -36,8 +36,6 @@ class Registration_Form(FlaskForm):
         if user:
             raise ValidationError("Email is already taken.")
 
-
-
 class Login_Form(FlaskForm):
 
     username = StringField("Username",
@@ -48,7 +46,6 @@ class Login_Form(FlaskForm):
 
     remember = BooleanField("Remember Me")
     submit = SubmitField('Login')
-
 
 class Update_Account_Form(FlaskForm):
 
@@ -107,6 +104,7 @@ class Personal_Profile_Form(FlaskForm):
         if birthday.data:
             pass
 
+# region Medical History Forms
 class Previous_Admissions_Form(FlaskForm):
 
     place = TextAreaField("Place", validators=[DataRequired()])
@@ -133,13 +131,33 @@ class Allergy_History_Form(FlaskForm):
     allergy_type = StringField('Allergy', validators=[])
     date = DateField('Admission Date', format='%d/%m/%Y')
     submit = SubmitField("Update")
+# endregion
+
+class Request_Reset_Form(FlaskForm):
+    email = StringField('Email',
+                        validators=[DataRequired(), Email()])
+
+    submit = SubmitField('Request Password Reset')
+
+
+    def validate_email(self, email):
+        user = User.query.filter_by(email=email.data).first()
+        if user is None:
+            raise ValidationError("There is no account with that email. You must register first.")
+
+
+class Reset_Password_Form(FlaskForm):
+    password = PasswordField("Password",
+                             validators=[DataRequired(), Length(min=6)])
+
+    confirm_password = PasswordField("Confirm Password",
+                                     validators=[DataRequired(), EqualTo("password")])
+
+    submit = SubmitField('Reset Password')
 
 
 
-
-
-
-
+# region Teammates' forms
 class ReviewForm(FlaskForm):
     comment = StringField('Leave a review',
                           validators=[DataRequired()])
@@ -159,3 +177,4 @@ class Symptom_Checker_Form(FlaskForm):
     answers = RadioField('Label', choices=[('value', 'one'), ('value_two', 'two'),
                                            ('value_three', 'three'), ('value_four', 'four')])
     submit = SubmitField("Submit")
+# endregion

@@ -54,6 +54,10 @@
                         </fieldset>
                         
                         {{ form.submit(class="btn btn-success btn-block col-12") }}  
+
+                        <small class="text-muted">
+                            <a href="{{ url_for('reset_request') }}" class="ml-2"> Forgot Password? </a>
+                        </small>
                     </form>
                 </div>
                 <div class="border-top pt-3">

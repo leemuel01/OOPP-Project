@@ -1,7 +1,11 @@
+import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy #database stuff
 from flask_bcrypt import Bcrypt #password encryption stuff
 from flask_login import LoginManager #Login stuff
+from flask_mail import Mail
+
+import yaml
 app = Flask(__name__)
 
 
@@ -23,5 +27,14 @@ login_manager = LoginManager(app)
 #Login required
 login_manager.login_view = 'login'
 login_manager.login_message_category = 'info'
+
+#Flask Mail
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME'] = 'medfriendemail@gmail.com'
+app.config['MAIL_PASSWORD'] = 'ooppmedfriend'
+
+mail = Mail(app)
 
 from Flask import routes

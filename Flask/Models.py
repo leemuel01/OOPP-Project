@@ -1,8 +1,11 @@
 #This is the place where the user and their medical history are created
 
 from datetime import datetime
-from Flask import db, login_manager
+from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
+
+from Flask import db, login_manager, app
 from flask_login import UserMixin
+
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -20,7 +23,6 @@ class User(db.Model, UserMixin):
 
     image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
 
-    # past_medical_history = db.relationship('Past_Medical_History', backref='person', lazy=True, uselist=False)
 
     personal_profile = db.relationship('Personal_Profile', backref='person')
 
@@ -28,6 +30,22 @@ class User(db.Model, UserMixin):
     surgeries = db.relationship('Surgeries', backref="person")
     blood_transfusions = db.relationship('Blood_Transfusions', backref='person')
     allergies = db.relationship('Allergies', backref="person")
+
+
+    #For password reset
+    def get_reset_token(self, expires_sec=1800): #1800 sec is 30 mins
+        s = Serializer(app.config['SECRET_KEY'], expires_sec)
+        return s.dumps({'user_id':self.id}).decode('utf-8')
+
+    @staticmethod #to inform python there's no self argument and only token is accepted as argument
+    def verify_reset_token(token):
+        s = Serializer(app.config['SECRET_KEY'])
+        try:
+            user_id = s.loads(token)['user_id']
+        except:
+            return None
+        return User.query.get(user_id)
+
     def __repr__(self):
         return f"User('{self.username}', '{self.email}', '{self.image_file}')"
 

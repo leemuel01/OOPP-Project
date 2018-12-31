@@ -2,16 +2,16 @@ import secrets
 import os, datetime
 from PIL import Image
 from flask import render_template, flash, url_for, redirect, request
-from Flask import app, db, bcrypt
+from Flask import app, db, bcrypt, mail
+
 from sqlalchemy import func
 
 
-from Flask.Forms import Registration_Form, \
-    Login_Form, \
-    Update_Account_Form, \
-    Personal_Profile_Form, \
-    Previous_Admissions_Form, Previous_Surgeries_Form, Blood_Transfusion_History_Form, Allergy_History_Form, \
-    Feedback, Symptom_Checker_Form   #Form classes
+from Flask.Forms import (Registration_Form,
+                         Login_Form,
+                         Request_Reset_Form, Reset_Password_Form, Update_Account_Form, Personal_Profile_Form,
+                         Previous_Admissions_Form, Previous_Surgeries_Form, Blood_Transfusion_History_Form, Allergy_History_Form,
+                         Feedback, Symptom_Checker_Form)   #Form classes
 
 from Flask.Models import User, Personal_Profile, Admissions, Surgeries, Blood_Transfusions, Allergies
 
@@ -19,7 +19,7 @@ from Flask.Postal import Postalcode
 
 from flask_login import login_user, current_user, logout_user, login_required
 
-
+from flask_mail import Message
 
 db.create_all()
 db.session.commit()
@@ -28,9 +28,9 @@ db.session.commit()
 #Flask pages
 @app.route("/", methods=['GET', 'POST'])
 def index():
-
     return render_template("home.html")
 
+# region Register and Login
 @app.route("/templates/register.html", methods = ['POST', 'GET'])
 def register():
     if current_user.is_authenticated:
@@ -78,7 +78,56 @@ def logout():
     logout_user()
     return redirect(url_for("index"))
 
+def send_reset_email(user):
+    token = user.get_reset_token()
+    msg = Message('Password Reset Request',
+                  sender='noreply@demo.com',
+                  recipients=[user.email])
+    msg.body = f'''To reset your password, visit the following link:
+{url_for('reset_token', token = token, _external=True)}
 
+If you did not make this request then simply ignore this email and no changes will be made.
+'''
+    mail.send(msg)
+
+@app.route("/reset_password", methods = ['POST', 'GET'])
+def reset_request():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+
+    form = Request_Reset_Form()
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data).first()
+        send_reset_email(user)
+        flash('An email has been sent with instructions to reset your password', 'info')
+        return redirect(url_for('login'))
+    return render_template("Request Reset.html", title="Reset Password", form=form)
+
+@app.route("/reset_password/<token>", methods = ['POST', 'GET'])
+def reset_token(token):
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    user = User.verify_reset_token(token)
+    if user == None:
+        flash('That is an invalid or expired token.', 'warning')
+        return redirect(url_for('reset_request'))
+
+
+    form = Reset_Password_Form()
+    if form.validate_on_submit():
+
+        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8') #encryption password
+        user.password = hashed_password
+        db.session.commit()
+
+        flash(f'Your password has been reset! You are now able to log in.', 'success')
+        return redirect(url_for("login"))
+
+    return render_template("Reset Token.html", title="Reset Password", form=form)
+
+# endregion
+
+# region Profile Page
 def save_picture(form_picture):
     #saving image and making the image name random
     random_hex = secrets.token_hex(8)
@@ -94,7 +143,6 @@ def save_picture(form_picture):
     i.save(picture_path)
 
     return picture_fn
-
 
 @app.route("/Profile", methods = ['POST', 'GET'])
 @login_required
@@ -143,8 +191,9 @@ def profile_edit():
     image_files = url_for('static', filename=f"images/Profile_Picture/{current_user.image_file}")
 
     return render_template("profile.html", title="Edit", image_file=image_files, form=form)
+# endregion
 
-
+# region Medical History Update
 @app.route("/History", methods = ['POST', 'GET'])
 @login_required
 def Personal_Details():
@@ -184,15 +233,9 @@ def Personal_Details():
     return render_template('edit personal details.html', title="Update Personal Details", form=form)
 
 
-
-
-
 @app.route("/UpdateAdmissions", methods = ['POST', 'GET'])
 @login_required
 def Previous_Admissions():
-
-
-
     form = Previous_Admissions_Form()
 
     if form.validate_on_submit():
@@ -215,11 +258,9 @@ def Previous_Admissions():
 @app.route("/UpdateAdmissions/<int:item_id>", methods = ['POST', 'GET'])
 @login_required
 def delete_item(item_id):
-    # def delete_item(itemid):
-    #
-    #     flash(f'{item}', 'success')
-    #     redirect(url_for('account'))
-    item = Admissions.query.filter_by(id=item_id).first()
+
+    # item = Admissions.query.filter_by(id=item_id).first()
+    item = Admissions.query.get_or_404(item_id)
     db.session.delete(item)
     db.session.commit()
     flash(f'Admission has been successfully deleted!', 'success')
@@ -286,31 +327,9 @@ def Update_Allergies():
         form.date.data = datetime.datetime.utcnow()
 
         return render_template('update forms.html', title="Update Allergies", form=form)
+# endregion
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# region Teammates' routes
 @app.route("/Symptom Checker", methods = ['POST', 'GET'])
 def symptom_checker():
     form = Symptom_Checker_Form()
@@ -364,3 +383,4 @@ def nearby():
     objuserpostal = Postalcode(request.form['postalcode'])
 
     return render_template("nearby.html",userlocation=objuserpostal.generallocation())
+# endregion
