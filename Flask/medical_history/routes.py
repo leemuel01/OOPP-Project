@@ -49,97 +49,90 @@ def Personal_Details():
     return render_template('Medical History/edit personal details.html', title="Update Personal Details", form=form)
 
 
-@medical_history.route("/UpdateAdmissions", methods = ['POST', 'GET'])
+
+@medical_history.route("/Update <string:record>", methods=['POST', 'GET'])
 @login_required
-def Previous_Admissions():
-    form = Previous_Admissions_Form()
+def Update_Record(record):
+    records = {"Admissions": [Admissions, Previous_Admissions_Form()],
+               "Surgeries": [Surgeries, Previous_Surgeries_Form()],
+               "Blood Transfusions": [Blood_Transfusions, Blood_Transfusion_History_Form()],
+               "Allergies": [Allergies, Allergy_History_Form()]
+               }
+    form = records[record][1]
 
-    if form.validate_on_submit():
+    if record == "Admissions":
+        if form.validate_on_submit():
+            admission = Admissions(date=form.date.data,
+                                   place=form.place.data,
+                                   comments=form.comment.data,
+                                   user_id=current_user.id)
 
-        admission = Admissions(date=form.date.data,
-                               place=form.place.data,
-                               comments=form.comment.data,
-                               user_id=current_user.id)
 
-        db.session.add(admission)
-        db.session.commit()
-        flash(f'Your personal details have been updated', 'success')
-        return redirect(url_for('medical_history.Previous_Admissions'))
+            db.session.add(admission)
+            db.session.commit()
+            flash(f'Your personal details have been updated', 'success')
+            return redirect(url_for('medical_history.Update_Record', record=record))
+        else:
+            form.date.data = datetime.datetime.utcnow()
+    elif record == "Surgeries":
+        if form.validate_on_submit():
+            surgery = Surgeries(date=form.date.data,
+                                surgery_type=form.surgery_type.data,
+                                place=form.place.data,
+                                comments=form.comment.data,
+                                user_id=current_user.id)
+
+
+            db.session.add(surgery)
+            db.session.commit()
+            flash(f'Your personal details have been updated', 'success')
+            return redirect(url_for('medical_history.Update_Record', record=record))
+        else:
+            form.date.data = datetime.datetime.utcnow()
+    elif record == "Blood Transfusions":
+        if form.validate_on_submit():
+
+            transfusion = Blood_Transfusions(date=form.date.data,
+                                             blood_type=form.blood_type.data,
+                                             place=form.place.data,
+                                             comments=form.comment.data,
+                                             user_id=current_user.id)
+
+            db.session.add(transfusion)
+            db.session.commit()
+            flash(f'Your personal details have been updated', 'success')
+            return redirect(url_for('medical_history.Update_Record', record=record))
+        else:
+            form.date.data = datetime.datetime.utcnow()
+    elif record == "Allergies":
+        if form.validate_on_submit():
+            allergies = Allergies(date=form.date.data,
+                                  allergy=form.allergy_type.data,
+                                  user_id=current_user.id)
+
+            db.session.add(allergies)
+            db.session.commit()
+            flash(f'Your personal details have been updated', 'success')
+            return redirect(url_for('medical_history.Update_Record', record=record))
+        else:
+            form.date.data = datetime.datetime.utcnow()
+
     else:
         form.date.data = datetime.datetime.utcnow()
 
+    return render_template('Medical History/update forms.html', title=f"Update {record}", form=form)
 
-    return render_template('Medical History/update forms.html', title="Update Admissions", form=form)
-
-@medical_history.route("/UpdateAdmissions/<int:item_id>", methods = ['POST', 'GET'])
+@medical_history.route("/Update_<string:record>/<int:item_id>", methods = ['POST', 'GET'])
 @login_required
-def delete_item(item_id):
+def delete_item(record, item_id):
+    records = {"Admissions": [Admissions, Previous_Admissions_Form()],
+               "Surgeries": [Surgeries, Previous_Surgeries_Form()],
+               "Blood Transfusions": [Blood_Transfusions, Blood_Transfusion_History_Form()],
+               "Allergies": [Allergies, Allergy_History_Form()]
+               }
 
-    # item = Admissions.query.filter_by(id=item_id).first()
-    item = Admissions.query.get_or_404(item_id)
+    item = records[record][0].query.get_or_404(item_id)
     db.session.delete(item)
     db.session.commit()
     flash(f'Admission has been successfully deleted!', 'success')
-    return redirect(url_for('medical_history.Previous_Admissions'))
-
-
-
-@medical_history.route("/UpdateSurgeries", methods = ['POST', 'GET'])
-@login_required
-def Previous_Surgeries():
-    form = Previous_Surgeries_Form()
-    if form.validate_on_submit():
-
-        surgery = Surgeries(date=form.date.data,
-                            surgery_type=form.surgery_type.data,
-                            place=form.place.data,
-                            comments=form.comment.data,
-                            user_id=current_user.id)
-
-        db.session.add(surgery)
-        db.session.commit()
-        flash(f'Your personal details have been updated', 'success')
-        return redirect(url_for('medical_history.profile_history'))
-    else:
-        form.date.data = datetime.datetime.utcnow()
-
-    return render_template('Medical History/update forms.html', title="Update Surgeries", form=form)
-
-@medical_history.route("/UpdateBloodTransfusion", methods = ['POST', 'GET'])
-@login_required
-def Blood_Transfusion_History():
-    form = Blood_Transfusion_History_Form()
-
-    if form.validate_on_submit():
-
-        transfusion = Blood_Transfusions(date=form.date.data,
-                            blood_type=form.blood_type.data,
-                            place=form.place.data,
-                            comments=form.comment.data,
-                            user_id=current_user.id)
-
-        db.session.add(transfusion)
-        db.session.commit()
-        flash(f'Your personal details have been updated', 'success')
-        return redirect(url_for('medical_history.profile_history'))
-    else:
-        form.date.data = datetime.datetime.utcnow()
-
-    return render_template('Medical History/update forms.html', title="Update Blood Transfusion", form=form)
-
-
-@medical_history.route("/UpdateAllergies", methods = ['POST', 'GET'])
-@login_required
-def Update_Allergies():
-    form = Allergy_History_Form()
-
-    if form.validate_on_submit():
-        allergies = Allergies(date=form.date.data, allergy=form.allergy_type.data, user_id=current_user.id)
-        db.session.add(allergies)
-        db.session.commit()
-        flash(f'Your personal details have been updated', 'success')
-        return redirect(url_for('medical_history.profile_history'))
-    else:
-        form.date.data = datetime.datetime.utcnow()
-
-        return render_template('Medical History/update forms.html', title="Update Allergies", form=form)
+    return redirect(url_for('medical_history.Update_Record', record=record))
