@@ -54,3 +54,8 @@ class Allergy_History_Form(FlaskForm):
     allergy_type = StringField('Allergy', validators=[])
     date = DateField('Admission Date', format='%d/%m/%Y')
     submit = SubmitField("Update")
+
+class Vaccine_History_Form(FlaskForm):
+    vaccine_type = StringField('Allergy', validators=[])
+    date = DateField('Admission Date', format='%d/%m/%Y')
+    submit = SubmitField("Update")

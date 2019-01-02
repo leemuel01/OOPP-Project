@@ -30,6 +30,7 @@ class User(db.Model, UserMixin):
     surgeries = db.relationship('Surgeries', backref="person")
     blood_transfusions = db.relationship('Blood_Transfusions', backref='person')
     allergies = db.relationship('Allergies', backref="person")
+    vaccinations = db.relationship('Vaccinations', backref="person")
 
 
     #For password reset
@@ -65,6 +66,7 @@ class Personal_Profile(db.Model):
     def __repr__(self):
         return f"Personal_Profile('{self.age}', '{self.sex}', '{self.address}', '{self.full_name}', '{self.nric}')"
 
+# region Past Medical History
 class Admissions(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
@@ -77,7 +79,6 @@ class Admissions(db.Model):
 
     def __repr__(self):
         return f"Previous_Admissions('{self.place}', '{self.date}', '{self.comments}')"
-
 
 class Surgeries(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -122,7 +123,15 @@ class Allergies(db.Model):
 
     def __repr__(self):
         return f"Previous_Admissions('{self.allergy}','{self.date_diagnosed}')"
+# endregion
 
+class Vaccinations(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    vaccine = db.Column(db.String(100), nullable=True)
+    date = db.Column(db.DateTime, nullable=True)
+
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+# region Teammates' database model
 #review
 class Post_review(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -142,3 +151,5 @@ class Content(db.Model):
 
     def __repr__(self):
         return f"Content('{self.subject}')"
+# endregion
+

@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 
 {% block content %}
+
 {% if title == "Update Personal Details" %}
 <div class="container">
     <form action="" method="post">
@@ -98,12 +99,12 @@
     </form>
 </div>
 
-
-
 {% elif title in ["Update Admissions", "Update Surgeries", "Update Blood Transfusions"] %}
 <div class="container-fluid">
-    <div class="row justify-content-around">
-        <div class="col-6">
+    <br>
+    <br>
+    <div class="row justify-content-around col-12">
+        <div class="col-4">
 
             {% if title == "Update Surgeries" %}
             {% if current_user.surgeries %}
@@ -258,6 +259,7 @@
                     {% if current_user.blood_transfusions[i] %}
                     <div class="row">
                         <p class="col">
+                            {{ current_user.blood_transfusions[i].blood_type }} at
                             {{ current_user.blood_transfusions[i].place }} on {{
                             current_user.blood_transfusions[i].date.strftime('%d/%m/%Y') }}
 
@@ -338,23 +340,25 @@
                         {{ form.surgery_type(class="form-control form-control-lg", placeholder="Heart Surgery") }}
                         {% endif %}
                     </div>
-                    {% elif title == "Update Blood Transfusion" %}
-                    <div class="form-group">
-                        {{ form.blood_type.label(class="form-control-label") }}
-                        {% if form.blood_type.errors %}
 
-                        {{ form.blood_type(class="form-control form-control-lg is-invalid", placeholder="Blood Type A")
-                        }}
-                        <div class="invalid-feedback">
-                            {% for error in form.blood_type.errors %}
-                            <span>{{ error }}</span>
-                            {% endfor %}
+                    {% elif title == "Update Blood Transfusions" %}
+                        <div class="form-group">
+                            {{ form.blood_type.label(class="form-control-label") }}
+                            
+                            {% if form.blood_type.errors %}
+
+                            {{ form.blood_type(class="form-control form-control-lg is-invalid", placeholder="Blood Type A")
+                            }}
+                            <div class="invalid-feedback">
+                                {% for  error in form.blood_type.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+
+                            {% else %}
+                            {{ form.blood_type(class="form-control form-control-lg", placeholder="Blood Type A") }}
+                            {% endif %}
                         </div>
-
-                        {% else %}
-                        {{ form.blood_type(class="form-control form-control-lg", placeholder="Blood Type A") }}
-                        {% endif %}
-                    </div>
                     {% endif %}
 
 
@@ -425,72 +429,136 @@
 
 
 
-    {% elif title == "Update Allergies" %}
+    {% elif title in ["Update Allergies", "Update Vaccinations"] %}
 
-    <div class="row justify-content-around">
-        <div class="col-6">
-                {% if current_user.allergies %}
-                <div class="vh-history">
-        
-                    <br>
-                    <h3>
-                        <b>Allergies:</b>
-                    </h3>
-                    <br>
-                    <p>
-        
-                        {% for i in range(current_user.allergies|length) %}
-                        {% if current_user.allergies[i] %}
-                        <div class="row">
-                            <p class="col">
-                                {{ current_user.allergies[i].allergy }} diagnosed on
-                                {{current_user.allergies[i].date.strftime('%d/%m/%Y') }}
-                            </p>
-        
-                            <button class="btn btn-danger col-3" data-toggle="modal" data-target="#exampleModal{{i}}">
-                                Remove
-                            </button>
-        
-        
-                        </div>
-                        <hr>
+    <div class="row justify-content-around col-12">
+        {% if title ==  "Update Allergies"%}
+            <div class="col-6">
+                    {% if current_user.allergies %}
+                    <div class="vh-history">
+            
                         <br>
-        
-                        <div class="modal fade" id="exampleModal{{i}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                            aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to delete the
-                                            admission?</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <a href="{{ url_for('medical_history.delete_item', record='Allergies',  item_id=current_user.allergies[i].id) }}">
-                                            <button class="btn btn-danger col-12"> Yes </button>
-                                        </a>
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal"> No </button>
-        
+                        <h3>
+                            <b>Allergies:</b>
+                        </h3>
+                        <br>
+                        <p>
+            
+                            {% for i in range(current_user.allergies|length) %}
+                            {% if current_user.allergies[i] %}
+                            <div class="row">
+                                <p class="col">
+                                    {{ current_user.allergies[i].allergy }} diagnosed on
+                                    {{current_user.allergies[i].date.strftime('%d/%m/%Y') }}
+                                </p>
+            
+                                <button class="btn btn-danger col-3" data-toggle="modal" data-target="#exampleModal{{i}}">
+                                    Remove
+                                </button>
+            
+            
+                            </div>
+                            <hr>
+                            <br>
+            
+                            <div class="modal fade" id="exampleModal{{i}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to delete the
+                                                admission?</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <a href="{{ url_for('medical_history.delete_item', record='Allergies',  item_id=current_user.allergies[i].id) }}">
+                                                <button class="btn btn-danger col-12"> Yes </button>
+                                            </a>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal"> No </button>
+            
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-        
-                        {% endif %}
-                        {% endfor %}
-        
-                    </p>
-                </div>
-                {% else %}
-                <div class="row justify-content-center">
-                    <h4 class="text-center col-12"> No past transfusions recorded. </h4>
-                </div>
-                {% endif %}
-        </div>
+            
+                            {% endif %}
+                            {% endfor %}
+            
+                        </p>
+                    </div>
+                    {% else %}
+                    <div class="row justify-content-center">
+                        <h4 class="text-center col-12"> No past allergies recorded. </h4>
+                    </div>
+                    {% endif %}
+            </div>
 
-
+        {% elif title == "Update Vaccinations" %}
+            <div class="col-6">
+                    {% if current_user.vaccinations %}
+                    <div class="vh-history">
+            
+                        <br>
+                        <h3>
+                            <b>Vaccinations:</b>
+                        </h3>
+                        <br>
+                        <p>
+            
+                            {% for i in range(current_user.vaccinations|length) %}
+                            {% if current_user.vaccinations[i] %}
+                            <div class="row">
+                                <p class="col">
+                                    {{ current_user.vaccinations[i].vaccine }} shot on
+                                    {{current_user.vaccinations[i].date.strftime('%d/%m/%Y') }}
+                                </p>
+            
+                                <button class="btn btn-danger col-3" data-toggle="modal" data-target="#exampleModal{{i}}">
+                                    Remove
+                                </button>
+            
+            
+                            </div>
+                            <hr>
+                            <br>
+            
+                            <div class="modal fade" id="exampleModal{{i}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to delete the
+                                                admission?</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <a href="{{ url_for('medical_history.delete_item', record='Vaccinations',  item_id=current_user.vaccinations[i].id) }}">
+                                                <button class="btn btn-danger col-12"> Yes </button>
+                                            </a>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal"> No </button>
+            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+            
+                            {% endif %}
+                            {% endfor %}
+            
+                        </p>
+                    </div>
+                    {% else %}
+                    <div class="row justify-content-center">
+                        <h4 class="text-center col-12"> No past vaccinations recorded. </h4>
+                    </div>
+                    {% endif %}
+            </div>
+            
+        {% endif %}
         <div class="col-5">
             <form action="" method="post">
 
@@ -501,6 +569,7 @@
                         {{title}}
                     </legend>
 
+                    {% if title == "Update Allergies" %}
                     <div class="form-group">
                         {{ form.allergy_type.label(class="form-control-label") }}
 
@@ -518,24 +587,41 @@
                         {{ form.allergy_type(class="form-control form-control-lg", placeholder="Peanut Allergy") }}
                         {% endif %}
                     </div>
+                    
 
+                    {% elif title == "Update Vaccinations" %}
                     <div class="form-group">
-                        {{ form.date.label(class="form-control-label") }}
-                        {% if form.date.errors %}
-
-                        {{ form.date(class="form-control form-control-lg is-invalid", placeholder="dd/mm/yyyy") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.date.errors %}
-                            <span>{{ error }}</span>
-                            {% endfor %}
+                            {{ form.vaccine_type.label(class="form-control-label") }}
+    
+                            {% if form.vaccine_type.errors %}
+    
+                            {{ form.vaccine_type(class="form-control form-control-lg is-invalid", placeholder="Smallpox") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.vaccine_type.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+    
+                            {% else %}
+                            {{ form.vaccine_type(class="form-control form-control-lg", placeholder="Smallpox") }}
+                            {% endif %}
                         </div>
-
-                        {% else %}
-                        {{ form.date(class="form-control form-control-lg", placeholder="dd/mm/yyyy") }}
-                        {% endif %}
-                    </div>
-
-
+                    {% endif %}
+                    <div class="form-group">
+                            {{ form.date.label(class="form-control-label") }}
+                            {% if form.date.errors %}
+    
+                            {{ form.date(class="form-control form-control-lg is-invalid", placeholder="dd/mm/yyyy") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.date.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+    
+                            {% else %}
+                            {{ form.date(class="form-control form-control-lg", placeholder="dd/mm/yyyy") }}
+                            {% endif %}
+                        </div>
                 </fieldset>
 
 
