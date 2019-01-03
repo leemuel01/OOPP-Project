@@ -25,9 +25,9 @@
 <body>
 
     <!-- Navbar tabs -->
-    <nav id="#navbarSupportedContent" class="navbar navbar-expand-lg navbar-custom justify-content-center">
+    <nav id="#navbarSupportedContent" class="navbar navbar-expand-lg navbar-custom justify-content-center sticky-top">
 
-        <a class="navbar-brand mr-0" href="{{ url_for('index') }}" id="brandlogo">
+        <a class="navbar-brand mr-0" href="{{ url_for('main.index') }}" id="brandlogo">
             <img src="../static/images/Logo.png" alt="" class="img-fluid" style="height:8vh">
         </a>
 
@@ -45,8 +45,8 @@
                         Features
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{{ url_for('appointment') }}">Appointment</a>
-                        <a class="dropdown-item" href="{{ url_for('symptom_checker') }}">Symptom Checker</a>
+                        <a class="dropdown-item" href="{{ url_for('appointment.appointments') }}">Appointment</a>
+                        <a class="dropdown-item" href="{{ url_for('symptom_checker.symptom_check') }}">Symptom Checker</a>
                     </div>
                 </li>
 
@@ -56,12 +56,12 @@
                         Learning Materials
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{{ url_for('trivia') }}">Medical Trivia</a>
-                        <a class="dropdown-item" href="{{ url_for('teacher') }}">Medical Tutor</a>
+                        <a class="dropdown-item" href="{{ url_for('trivia.main_page') }}">Medical Trivia</a>
+                        <a class="dropdown-item" href="{{ url_for('medical_teacher.teacher') }}">Medical Tutor</a>
                     </div>
 
                 </li>
-                <a class="nav-link active" href="{{ url_for('feedback') }}">Feedback</a>
+                <a class="nav-link active" href="{{ url_for('feedback.form_page') }}">Feedback</a>
                 </li>
             </ul>
 
@@ -74,14 +74,14 @@
                 
                 <ul class="dropdown-menu dropdown-menu-right">
                     <li>
-                        <a href="{{ url_for('account') }}" class="nav-link active"> Profile </a>
+                        <a href="{{ url_for('users.account') }}" class="nav-link active"> Profile </a>
                     </li>
                     <li>
-                        <a href="{{ url_for('logout') }}" class="nav-link active"> Logout </a>
+                        <a href="{{ url_for('users.logout') }}" class="nav-link active"> Logout </a>
                     </li>    
                 </ul>
                 {% else %}
-                    <a href="{{ url_for('login') }}" class="nav-link active"> Login </a>
+                    <a href="{{ url_for('users.login') }}" class="nav-link active"> Login </a>
                 {% endif %}
             </ul>
 
