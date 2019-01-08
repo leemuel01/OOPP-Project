@@ -162,15 +162,6 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Procfile.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="26" selection-start-column="26" selection-end-column="26" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Flask/medical_history/routes.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1955">
@@ -410,16 +401,16 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Ryuse\PycharmProjects\OOPP-Project\Flask\appointment" />
-      <recent name="C:\Users\Ryuse\PycharmProjects\OOPP-Project" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Ryuse\PycharmProjects\OOPP-Project\Flask\medical_history" />
       <recent name="C:\Users\Ryuse\PycharmProjects\OOPP-Project\Flask\appointment" />
       <recent name="C:\Users\Ryuse\PycharmProjects\OOPP-Project\Flask\feedback" />
       <recent name="C:\Users\Ryuse\PycharmProjects\OOPP-Project\Flask\medical_teacher" />
       <recent name="C:\Users\Ryuse\PycharmProjects\OOPP-Project\Flask\main" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Ryuse\PycharmProjects\OOPP-Project" />
+      <recent name="C:\Users\Ryuse\PycharmProjects\OOPP-Project\Flask\appointment" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -551,7 +542,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49209487" visible="true" weight="0.32147652" />
       <window_info id="Structure" order="1" sideWeight="0.5079051" side_tool="true" weight="0.29932886" />
