@@ -28,8 +28,9 @@ class Personal_Profile_Form(FlaskForm):
         if birthday.data:
             pass
 
-class Previous_Admissions_Form(FlaskForm):
 
+class Previous_Admissions_Form(FlaskForm):
+    reason = StringField("Reason for Admission", validators=[DataRequired()])
     place = TextAreaField("Place", validators=[DataRequired()])
     date = DateField('Admission Date', format='%d/%m/%Y')
     comment = TextAreaField("Comment", validators=[])
@@ -50,6 +51,10 @@ class Blood_Transfusion_History_Form(FlaskForm):
     comment = TextAreaField("Comment", validators=[])
     submit = SubmitField("Update")
 
+
+
+
+
 class Allergy_History_Form(FlaskForm):
     allergy_type = StringField('Allergy', validators=[])
     date = DateField('Admission Date', format='%d/%m/%Y')
@@ -57,5 +62,10 @@ class Allergy_History_Form(FlaskForm):
 
 class Vaccine_History_Form(FlaskForm):
     vaccine_type = StringField('Allergy', validators=[])
+    date = DateField('Admission Date', format='%d/%m/%Y')
+    submit = SubmitField("Update")
+
+class Previous_Illnesses_Form(FlaskForm):
+    illness = StringField("Illness", validators=[DataRequired()])
     date = DateField('Admission Date', format='%d/%m/%Y')
     submit = SubmitField("Update")

@@ -88,8 +88,10 @@
                     {% for i in range(5) %}
                     {% if current_user.admissions[i] %}
                     <p>
+                        Admitted at
                         {{ current_user.admissions[i].place }} on {{
                         current_user.admissions[i].date.strftime('%d/%m/%Y') }}
+                        for {{ current_user.admissions[i].reason }}
 
                     </p>
                     {% endif %}
@@ -248,7 +250,7 @@
         <br>
     </div>
 
-    <div id="vaccines" class="row col-12 justify-content-around">
+    <div id="history2" class="row col-12 justify-content-around">
             <div class="row justify-content-start col-3">
             {% if current_user.vaccinations %}
                 <div class="col vh-history">
@@ -292,5 +294,78 @@
                 </div>
             {% endif %}
             </div>
+
+            <div class="row justify-content-start col-3">
+                    {% if current_user.illnesses %}
+                    <div class="vh-history">
+            
+                        <br>
+                        <h3>
+                            <b>Previous Illnesses:</b>
+                        </h3>
+                        <br>
+                        <p>
+            
+                            {% for i in range(current_user.illnesses|length) %}
+                            {% if current_user.illnesses[i] %}
+                            <div class="row">
+                                <p class="col">
+                                    {{ current_user.illnesses[i].illness }}
+                                    contracted on {{
+                                    current_user.illnesses[i].date.strftime('%d/%m/%Y') }}
+            
+                                    {% if current_user.illnesses[i].comments != '' %}
+                                    ({{ current_user.illnesses[i].comments }})
+                                    {% endif %}
+                                </p>
+            
+                                <button class="btn btn-danger col-3" data-toggle="modal" data-target="#exampleModal{{i}}">
+                                    Remove
+                                </button>
+            
+            
+                            </div>
+                            <hr>
+                            <br>
+            
+                            <div class="modal fade" id="exampleModal{{i}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to delete the
+                                                record?</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <a href="{{ url_for('medical_history.delete_item', record='Illnesses',  item_id=current_user.illnesses[i].id) }}">
+                                                <button class="btn btn-danger col-12"> Yes </button>
+                                            </a>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal"> No </button>
+            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+            
+                            {% endif %}
+                            {% endfor %}
+            
+                        </p>
+                    </div>
+                    {% else %}
+                    <div class="row justify-content-center">
+                            <h4 class="text-center col-12"> You have no past illnesses recorded. </h4>
+        
+                            <div class="text-center">
+                                <a href="{{ url_for('medical_history.Update_Record', record='Illnesses') }}">
+                                    <button class="btn btn-info col"> Record </button>
+                                </a>
+                            </div>
+                        </div>
+                    {% endif %}
+                    </div>
     </div>
 </div>

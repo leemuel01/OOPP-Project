@@ -23,10 +23,12 @@ class User(db.Model, UserMixin):
 
     image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
 
+    authenticated = db.Column(db.Boolean, nullable=False, default=False)
 
     personal_profile = db.relationship('Personal_Profile', backref='person')
 
     admissions = db.relationship('Admissions', backref="person")
+    illnesses = db.relationship('Illnesses', backref="person")
     surgeries = db.relationship('Surgeries', backref="person")
     blood_transfusions = db.relationship('Blood_Transfusions', backref='person')
     allergies = db.relationship('Allergies', backref="person")
@@ -70,7 +72,7 @@ class Personal_Profile(db.Model):
 class Admissions(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
-
+    reason = db.Column(db.String(100), nullable=False)
     place = db.Column(db.String(100), nullable=True)
     date = db.Column(db.DateTime, nullable=True, default=datetime.utcnow())
     comments = db.Column(db.String(100), nullable=True)
@@ -127,11 +129,19 @@ class Allergies(db.Model):
 
 class Vaccinations(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    vaccine = db.Column(db.String(100), nullable=True)
+    vaccine = db.Column(db.String(100), nullable=False)
+    date = db.Column(db.DateTime, nullable=True)
+
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+
+class Illnesses(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    illness = db.Column(db.String(100), nullable=False)
     date = db.Column(db.DateTime, nullable=True)
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 # region Teammates' database model
+
 #review
 class Post_review(db.Model):
     id = db.Column(db.Integer, primary_key=True)
