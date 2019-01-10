@@ -4,7 +4,7 @@ from Flask.appointment.Postal import Postalcode
 
 appointment = Blueprint('appointment', __name__)
 
-@appointment.route("/Appointment", methods=['POST', 'GET'])
+@appointment.route("/appointment.html", methods=['POST', 'GET'])
 def appointments():
     title = "Appointment"
 
