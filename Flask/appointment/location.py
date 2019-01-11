@@ -19,7 +19,7 @@ googlemaps_req_nearby_hospital = requests.get("https://maps.googleapis.com/maps/
                                               "&rankby=distance&type=hospital&keyword=general+hospital&key="
                                               +googlemaps_api_key+"")
 # debug show results#
-print(googlemaps_req_nearby_hospital.json()["results"][1])
+print(googlemaps_req_nearby_hospital.json()["results"][4])
 
 # loop to print results, count required as i is object itself not an int.#
 simple_count = 0
@@ -34,5 +34,11 @@ for i in googlemaps_req_nearby_hospital.json()["results"]:
         print(" is currently: closed")
     else:
         print(" has no opening hours data available")
-# reset count#
+    """ 
+    sql:IF EXISTS(SELECT * FROM healthlocation WHERE gmap_id=i["id"])
+        SELECT * FROM healthlocation WHERE gmap_id=i["id"]
+        then use the above row to do stuff(need to craft a table)
+    
+    """
+# reset count for above loop#
 simple_count = 0
