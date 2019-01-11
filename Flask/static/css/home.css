@@ -16,6 +16,19 @@ body {
     background-repeat: no-repeat;
 }
 
-/* div{
-    border: 1px solid black
-} */
+.whitebg{
+    min-height: 50vh;
+    background-color: white;
+}
+
+#functions{
+    background-color: rgb(211, 215, 219);
+    min-height: 80vh
+}
+
+
+
+#contacts{
+    background-color: rgb(83, 169, 255);
+    min-height: 50vh
+}

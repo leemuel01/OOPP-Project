@@ -1,0 +1,137 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/profile.css') }}" />
+
+<div id="profilecontainer" class="container-fluid">
+
+    <!-- <div class="row justify-content-around">
+        <h1 class="text-center" class="col-12"> Profile </h1>
+    </div> -->
+
+
+    <div class="row justify-content-start">
+        <div id="picture" class="col-lg-1">
+            <img id="userprofilepic" src="{{ image_file }}" class="img-fluid img-thumbnail" data-toggle="modal"
+                data-target="#picchange">
+        </div>
+
+        <div class="col-2">
+            <p>
+                <b>Username:</b>
+                {{ current_user.username }}
+            </p>
+            <p>
+                <b> Email:</b>
+                {{ current_user.email }}
+            </p>
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <!-- <div class="col-2">
+
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <br>
+                <h3 class="text-center">Personal Profile</h3>
+                <hr>
+            </div>
+
+
+        </div>
+
+    </div> -->
+</div>
+
+<div id="moreinfo">
+    <!--=================================== Navvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv =======================-->
+    <nav>
+        <ul class="nav nav-tabs nav-justified">
+            <li class="nav-item">
+                {% if title == "Reminder" or title == "Profile" %}
+                <a id="remindernav" class="nav-link active" href="{{ url_for('users.profile_reminder') }}">Reminders</a>
+                {% else %}
+                <a id="remindernav" class="nav-link" href="{{ url_for('users.profile_reminder') }}">Reminders</a>
+                {% endif %}
+            </li>
+            <li class="nav-item">
+                {% if title == "History" %}
+                <a id="medicalhistorynav" class="nav-link active" href="{{ url_for('users.profile_history') }}">Medical
+                    History</a>
+                {% else %}
+                <a id="medicalhistorynav" class="nav-link" href="{{ url_for('users.profile_history') }}">Medical History</a>
+                {% endif %}
+
+            </li>
+            <li class="nav-item">
+                {% if title == "Edit" %}
+                <a id="userinfonav" class="nav-link active" href="{{ url_for('users.profile_edit') }}">Personal Particulars</a>
+                {% else %}
+                <a id="userinfonav" class="nav-link" href="{{ url_for('users.profile_edit') }}">Personal Particulars</a>
+                {% endif %}
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container-fluid">
+        {% if title == "History" %}
+        {% include 'Users/profile_medhist.html' %}
+
+        {% elif title == "Reminder" %}
+        {% include 'Users/profile_reminder.html' %}
+
+        {% elif title == "Edit" %}
+        {% include 'Users/profile_edit.html' %}
+        {% endif %}
+    </div>
+
+
+
+</div>
+
+
+
+
+
+<!-- ======================================================= Right Side =========================================================== -->
+
+<!-- <div id="col2" class="col-lg-6 col-sm-12">
+
+        <div id="reminders" class="row justify-content-center">
+
+            <h1 class="text-center col-12"> Reminders </h1>
+
+            <div id="activites" class="col-10">
+                <br>
+
+            </div>
+
+
+        </div>
+
+
+        <div id="medical_history" class="row justify-content-center">
+
+            <h1 class="text-center col-12"> Medical History </h1>
+
+            <div id="medicalhistory" class="container-fluid col-11 col-xs-12">
+
+            </div>
+
+            <button class="btn btn-success col-11">Show All</button>
+            <br>
+        </div>
+
+
+
+
+    </div> -->
+<!-- <script src="{{ url_for('static', filename='js/profile.js') }}"></script> -->
+
+{% endblock %}
