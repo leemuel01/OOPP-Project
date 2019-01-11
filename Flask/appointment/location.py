@@ -15,20 +15,24 @@ googlemaps_req_latitude = str(googlemaps_req.json()['results'][0]["geometry"]["l
 googlemaps_req_longitude = str(googlemaps_req.json()['results'][0]["geometry"]["location"]["lng"])
 # using the previous location latitude and longitude to get nearby hospitals ranked by distance from location input#
 googlemaps_req_nearby_hospital = requests.get("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+googlemaps_req_latitude+","
-                                              +googlemaps_req_longitude+"&rankby=distance&type=hospital&keyword=general+hospital&key="+googlemaps_api_key+"")
+                                              +googlemaps_req_longitude+
+                                              "&rankby=distance&type=hospital&keyword=general+hospital&key="
+                                              +googlemaps_api_key+"")
 # debug show results#
 print(googlemaps_req_nearby_hospital.json()["results"][1])
 
-# loop to print results#
+# loop to print results, count required as i is object itself not an int.#
 simple_count = 0
 for i in googlemaps_req_nearby_hospital.json()["results"]:
     simple_count+=1
-    print(simple_count, i["name"], "is currently: ",end="")
+    print(simple_count, i["name"],end="")
+    # To check if opening_hours key available as it is not in every i object
+    # and to check if its open or closed based on google places api#
     if "opening_hours" in i and i["opening_hours"]["open_now"] == True:
-        print("open")
+        print(" is currently: open")
     elif "opening_hours" in i and i["opening_hours"]["open_now"] == False:
-        print("closed")
+        print(" is currently: closed")
     else:
-        print("no opening hours data available")
-
+        print(" has no opening hours data available")
+# reset count#
 simple_count = 0
