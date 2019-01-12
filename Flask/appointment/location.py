@@ -1,4 +1,8 @@
 import requests
+import sqlite3
+
+# connect to site.db#
+sqlite_connection=sqlite3.connect("../site.db")
 
 # user inputs location #
 user_location_input = "singapore+400322"
