@@ -37,8 +37,8 @@ for i in googlemaps_req_nearby_hospital.json()["results"]:
     """ 
     sql:IF EXISTS(SELECT * FROM healthlocation WHERE gmap_id=i["id"])
         SELECT * FROM healthlocation WHERE gmap_id=i["id"]
-        then use the above row to do stuff(need to craft a table)
-        test
+        update healthlocation row with latest data from places api
+        display row details on webpage with required data(name, pic, current queue num,est waiting time num)
     """
 # reset count for above loop#
 simple_count = 0
