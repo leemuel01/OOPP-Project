@@ -32,10 +32,11 @@ for i in googlemaps_req_nearby_hospital.json()["results"]:
     print(simple_count, i["name"],end="")
     # To check if opening_hours key available as it is not in every i object
     # and to check if its open or closed based on google places api#
-    if "opening_hours" in i and i["opening_hours"]["open_now"] == True:
-        print(" is currently: open")
-    elif "opening_hours" in i and i["opening_hours"]["open_now"] == False:
-        print(" is currently: closed")
+    if "opening_hours" in i:
+        if i["opening_hours"]["open_now"] == True:
+            print(" is currently: open")
+        elif i["opening_hours"]["open_now"] == False:
+            print(" is currently: closed")
     else:
         print(" has no opening hours data available")
     """ 

@@ -1,6 +1,6 @@
 from flask import render_template, request, Blueprint
-
 from Flask.appointment.Postal import Postalcode
+from Flask.appointment.location import *
 
 appointment = Blueprint('appointment', __name__)
 
