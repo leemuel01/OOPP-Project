@@ -1,0 +1,5 @@
+Past_Medical_History, 
+Previous_Admissions, 
+Previous_Surgeries, 
+Blood_Transfusion_History, 
+Allergy_History

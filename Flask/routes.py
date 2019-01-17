@@ -6,8 +6,20 @@ from Flask import app, db, bcrypt
 
 
 
-from Flask.Forms import Registration_Form, Login_Form, Update_Account_Form, Personal_Profile_Form, ReviewForm   #Form classes
-from Flask.Models import User, Personal_Profile, Post_review
+from Flask.Forms import Registration_Form, \
+    Login_Form, \
+    Update_Account_Form, \
+    Personal_Profile_Form, \
+    Previous_Admissions_Form, Previous_Surgeries_Form, Blood_Transfusion_History_Form, Allergy_History_Form, \
+    Feedback, Symptom_Checker_Form   #Form classes
+
+from Flask.Models import User, \
+    Personal_Profile, \
+    Content, \
+    Past_Medical_History, Previous_Admissions, Previous_Surgeries, Blood_Transfusion_History, Allergy_History
+
+from Flask.Postal import Postalcode
+
 from flask_login import login_user, current_user, logout_user, login_required
 
 #Flask pages
@@ -34,22 +46,6 @@ def register():
         db.session.commit()
 
         flash(f'Your account has been created! You are now able to log in.', 'success')
-
-        #get form data
-        # username = form.username.data
-        # password = form.password.data
-        # email = form.email.data
-
-        # fullname = form.full_name.data
-        # nric = form.nric.data
-
-
-        # #flask-mysqldb stuff
-        # cur = mysql.connection.cursor()
-        # cur.execute("INSERT INTO Users(Username, Password, Email, Full_Name, NRIC) VALUES(%s, %s, %s, %s, %s)",
-        #             (username, password, email, fullname, nric))
-        # mysql.connection.commit()
-        # cur.close()
         return redirect(url_for("login"))
 
 
@@ -101,7 +97,6 @@ def save_picture(form_picture):
 @app.route("/Profile", methods = ['POST', 'GET'])
 @login_required
 def account():
-
     image_files = url_for('static', filename=f"images/Profile_Picture/{current_user.image_file}")
 
     return render_template("profile.html", title="Profile",
@@ -153,8 +148,7 @@ def profile_edit():
 
 @app.route("/History", methods = ['POST', 'GET'])
 @login_required
-
-def Medical_History():
+def Personal_Details():
     user = User.query.filter_by(username=current_user.username).first()
     form = Personal_Profile_Form()
 
@@ -166,6 +160,7 @@ def Medical_History():
                                        sex=form.sex.data,
                                        address=form.address.data,
                                        user_id=current_user.id)
+
             db.session.add(history)
 
         else:
@@ -179,11 +174,154 @@ def Medical_History():
         flash(f'Your personal details have been updated', 'success')
         return redirect(url_for('account'))
 
-    # elif user.personal_profile != None and request.method == 'GET':
-    #     form.full_name.data = user.personal_profile.full_name
-    #     form.nric.data = user.personal_profile.nric
+    elif user.personal_profile != None and request.method == 'GET':
+        form.full_name.data = user.personal_profile.full_name
+        form.nric.data = user.personal_profile.nric
 
-    return render_template('edit medical history.html', title="Edit Medical History", form=form)
+    return render_template('edit personal details.html', title="Update Personal Details", form=form)
+
+
+
+@app.route("/UpdateAdmissions", methods = ['POST', 'GET'])
+@login_required
+def Previous_Admissions():
+    user = User.query.filter_by(username=current_user.username).first()
+    form = Previous_Admissions_Form()
+
+    if user.past_medical_history == None:
+        history = Past_Medical_History()
+        db.session.add(history)
+        db.session.commit()
+
+    if form.validate_on_submit():
+        # if user.past_medical_history == None:
+        #     admissions = Previous_Admissions(date=form.date.data, place=form.place.data, comments=form.comment.data, PastMedHist_id=current_user.past_medical_history.user_id)
+        #     db.session.add(admissions)
+
+        # else:
+        #     current_user.previous_admissions.date = form.date.data
+        #     current_user.previous_admissions.place = form.place.data
+        #     current_user.previous_admissions.comments = form.comment.data
+
+        # db.session.commit()
+            flash(f'Your {user.past_medical_history} personal details have been updated', 'success')
+        # return redirect(url_for('account'))
+
+    return render_template('update forms.html', title="Update Previous Admissions", form=form)
+
+# @app.route("/History", methods = ['POST', 'GET'])
+# @login_required
+# def Previous_Admissions():
+#     user = User.query.filter_by(username=current_user.username).first()
+#     form = Previous_Admissions
+#     if form.validate_on_submit():
+#         if user.previous_admissions == None or \
+#                 user.previous_surgeries == None or \
+#                 user.blood_transfusion_history == None or \
+#                 user.allergy_history == None:
+#
+#             admissions = Previous_Admissions(date=form.admission_date.data)
+#             db.session.add(history)
+#
+#         else:
+#             current_user.personal_profile.nric = form.nric.data
+#             current_user.personal_profile.full_name = form.full_name.data
+#             current_user.personal_profile.age = form.birthday.data
+#             current_user.personal_profile.sex = form.sex.data
+#             current_user.personal_profile.address = form.address.data
+#
+#         db.session.commit()
+#         flash(f'Your personal details have been updated', 'success')
+#         return redirect(url_for('account'))
+#
+#     # elif user.personal_profile != None and request.method == 'GET':
+#     #     form.full_name.data = user.personal_profile.full_name
+#     #     form.nric.data = user.personal_profile.nric
+#
+#     return render_template('edit medical history.html', title="Edit Medical History", form=form)
+#
+# @app.route("/History", methods = ['POST', 'GET'])
+# @login_required
+# def Past_Medical_History():
+#     user = User.query.filter_by(username=current_user.username).first()
+#     form = Past_Medical_History_Form()
+#
+#     if form.validate_on_submit():
+#         if user.previous_admissions == None or \
+#                 user.previous_surgeries == None or \
+#                 user.blood_transfusion_history == None or \
+#                 user.allergy_history == None:
+#
+#             admissions = Previous_Admissions(date=form.admission_date.data)
+#             db.session.add(history)
+#
+#         else:
+#             current_user.personal_profile.nric = form.nric.data
+#             current_user.personal_profile.full_name = form.full_name.data
+#             current_user.personal_profile.age = form.birthday.data
+#             current_user.personal_profile.sex = form.sex.data
+#             current_user.personal_profile.address = form.address.data
+#
+#         db.session.commit()
+#         flash(f'Your personal details have been updated', 'success')
+#         return redirect(url_for('account'))
+#
+#     # elif user.personal_profile != None and request.method == 'GET':
+#     #     form.full_name.data = user.personal_profile.full_name
+#     #     form.nric.data = user.personal_profile.nric
+#
+#     return render_template('edit medical history.html', title="Edit Medical History", form=form)
+#
+# @app.route("/History", methods = ['POST', 'GET'])
+# @login_required
+# def Past_Medical_History():
+#     user = User.query.filter_by(username=current_user.username).first()
+#     form = Past_Medical_History_Form()
+#
+#     if form.validate_on_submit():
+#         if user.previous_admissions == None or \
+#                 user.previous_surgeries == None or \
+#                 user.blood_transfusion_history == None or \
+#                 user.allergy_history == None:
+#
+#             admissions = Previous_Admissions(date=form.admission_date.data)
+#             db.session.add(history)
+#
+#         else:
+#             current_user.personal_profile.nric = form.nric.data
+#             current_user.personal_profile.full_name = form.full_name.data
+#             current_user.personal_profile.age = form.birthday.data
+#             current_user.personal_profile.sex = form.sex.data
+#             current_user.personal_profile.address = form.address.data
+#
+#         db.session.commit()
+#         flash(f'Your personal details have been updated', 'success')
+#         return redirect(url_for('account'))
+#
+#     # elif user.personal_profile != None and request.method == 'GET':
+#     #     form.full_name.data = user.personal_profile.full_name
+#     #     form.nric.data = user.personal_profile.nric
+#
+#     return render_template('edit medical history.html', title="Edit Medical History", form=form)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -191,8 +329,11 @@ def Medical_History():
 
 @app.route("/Symptom Checker", methods = ['POST', 'GET'])
 def symptom_checker():
-    title = "Symptom Checker"
-    return render_template("Symptom Checker.html", title=title )
+    form = Symptom_Checker_Form()
+    if form.validate_on_submit():
+        flash("banana", 'success')
+        return redirect(url_for('index'))
+    return render_template("Symptom Checker.html", title="Symptom Checker", form=form)
 
 @app.route("/templates/trivia.html", methods = ['POST', 'GET'])
 def trivia():
@@ -204,15 +345,8 @@ def trivia():
 
 @app.route("/Medical Teacher", methods = ['POST', 'GET'])
 def teacher():
-
-    form = ReviewForm()
-    comments = Post_review.query.get(1)
-    if form.validate_on_submit():
-        review = Post_review(content=form.comment.data)
-        db.session.add(review)
-        db.session.commit()
-
-    return render_template("first aid teacher.html", title="Medical Tutor", form=form, comments = comments)
+    title = "Medical Tutor  "
+    return render_template("medical teacher.html", title=title )
 
 
 #====================================== Feedback Page =========================================
@@ -220,10 +354,16 @@ def teacher():
 @app.route("/Feedback", methods = ['POST', 'GET'])
 def feedback():
     title = "Feedback"
+    form = Feedback()
+    if form.validate_on_submit():
+        content = Content(subject=form.subject.data, content=form.content.data)
+        db.session.add(content)
+        db.session.commit()
 
 
-    return render_template("feedback.html", title=title)
+        flash(f'feedback submitted.', "success")
 
+    return render_template("feedback.html", title=title, form = form)
 
 
 #====================================== Appointment Page =========================================
@@ -233,3 +373,10 @@ def appointment():
     title = "Appointment"
 
     return render_template("appointment.html", title=title)
+
+@app.route("/nearby.html", methods=['POST'])
+def nearby():
+
+    objuserpostal = Postalcode(request.form['postalcode'])
+
+    return render_template("nearby.html",userlocation=objuserpostal.generallocation())

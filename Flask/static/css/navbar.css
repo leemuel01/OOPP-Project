@@ -6,12 +6,20 @@
     font-size:1em;
     /* color: #007BFF; */
     font-weight: 500;
+    
 }
 
 .nav-link, .navbar-brand{
     margin: 0px 10px;
+    
 }
 
 #rightside:hover{
     cursor: pointer;
+}
+
+.navbar{
+    border-bottom: 2px solid rgb(61, 59, 163);
+    background-color: white;
+    opacity: 0.9;
 }
