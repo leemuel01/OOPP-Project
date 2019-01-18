@@ -6,6 +6,7 @@ from flask import current_app, url_for
 from flask_mail import Message
 
 from Flask import mail
+from Flask.Models import User
 
 
 def send_reset_email(user):
@@ -49,3 +50,16 @@ def save_picture(form_picture):
     i.save(picture_path)
 
     return picture_fn
+
+
+def del_unauthenticated(email):
+
+    print(email)
+    user = User.query.filter_by(email=email).first()
+    print(user)
+
+    # if user.authenticated == False:
+    #     db.session.delete(user)
+    #     db.session.commit()
+
+# flash(f"{user} lol", "success")

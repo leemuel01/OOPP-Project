@@ -14,8 +14,7 @@ login_manager = LoginManager()
 #Login required
 login_manager.login_view = 'users.users'
 login_manager.login_message_category = 'info'
-
-
+#Flaskmail
 mail = Mail()
 
 
@@ -38,6 +37,7 @@ def create_app(config_class=Config):
     from Flask.trivia.routes import trivia
     from Flask.users.routes import users
     from Flask.errors.handlers import errors
+
     app.register_blueprint(appointment)
     app.register_blueprint(feedback)
     app.register_blueprint(main)

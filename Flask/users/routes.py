@@ -5,8 +5,12 @@ from Flask import bcrypt, db
 from Flask.Models import User
 from Flask.users.forms import Registration_Form, Login_Form, Request_Reset_Form, Reset_Password_Form, \
     Update_Account_Form
-from Flask.users.functions import send_reset_email, save_picture, send_authenticate_email
+from Flask.users.functions import send_reset_email, save_picture, send_authenticate_email, del_unauthenticated
 
+import time
+import atexit
+# from apscheduler.schedulers.background import BackgroundScheduler
+from flask_apscheduler.scheduler import BackgroundScheduler
 users = Blueprint('users', __name__)
 
 @users.route("/templates/register.html", methods = ['POST', 'GET'])
@@ -18,15 +22,15 @@ def register():
     if form.validate_on_submit():
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8') #encryption password
         user = User(username=form.username.data, email=form.email.data, password=hashed_password)
+
         db.session.add(user)
         db.session.commit()
 
         email = User.query.filter_by(email=form.email.data).first()
         send_authenticate_email(email)
-        flash(f'Your account has been created! You are now able to log in.', 'success')
+
+        flash(f'Your account has been created! Please check your email to activate it to log in.', 'success')
         return redirect(url_for("users.login"))
-
-
 
     return render_template("Users/register.html", title="Sign Up", form=form)
 
@@ -58,6 +62,8 @@ def logout():
     logout_user()
     return redirect(url_for("main.index"))
 
+
+
 @users.route("/authenticate/<token>")
 def authenticate(token):
 
@@ -71,6 +77,8 @@ def authenticate(token):
 
     flash(f'Your password has activated! You are now able to log in.', 'success')
     return redirect(url_for("users.login"))
+
+
 
 @users.route("/reset_password", methods = ['POST', 'GET'])
 def reset_request():
@@ -106,6 +114,9 @@ def reset_token(token):
         return redirect(url_for("users.users"))
 
     return render_template("Users/Reset Token.html", title="Reset Password", form=form)
+
+
+
 
 
 @users.route("/Profile", methods = ['POST', 'GET'])

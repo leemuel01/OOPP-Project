@@ -1,6 +1,6 @@
 #This is the place where the user and their medical history are created
 
-from datetime import datetime
+from datetime import datetime, timedelta
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from flask import current_app
 from Flask import db, login_manager
@@ -25,7 +25,10 @@ class User(db.Model, UserMixin):
 
     authenticated = db.Column(db.Boolean, nullable=False, default=False)
 
+    delete_time = db.Column(db.DateTime, nullable=False, default=(datetime.utcnow() + timedelta(minutes=30)))
+
     personal_profile = db.relationship('Personal_Profile', backref='person')
+
 
     admissions = db.relationship('Admissions', backref="person")
     illnesses = db.relationship('Illnesses', backref="person")
@@ -36,7 +39,7 @@ class User(db.Model, UserMixin):
 
 
     #For password reset
-    def get_reset_token(self, expires_sec=1800): #1800 sec is 30 mins
+    def get_reset_token(self, expires_sec=86400): #1800 sec is 30 mins
         s = Serializer(current_app.config['SECRET_KEY'], expires_sec)
         return s.dumps({'user_id':self.id}).decode('utf-8')
 
