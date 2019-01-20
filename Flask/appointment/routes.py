@@ -11,8 +11,9 @@ def appointments():
     return render_template("Appointment/appointment.html", title=title)
 
 @appointment.route("/nearby.html", methods = ['POST', 'GET'])
+
+
 def nearby():
+    postal_code = request.form.get("Postal_Code")
 
-    objuserpostal = Postalcode(request.form['postalcode'])
-
-    return render_template("Appointment/nearby.html",userlocation=objuserpostal.generallocation())
+    return render_template("Appointment/nearby.html", title="nearby", userlocation= postal_code)
