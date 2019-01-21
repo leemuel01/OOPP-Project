@@ -1,7 +1,9 @@
 import requests
-import sqlite3
+
 import random
 from Flask.appointment.config import Config
+
+# remember to allow different types of healthlocation e.g hospital and clinic
 
 
 class LocationSearch(Config):
@@ -52,21 +54,26 @@ class LocationSearch(Config):
         database = self.database_connection()
         simple_count = 0
         for i in self.__places_nearby_hospital_result.json()["results"]:
-            # insert into database if gmap_place_id does not exist in database,
-            # ignore if unique key(gmap_place_id) is found
+            # simulation of number of people in queue, assuming it takes 15mins per person and urls
+            simulate_queue = random.randrange(3,200)
+            simulate_waiting_time = simulate_queue * 15
+            simulate_appointment_url = "https://www."+i["name"].replace(" ","")+".com/appointment"
+            simulate_queue_watch_url = "https://www."+i["name"].replace(" ","")+".com/queue_watch"
+
+            # grab image from google places photo api
             if "photos" in i:
                 photo_ref_0 = i["photos"][0]["photo_reference"]
                 photo_ref_url = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference="+photo_ref_0+"&key="+self.get_api_key()
             else:
                 photo_ref_url = "placeholder"
 
-            #simulation of number of people in queue, assuming it takes 15mins per person
-            simulate_queue = random.randrange(3,200)
-            simulate_waiting_time = simulate_queue * 15
-            simulate_appointment_url = "https://www."+i["name"].replace(" ","")+".com/appointment"
-            simulate_queue_watch_url = "https://www."+i["name"].replace(" ","")+".com/queue_watch"
-            database.execute("INSERT OR IGNORE INTO healthlocation (gmap_place_id, gmap_name, gmap_photo, appointment_url, queue_watch_url, current_in_queue, estimated_waiting_time) "
-                             "VALUES (?,?,?,?,?,?,?)",(i["place_id"],i["name"],photo_ref_url,simulate_appointment_url,simulate_queue_watch_url,simulate_queue,simulate_waiting_time))
+            # insert into database if gmap_place_id does not exist in database,
+            # ignore if unique key(gmap_place_id) is found
+            database.execute("INSERT OR IGNORE INTO healthlocation (gmap_place_id, gmap_name, gmap_photo, "
+                             "appointment_url, queue_watch_url, current_in_queue, estimated_waiting_time) "
+                             "VALUES (?,?,?,?,?,?,?)",(i["place_id"],i["name"],photo_ref_url,simulate_appointment_url,
+                                                       simulate_queue_watch_url,simulate_queue,simulate_waiting_time))
+            # update database name and photo url from places api
             database.execute("UPDATE healthlocation SET gmap_name=?,gmap_photo=? WHERE gmap_place_id=?",(i["name"],photo_ref_url,i["place_id"]))
 
             simple_count += 1
