@@ -1,5 +1,4 @@
 import requests
-
 import random
 from Flask.appointment.config import Config
 
