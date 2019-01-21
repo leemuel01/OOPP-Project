@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<div id="carouselId" class="carousel slide container-content" data-ride="carousel">
+<!-- <div id="carouselId" class="carousel slide container-content" data-ride="carousel">
 
     <ol class="carousel-indicators">
         <li data-target="#carouselId" data-slide-to="0" class="active"></li>
@@ -48,7 +48,27 @@
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
     </a>
+</div> -->
+
+<div class="container-fluid" id="home_picture">
+    <div class="row justify-content-start" id="action">
+        <div class="col-5">
+            <div class="row justify-content-start">
+                <h1 class="">
+                    Taking care of yourself done easy.
+                </h1>
+
+                <p>
+                    Register to enjoy our features that will help you
+                </p>
+
+                <button class="btn btn-info col-10"> Sign up </button>
+            </div>
+
+        </div>
+    </div>
 </div>
+
 <div class="container-fluid" id="functions">
     <br>
 
@@ -59,25 +79,45 @@
     <br>
 
     <div class="row justify-content-around">
-        <div class="col-3 whitebg">
+
+        <div class="col-3 functionbg">
             <br>
-            <h4 class="text-center">
+            <br>
+            <img src="{{ url_for('static', filename='images/Assets/History.png') }}" alt="" class="img-fluid rounded mx-auto d-block">
+            <br>
+            <h5 class="text-center">
                 <b>Medical History</b>
-            </h4>
+            </h5>
+
+            <p class="text-center">
+                Keep track of your medical history and print it out!
+            </p>
         </div>
 
-        <div class="col-3 whitebg">
+        <div class="col-3 functionbg">
             <br>
-            <h4 class="text-center">
+            <br>
+            <img src="{{ url_for('static', filename='images/Assets/Calendar.png') }}" alt="" class="img-fluid rounded mx-auto d-block">
+            <br>
+            <h5 class="text-center">
                 <b>Automated Appointments</b>
-            </h4>
+            </h5>
+            <p class="text-center">
+                Appointments have been made easier to you by our automated services.
+            </p>
         </div>
 
-        <div class="col-3 whitebg">
+        <div class="col-3 functionbg">
             <br>
-            <h4 class="text-center">
+            <br>
+            <img src="{{ url_for('static', filename='images/Assets/line.png') }}" alt="" class="img-fluid rounded mx-auto d-block">
+            <br>
+            <h5 class="text-center">
                 <b>Hospital Queue Trackers</b>
-            </h4>
+            </h5>
+            <p class="text-center">
+                Keep track of your queue in hospitals and polyclinics.
+            </p>
         </div>
     </div>
 
@@ -92,16 +132,66 @@
     </div>
     <br>
     <div class="row justify-content-around">
-        <div class="col-5 whitebg">
+        <div class="col-2 contactbg">
 
         </div>
 
-        <div class="col-5 whitebg">
+        <div class="col-2 contactbg">
+
+        </div>
+
+        <div class="col-2 contactbg">
+
+        </div>
+
+        <div class="col-2 contactbg">
+
+        </div>
+        <div class="col-2 contactbg">
 
         </div>
     </div>
 
     <br>
     <br>
+</div>
+
+<div class="container-fluid" id="bottomnav">
+    <br>
+    <br>
+    <h3> About MedFriend </h3>
+    <ul>
+        <li>
+            <a class="" href="{{ url_for('appointment.appointments') }}">Appointment</a>
+        </li>
+
+        <li>
+            <a class="" href="{{ url_for('symptom_checker.symptom_check') }}">Symptom Checker</a>
+        </li>
+
+        <li>
+            <a class="" href="{{ url_for('trivia.main_page') }}">Medical Trivia</a>
+        </li>
+
+        <li>
+            <a class="" href="{{ url_for('medical_teacher.teacher') }}">Medical Tutor</a>
+        </li>
+
+        <li>
+            <a class="" href="{{ url_for('feedback.form_page') }}">Feedback</a>
+        </li>
+    </ul>
+    <br>
+    <br>
+    <p>
+        Copyright ©2019 All rights reserved
+    </p>
+
+
+
+
+
+
+
 </div>
 {% endblock %}

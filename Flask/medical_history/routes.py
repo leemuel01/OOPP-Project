@@ -37,7 +37,7 @@ def Personal_Details():
         db.session.commit()
 
         flash(f'Your personal details have been updated', 'success')
-        return redirect(url_for('users.account'))
+        return redirect(url_for('users.profile_reminder'))
 
     elif current_user.personal_profile != [] and request.method == 'GET':
         form.full_name.data = current_user.personal_profile[0].full_name

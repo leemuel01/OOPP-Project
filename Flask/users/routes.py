@@ -119,14 +119,15 @@ def reset_token(token):
 
 
 
+# @users.route("/Profile", methods = ['POST', 'GET'])
+# @login_required
+# def account():
+#     image_files = url_for('static', filename=f"images/Profile_Picture/{current_user.image_file}")
+#
+#     return render_template("Users/profile.html", title="Profile",
+#                            image_file=image_files)
+    
 @users.route("/Profile", methods = ['POST', 'GET'])
-@login_required
-def account():
-    image_files = url_for('static', filename=f"images/Profile_Picture/{current_user.image_file}")
-
-    return render_template("Users/profile.html", title="Profile",
-                           image_file=image_files)
-
 @users.route("/Profile/Reminder", methods = ['POST', 'GET'])
 @login_required
 def profile_reminder():
@@ -156,7 +157,7 @@ def profile_edit():
 
         db.session.commit()
         flash('Your account has been updated!', 'success')
-        return redirect(url_for('users.account'))
+        return redirect(url_for('users.profile_reminder'))
 
     elif request.method == 'GET':
         form.username.data = current_user.username

@@ -42,7 +42,7 @@
                 <li class="nav-item dropdown active">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
-                        Features
+                        Services
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="{{ url_for('appointment.appointments') }}">Appointment</a>
@@ -50,17 +50,19 @@
                     </div>
                 </li>
 
+
                 <li class="nav-item dropdown active">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
-                        Learning Materials
+                        Learning
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="{{ url_for('trivia.main_page') }}">Medical Trivia</a>
                         <a class="dropdown-item" href="{{ url_for('medical_teacher.teacher') }}">Medical Tutor</a>
                     </div>
-
                 </li>
+
+                <li>
                 <a class="nav-link active" href="{{ url_for('feedback.form_page') }}">Feedback</a>
                 </li>
             </ul>
@@ -68,18 +70,22 @@
             <ul id="rightside" class="nav navbar-nav flex-row justify-content-center flex-nowrap">
                 {% if current_user.is_authenticated %}
                 <li class="nav-item dropdown active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {{ current_user.username }}
+                    <b>
+                        {{ current_user.username }}
+                    </b>
                 </li>
-                
                 
                 <ul class="dropdown-menu dropdown-menu-right">
                     <li>
-                        <a href="{{ url_for('users.account') }}" class="nav-link active"> Profile </a>
+                        <a href="{{ url_for('users.profile_reminder') }}" class="nav-link active"> Profile </a>
                     </li>
                     <li>
                         <a href="{{ url_for('users.logout') }}" class="nav-link active"> Logout </a>
                     </li>    
                 </ul>
+                
+                
+
                 {% else %}
                     <a href="{{ url_for('users.login') }}" class="nav-link active"> Login </a>
                 {% endif %}
