@@ -3,15 +3,23 @@ import random
 from Flask.appointment.config import Config
 
 # remember to allow different types of healthlocation e.g hospital and clinic
+# also, to clean up and reorganise
+
+"""
+consider auto location get
+Note: As of Chrome 50, the Geolocation API only works on secure contexts (HTTPS). 
+If your site is hosted on a non-secure origin (such as HTTP), any requests for the user's location no longer function.
+"""
 
 
 class LocationSearch(Config):
     def __init__(self,user_location_input):
-        self.__location_input = "singapore+"+user_location_input
+        self.__location_input = user_location_input+"+singapore"
         self.__places_result = ""
         self.__result_latitude = ""
         self.__result_longitude = ""
         self.__places_nearby_hospital_result = ""
+        self.__places_nearby_hospital_list = []
 
         super().__init__()
 
@@ -53,6 +61,7 @@ class LocationSearch(Config):
         database = self.database_connection()
         simple_count = 0
         for i in self.__places_nearby_hospital_result.json()["results"]:
+            simple_count += 1
             # simulation of number of people in queue, assuming it takes 15mins per person and urls
             simulate_queue = random.randrange(3,200)
             simulate_waiting_time = simulate_queue * 15
@@ -64,7 +73,7 @@ class LocationSearch(Config):
                 photo_ref_0 = i["photos"][0]["photo_reference"]
                 photo_ref_url = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference="+photo_ref_0+"&key="+self.get_api_key()
             else:
-                photo_ref_url = "placeholder"
+                photo_ref_url = "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg"
 
             # insert into database if gmap_place_id does not exist in database,
             # ignore if unique key(gmap_place_id) is found
@@ -75,7 +84,15 @@ class LocationSearch(Config):
             # update database name and photo url from places api
             database.execute("UPDATE healthlocation SET gmap_name=?,gmap_photo=? WHERE gmap_place_id=?",(i["name"],photo_ref_url,i["place_id"]))
 
-            simple_count += 1
+            # append info into obj list to display
+            nearby_hospital_array_loop = [simple_count,i["place_id"],i["name"],photo_ref_url,simulate_appointment_url,simulate_queue_watch_url,simulate_queue,simulate_waiting_time]
+            self.__places_nearby_hospital_list.append(nearby_hospital_array_loop)
+        #  need to .commit to save sql data
+        database.commit()
+        database.close()
+
+        """
+            
             print(simple_count, i["name"], end="")
             # To check if opening_hours key available as it is not in every i object
             # and to check if its open or closed based on google places api#
@@ -89,14 +106,21 @@ class LocationSearch(Config):
                     print(" ")
             else:
                 print(" has no opening hours data available")
+            """
 
-        #  need to .commit to save sql data
-        database.commit()
-        database.close()
+    def display_nearby_result(self):
+        self.find_nearby_hospital()
+        self.nearby_hospital_update_result()
+        print(self.__places_nearby_hospital_list)
+        return self.__places_nearby_hospital_list
 
+
+
+"""
+# test
 runlocationsearch = LocationSearch("400322")
-runlocationsearch.find_nearby_hospital()
-runlocationsearch.nearby_hospital_update_result()
+runlocationsearch.display_nearby_result()
+"""
 
 """
 OLD

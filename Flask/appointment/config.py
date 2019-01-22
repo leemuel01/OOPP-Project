@@ -19,4 +19,4 @@ class Config:
         self.__google_api_key = self.read_file()
 
     def database_connection(self):
-        return sqlite3.connect("../site.db")
+        return sqlite3.connect("Flask/site.db")
