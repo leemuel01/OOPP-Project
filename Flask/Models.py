@@ -150,14 +150,17 @@ class Content(db.Model):
 
     def __repr__(self):
         return f"Content('{self.subject}')"
-# endregion
 
 
 # Symptom
 class Symptom(db.Model):
-    id = db.Column(db.Integer, primary_key=True, nullable=True)
+    id = db.Column(db.Integer, primary_key=True)
     symptom_answer = db.Column(db.String(60), nullable=False)
     symptom_treatment = db.Column(db.String(250), nullable=False)
 
     def __repr__(self):
         return f"Symptom('{self.symptom_answer}', '{self.symptom_treatment}')"
+
+
+# endregion
+
