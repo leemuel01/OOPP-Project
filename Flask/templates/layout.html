@@ -135,6 +135,14 @@
             showRightIcon: false,
             maxDate: today
         });
+
+        $('input[name="birthday"]').datepicker({
+            uiLibrary: 'bootstrap4',
+            format: 'dd/mm/yyyy',
+            showRightIcon: false,
+            maxDate: today,
+            minDate: '12/12/1903'
+        });
     </script>
 </body>
 

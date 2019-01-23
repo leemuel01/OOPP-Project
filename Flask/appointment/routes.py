@@ -1,6 +1,6 @@
 from flask import render_template, request, Blueprint
+from Flask.appointment.location import LocationSearch
 
-from Flask.appointment.Postal import Postalcode
 
 appointment = Blueprint('appointment', __name__)
 
@@ -11,8 +11,11 @@ def appointments():
     return render_template("Appointment/appointment.html", title=title)
 
 @appointment.route("/nearby.html", methods = ['POST', 'GET'])
+
+
 def nearby():
+    postal_code = request.form.get("Postal_Code")
+    test4 = LocationSearch(postal_code)
+    test4.display_nearby_result()
 
-    objuserpostal = Postalcode(request.form['postalcode'])
-
-    return render_template("Appointment/nearby.html",userlocation=objuserpostal.generallocation())
+    return render_template("Appointment/nearby.html", title="nearby", display_result_list= test4.display_nearby_result())

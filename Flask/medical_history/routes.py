@@ -1,6 +1,7 @@
 import datetime
+import pdfkit
 
-from flask import Blueprint, redirect, url_for, flash, render_template, request
+from flask import Blueprint, redirect, url_for, flash, render_template, request, make_response
 from flask_login import login_required, current_user
 
 from Flask import db
@@ -17,9 +18,12 @@ def Personal_Details():
     form = Personal_Profile_Form()
 
     if form.validate_on_submit():
-        age = int(datetime.datetime.today().year) - int(form.birthday.data.year)
+        age = int(datetime.datetime.today().year) - \
+              int(form.birthday.data.year - ((datetime.datetime.today().month, datetime.datetime.today().day) > (form.birthday.data.month, form.birthday.data.day))) - 1
+
         bmi = form.weight.data / (form.height.data ** 2)
         # flash(f"{.year()}")
+
         if current_user.personal_profile == []:
 
             history = Personal_Profile(full_name=form.full_name.data,
@@ -31,7 +35,7 @@ def Personal_Details():
                                        height=form.height.data,
                                        weight=form.weight.data,
                                        heart_rate=form.heart_rate.data,
-                                       bmi= bmi,
+                                       bmi= (round(bmi,2)),
                                        user_id=current_user.id)
 
             db.session.add(history)
@@ -47,7 +51,7 @@ def Personal_Details():
             current_user.personal_profile[0].height = form.height.data
             current_user.personal_profile[0].weight = form.weight.data
             current_user.personal_profile[0].heart_rate = form.heart_rate.data
-            current_user.personal_profile[0].bmi = bmi
+            current_user.personal_profile[0].bmi = (round(bmi,2))
 
         db.session.commit()
 
@@ -55,6 +59,7 @@ def Personal_Details():
         return redirect(url_for('users.profile_reminder'))
 
     elif current_user.personal_profile != [] and request.method == 'GET':
+
         form.full_name.data = current_user.personal_profile[0].full_name
         form.nric.data = current_user.personal_profile[0].nric
         form.birthday.data = current_user.personal_profile[0].birthday
@@ -128,8 +133,6 @@ def Update_Record(record):
     return render_template('Medical History/update forms.html', title=f"Update {record}", form=form)
 
 
-
-
 @medical_history.route("/Update_<string:record>/<int:item_id>", methods = ['POST', 'GET'])
 @login_required
 def delete_item(record, item_id):
@@ -145,3 +148,16 @@ def delete_item(record, item_id):
     db.session.commit()
     flash(f'The record has been successfully deleted!', 'success')
     return redirect(url_for('medical_history.Update_Record', record=record))
+
+@medical_history.route("/Print")
+@login_required
+def print_pdf():
+    rendered = render_template('Medical History/pdf.html')
+
+    config = pdfkit.configuration(wkhtmltopdf='wkhtmltopdf/bin/wkhtmltopdf.exe') #path to app
+    pdf = pdfkit.from_string(rendered, False, configuration=config)
+
+    response = make_response(pdf)
+    response.headers['Content-Type'] = 'application/pdf'
+    response.headers['Content-Disposition'] = 'inline; filename=history.pdf'
+    return response

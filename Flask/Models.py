@@ -171,3 +171,7 @@ class Content(db.Model):
         return f"Content('{self.subject}')"
 # endregion
 
+class Trivia(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    image = db.Column(db.String(50), nullable=False)
+    type = db.Column(db.String(20), nullable=True)

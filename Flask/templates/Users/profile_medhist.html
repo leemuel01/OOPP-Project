@@ -133,11 +133,16 @@
     </div>
 
     <hr class="col-11">
-    <div id="breaklines" class="col-12">
-            <br>
-            <h1> History </h1>
-            <br>
-        </div>
+    <br>
+    <div id="breaklines" class="col-12 row justify-content-center">
+
+        <br>
+        <br>
+        <h1 class="col-12 text-center"> History </h1>
+
+        <br>
+    </div>
+    <hr class="col-11">
     <div id="histories" class="row col-12 justify-content-around">
 
         <div id="admissions" class="row justify-content-start col-3">
@@ -227,7 +232,7 @@
         </div>
 
         <div id="blood transfusions" class="row justify-content-start col-3">
-            
+
             {% if current_user.blood_transfusions %}
             <div class="col vh-history">
                 <br>
@@ -245,7 +250,7 @@
 
                 </p>
             </div>
-            
+
             <div class="text-center col-12">
                 <a href="{{ url_for('medical_history.Update_Record', record='Blood Transfusions') }}">
                     <button class="btn btn-info col"> Update </button>
@@ -325,7 +330,7 @@
         <div id="illnesses" class="row justify-content-start col-3">
             {% if current_user.illnesses %}
             <div class="vh-history">
-                    <br>
+                <br>
                 <p>
                     <b>Illnesses:</b>
                     {% for i in range(current_user.illnesses|length) %}
@@ -367,7 +372,7 @@
         </div>
 
         <div id="allergies" class="row justify-content-start col-3">
-            
+
             {% if current_user.allergies %}
             <div class="col vh-history">
                 <br>
@@ -386,7 +391,7 @@
 
                 </p>
             </div>
-            
+
 
             <div class="text-center col-12">
                 <a href="{{ url_for('medical_history.Update_Record', record='Allergies') }}">
@@ -409,5 +414,12 @@
 
         </div>
 
+    </div>
+
+    <div class="text-center col-5">
+        <br>
+        <a href="{{ url_for('medical_history.print_pdf') }}">
+            <button class="btn btn-info col-12"> Print </button>
+        </a>
     </div>
 </div>

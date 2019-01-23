@@ -4,10 +4,29 @@
     <div class="row justify-content-center">
         <div class="col-6 ">
             <div class="jumbotron jumbotron-fluid text-center">
-                You are near:
-                {{ userlocation }}
+
+                Here are the available hospitals near you:
+
+                {% for i in range(display_result_list|length) %}
+
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="{{ display_result_list[i][3] }}" alt="No Picture Avaliable">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ display_result_list[i][2] }}</h5>
+                            <br class="card-text">
+                            <p>
+                                Current patients in queue: {{ display_result_list[i][6] }} <br>
+                                Estimated waiting time: {{ display_result_list[i][7] }}
+                            </p>
+                            <p><a href="{{ display_result_list[i][4] }}" class="btn btn-primary">Book appointment</a></p>
+                            <a href="{{ display_result_list[i][5] }}" class="btn btn-primary">View Queue Watch</a>
+                    </div>
+                </div>
+
+                {% endfor %}
+
             </div>
         </div>
     </div>
 
-{% endblock %}
+    {% endblock %}

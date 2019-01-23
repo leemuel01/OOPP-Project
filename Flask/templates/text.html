@@ -1,19 +1,359 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap 4 DatePicker</title>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://unpkg.com/gijgo@1.9.11/js/gijgo.min.js" type="text/javascript"></script>
-    <link href="https://unpkg.com/gijgo@1.9.11/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Medical History</title>
 </head>
+
 <body>
-    <input id="datepicker" width="276" />
-    <script>
-        $('#datepicker').datepicker({
-            uiLibrary: 'bootstrap4'
-        });
-    </script>
+    <h1 align="center"> Medical History </h1>
+    <br>
+    <div class="row justify-content-center">
+        <h1> Personal Details</h1>
+        <hr class="col-11">
+
+        <div id="details" class="row col-11 justify-content-center">
+            {% if current_user.personal_profile %}
+            <div class="col">
+                <p>
+                    <b>Full Name:</b>
+                    {% if current_user.personal_profile[0].full_name == '' %}
+                    Not Set
+                    {% else %}
+                    {{ current_user.personal_profile[0].full_name }}
+                    {% endif %}
+
+                </p>
+
+                <p>
+                    <b>NRIC:</b>
+                    {% if current_user.personal_profile[0].nric == '' %}
+                    Not Set
+                    {% else %}
+                    {{ current_user.personal_profile[0].nric }}
+                    {% endif %}
+
+                </p>
+            </div>
+
+            <div class="col">
+                <p>
+                    <b>Date of Birth:</b>
+                    {% if current_user.personal_profile[0].birthday == None %}
+                    Not Set
+                    {% else %}
+                    {{ current_user.personal_profile[0].birthday.strftime('%d/%m/%Y') }}
+                    {% endif %}
+                </p>
+
+                <p>
+                    <b>Sex:</b>
+                    {{ current_user.personal_profile[0].sex }}
+                </p>
+            </div>
+
+            <div class="col">
+                <p>
+                    <b>Address:</b>
+                    {% if current_user.personal_profile[0].address == '' %}
+                    Not Set
+                    {% else %}
+                    {{ current_user.personal_profile[0].address }}
+                    {% endif %}
+
+                </p>
+
+                <p>
+                    <b>Age:</b>
+                    {% if current_user.personal_profile[0].age == '' %}
+                    Not Set
+                    {% else %}
+                    {{ current_user.personal_profile[0].age }}
+                    {% endif %}
+
+                </p>
+            </div>
+
+            <div class="col">
+                <p>
+                    <b>Height:</b>
+                    {% if current_user.personal_profile[0].height == '' %}
+                    Not Set
+                    {% else %}
+                    {{ current_user.personal_profile[0].height }}m
+                    {% endif %}
+
+                </p>
+
+                <p>
+                    <b>Weight:</b>
+                    {% if current_user.personal_profile[0].weight == '' %}
+                    Not Set
+                    {% else %}
+                    {{ current_user.personal_profile[0].weight }}kg
+                    {% endif %}
+
+                </p>
+            </div>
+
+            <div class="col">
+                <p>
+                    <b>BMI:</b>
+                    {% if current_user.personal_profile[0].bmi == '' %}
+                    Not Set
+                    {% else %}
+                    {{ current_user.personal_profile[0].bmi }}
+                    {% endif %}
+
+                </p>
+
+                <p>
+                    <b>Weight:</b>
+                    {% if current_user.personal_profile[0].heart_rate == '' %}
+                    Not Set
+                    {% else %}
+                    {{ current_user.personal_profile[0].heart_rate }}/min
+                    {% endif %}
+
+                </p>
+            </div>
+
+            {% else %}
+
+
+            {% endif %}
+        </div>
+
+        <hr class="col-11">
+        <br>
+        <div id="breaklines" class="col-12 row justify-content-center">
+
+            <h1 class="col-12 text-center"> History </h1>
+
+            <br>
+        </div>
+        <hr class="col-11">
+        <div id="histories" class="row col-12 justify-content-around">
+
+            <div id="admissions" class="row justify-content-start col-3">
+                {% if current_user.admissions %}
+                <div class="col vh-history">
+                    <br>
+                    <p>
+                        <b>Previous Admissions:</b>
+                        {% for i in range(5) %}
+                        {% if current_user.admissions[i] %}
+                        <p>
+                            Admitted at
+                            {{ current_user.admissions[i].place }} on {{
+                            current_user.admissions[i].date.strftime('%d/%m/%Y') }}
+                            for {{ current_user.admissions[i].reason }}
+
+                        </p>
+                        {% endif %}
+                        {% endfor %}
+
+                    </p>
+                </div>
+
+                {% else %}
+                <div class="row justify-content-center">
+                    <h4 class="text-center col-12"> You have no past admissions recorded. </h4>
+
+
+                </div>
+                {% endif %}
+            </div>
+
+            <div id="surgeries" class="row justify-content-start col-3">
+
+                {% if current_user.surgeries %}
+                <div class="col vh-history">
+                    <br>
+                    <p>
+                        <b>
+                            Previous Surgeries:
+                        </b>
+                    </p>
+
+                    <p>
+
+                        {% for i in range(5) %}
+                        {% if current_user.surgeries[i] %}
+                        <p>
+                            {{ current_user.surgeries[i].surgery_type }} at
+                            {{ current_user.surgeries[i].place }} on
+                            {{current_user.surgeries[i].date.strftime('%d/%m/%Y') }}
+
+                        </p>
+                        {% endif %}
+                        {% endfor %}
+
+                    </p>
+                </div>
+
+                {% else %}
+
+
+                <div class="row justify-content-center">
+                    <h4 class="text-center col-12"> You have no past surgeries recorded. </h4>
+
+                </div>
+                {% endif %}
+            </div>
+
+            <div id="blood transfusions" class="row justify-content-start col-3">
+
+                {% if current_user.blood_transfusions %}
+                <div class="col vh-history">
+                    <br>
+                    <p>
+                        <b> Blood Transfusions:</b>
+                        {% for i in range(5) %}
+                        {% if current_user.blood_transfusions[i] %}
+                        <p>
+                            {{ current_user.blood_transfusions[i].blood_type }} at
+                            {{ current_user.blood_transfusions[i].place }} on
+                            {{current_user.blood_transfusions[i].date.strftime('%d/%m/%Y') }}
+                        </p>
+                        {% endif %}
+                        {% endfor %}
+
+                    </p>
+                </div>
+
+                {% else %}
+
+
+                <div class="row justify-content-center">
+                    <h4 class="text-center col-12"> You have no blood transfusions recorded. </h4>
+
+                </div>
+                {% endif %}
+            </div>
+
+
+
+        </div>
+
+        <div id="breaklines" class="col-12">
+            <br>
+            <hr>
+            <br>
+        </div>
+
+        <div id="histories2" class="row col-12 justify-content-around">
+
+            <div id="vaccinations" class="row justify-content-start col-3">
+                {% if current_user.vaccinations %}
+                <div class="col vh-history">
+                    <br>
+                    <p>
+                        <b>
+                            Vaccines:
+                        </b>
+                    </p>
+
+                    <p>
+
+                        {% for i in range(5) %}
+                        {% if current_user.vaccinations[i] %}
+                        <p>
+                            {{ current_user.vaccinations[i].vaccine }} shot
+                            on
+                            {{current_user.vaccinations[i].date.strftime('%d/%m/%Y') }}
+
+                        </p>
+                        {% endif %}
+                        {% endfor %}
+
+                    </p>
+                </div>
+
+                {% else %}
+                <div class="row justify-content-center">
+                    <h4 class="text-center col-12"> You have no past vaccinations recorded. </h4>
+                </div>
+                {% endif %}
+            </div>
+
+            <div id="illnesses" class="row justify-content-start col-3">
+                {% if current_user.illnesses %}
+                <div class="vh-history">
+                    <br>
+                    <p>
+                        <b>Illnesses:</b>
+                        {% for i in range(current_user.illnesses|length) %}
+                        {% if current_user.illnesses[i] %}
+                        <div class="row">
+                            <p class="col">
+                                {{ current_user.illnesses[i].illness }}
+                                contracted on {{
+                                current_user.illnesses[i].date.strftime('%d/%m/%Y') }}
+
+                                {% if current_user.illnesses[i].comments and current_user.illnesses[i].comments != ''
+                                %}
+                                ({{ current_user.illnesses[i].comments }})
+                                {% endif %}
+                            </p>
+                        </div>
+
+
+                        {% endif %}
+                        {% endfor %}
+
+                    </p>
+                </div>
+                {% else %}
+                <div class="row justify-content-center">
+                    <h4 class="text-center col-12"> You have no past illnesses recorded. </h4>
+
+                </div>
+                {% endif %}
+            </div>
+
+            <div id="allergies" class="row justify-content-start col-3">
+
+                {% if current_user.allergies %}
+                <div class="col vh-history">
+                    <br>
+                    <p>
+                        <b>Allergies:</b>
+                        {% for i in range(5) %}
+                        {% if current_user.allergies[i] %}
+                        <p>
+                            {{ current_user.allergies[i].allergy }} diagnosed on
+                            {{current_user.allergies[i].date.strftime('%d/%m/%Y') }}
+
+
+                        </p>
+                        {% endif %}
+                        {% endfor %}
+
+                    </p>
+                </div>
+
+
+                <div class="text-center col-12">
+                    <a href="{{ url_for('medical_history.Update_Record', record='Allergies') }}">
+                        <button class="btn btn-info col"> Update </button>
+                    </a>
+                </div>
+
+                {% else %}
+                <div class="row justify-content-center">
+                    <h4 class="text-center col-12"> You have no allergies recorded. </h4>
+                </div>
+                {% endif %}
+
+
+            </div>
+
+        </div>
+    </div>
 </body>
+
 </html>

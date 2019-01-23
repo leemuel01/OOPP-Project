@@ -2,26 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c439e86f-cd57-4d86-a59a-b238d22b113e" name="Default Changelist" comment="Jesus christ I've been editing the wrong files no wonder things were not working.">
-      <change afterPath="$PROJECT_DIR$/Flask/medical_history/hospitals.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Flask/Models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Flask/Models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Flask/main/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/Flask/main/routes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Flask/medical_history/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/Flask/medical_history/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flask/appointment/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/Flask/appointment/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flask/appointment/location.py" beforeDir="false" afterPath="$PROJECT_DIR$/Flask/appointment/location.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flask/appointment/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/Flask/appointment/routes.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Flask/medical_history/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/Flask/medical_history/routes.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Flask/site.db" beforeDir="false" afterPath="$PROJECT_DIR$/Flask/site.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Flask/static/css/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/Flask/static/css/home.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Flask/static/css/profile.css" beforeDir="false" afterPath="$PROJECT_DIR$/Flask/static/css/profile.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Flask/static/css/signup.css" beforeDir="false" afterPath="$PROJECT_DIR$/Flask/static/css/signup.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Flask/static/images/Slides/Hallway.png" beforeDir="false" afterPath="$PROJECT_DIR$/Flask/static/images/Slides/Hallway.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Flask/static/images/Slides/Hallway.sai2" beforeDir="false" afterPath="$PROJECT_DIR$/Flask/static/images/Slides/Hallway.sai2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Flask/templates/Medical History/edit personal details.html" beforeDir="false" afterPath="$PROJECT_DIR$/Flask/templates/Medical History/edit personal details.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Flask/templates/Medical History/update forms.html" beforeDir="false" afterPath="$PROJECT_DIR$/Flask/templates/Medical History/update forms.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Flask/templates/Users/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/Flask/templates/Users/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flask/templates/Appointment/Appointment.html" beforeDir="false" afterPath="$PROJECT_DIR$/Flask/templates/Appointment/Appointment.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flask/templates/Appointment/nearby.html" beforeDir="false" afterPath="$PROJECT_DIR$/Flask/templates/Appointment/nearby.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Flask/templates/Users/profile_medhist.html" beforeDir="false" afterPath="$PROJECT_DIR$/Flask/templates/Users/profile_medhist.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Flask/templates/Users/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/Flask/templates/Users/register.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flask/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/Flask/templates/home.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Flask/templates/layout.html" beforeDir="false" afterPath="$PROJECT_DIR$/Flask/templates/layout.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Flask/users/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/Flask/users/routes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Notes &amp; Resources/Sources.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Notes &amp; Resources/Sources.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flask/templates/text.html" beforeDir="false" afterPath="$PROJECT_DIR$/Flask/templates/text.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -31,7 +25,7 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/OOPP_Project$test.coverage" NAME="test Coverage Results" MODIFIED="1546407128464" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/OOPP_Project$run.coverage" NAME="run Coverage Results" MODIFIED="1548217939203" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/OOPP_Project$run.coverage" NAME="run Coverage Results" MODIFIED="1548228702859" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/OOPP_Project$Flask.coverage" NAME="Flask Coverage Results" MODIFIED="1544285366155" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/OOPP_Project$Student.coverage" NAME="Student Coverage Results" MODIFIED="1543143159892" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/OOPP Project" />
   </component>
@@ -90,8 +84,8 @@
     <session id="1143349022">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="66" />
-          <entry key="project.open.time.0" value="6" />
+          <entry key="project.closed" value="67" />
+          <entry key="project.open.time.0" value="7" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.10" value="3" />
           <entry key="project.open.time.11" value="3" />
@@ -99,10 +93,10 @@
           <entry key="project.open.time.13" value="3" />
           <entry key="project.open.time.16" value="2" />
           <entry key="project.open.time.6" value="13" />
-          <entry key="project.open.time.7" value="18" />
+          <entry key="project.open.time.7" value="19" />
           <entry key="project.open.time.8" value="12" />
           <entry key="project.open.time.9" value="3" />
-          <entry key="project.opened" value="69" />
+          <entry key="project.opened" value="71" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages">
@@ -117,8 +111,8 @@
           <entry key="js" value="1" />
           <entry key="md" value="1" />
           <entry key="old database" value="1" />
-          <entry key="py" value="163" />
-          <entry key="txt" value="2" />
+          <entry key="py" value="168" />
+          <entry key="txt" value="4" />
           <entry key="yaml" value="3" />
         </counts>
       </usages-collector>
@@ -127,8 +121,8 @@
           <entry key="HTML" value="6" />
           <entry key="JavaScript" value="1" />
           <entry key="Markdown" value="1" />
-          <entry key="PLAIN_TEXT" value="3" />
-          <entry key="Python" value="163" />
+          <entry key="PLAIN_TEXT" value="5" />
+          <entry key="Python" value="168" />
           <entry key="YAML" value="3" />
         </counts>
       </usages-collector>
@@ -137,7 +131,7 @@
           <entry key="dummy" value="22" />
           <entry key="html" value="203" />
           <entry key="old database" value="155" />
-          <entry key="py" value="21800" />
+          <entry key="py" value="22243" />
           <entry key="txt" value="119" />
           <entry key="yaml" value="125" />
         </counts>
@@ -146,7 +140,7 @@
         <counts>
           <entry key="HTML" value="203" />
           <entry key="PLAIN_TEXT" value="296" />
-          <entry key="Python" value="21800" />
+          <entry key="Python" value="22243" />
           <entry key="YAML" value="125" />
         </counts>
       </usages-collector>
@@ -157,20 +151,12 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Flask/Models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
-              <caret line="70" column="31" selection-start-line="70" selection-start-column="31" selection-end-line="70" selection-end-column="31" />
+            <state relative-caret-position="304">
+              <caret line="176" column="50" selection-start-line="176" selection-start-column="4" selection-end-line="176" selection-end-column="50" />
               <folding>
                 <element signature="e#73#113#0" expanded="true" />
                 <element signature="e#417#2071#0" />
-                <element signature="e#2720#3196#0" />
-                <element signature="e#3229#3733#0" />
-                <element signature="e#3775#4276#0" />
-                <element signature="e#4309#4643#0" />
-                <element signature="e#4691#4919#0" />
-                <element signature="e#4952#5180#0" />
-                <marker date="1548218377775" expanded="true" signature="1770:1973" ph="..." />
-                <marker date="1548218377775" expanded="true" signature="4930:5425" ph="..." />
-                <marker date="1548218377775" expanded="true" signature="5164:5425" ph="..." />
+                <marker date="1548223110566" expanded="true" signature="6075:6080" ph="..." />
               </folding>
             </state>
           </provider>
@@ -179,19 +165,14 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Flask/medical_history/routes.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-527">
-              <caret line="14" column="15" selection-start-line="14" selection-start-column="15" selection-end-line="14" selection-end-column="15" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Flask/medical_history/forms.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="20" column="23" selection-start-line="20" selection-start-column="23" selection-end-line="20" selection-end-column="23" />
+            <state relative-caret-position="236">
+              <caret line="161" column="41" selection-start-line="161" selection-start-column="41" selection-end-line="161" selection-end-column="41" />
               <folding>
-                <element signature="e#0#40#0" expanded="true" />
+                <element signature="e#0#15#0" expanded="true" />
+                <element signature="e#730#3334#0" />
+                <element signature="e#3459#6057#0" />
+                <element signature="e#6207#6839#0" />
+                <marker date="1548228877824" expanded="true" signature="7491:7496" ph="..." />
               </folding>
             </state>
           </provider>
@@ -344,6 +325,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -355,12 +337,6 @@
               <item name="OOPP-Project" type="b2602c69:ProjectViewProjectNode" />
               <item name="OOPP-Project" type="462c0819:PsiDirectoryNode" />
               <item name="Flask" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OOPP-Project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OOPP-Project" type="462c0819:PsiDirectoryNode" />
-              <item name="Flask" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="OOPP-Project" type="b2602c69:ProjectViewProjectNode" />
@@ -378,7 +354,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -532,7 +507,7 @@
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49209487" visible="true" weight="0.36510068" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49209487" visible="true" weight="0.37583894" />
       <window_info id="Structure" order="1" sideWeight="0.5079051" side_tool="true" weight="0.29932886" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -668,14 +643,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Flask/appointment/routes.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="10" column="39" selection-start-line="10" selection-start-column="39" selection-end-line="10" selection-end-column="39" />
-          <caret line="17" column="39" selection-start-line="17" selection-start-column="39" selection-end-line="17" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Flask/templates/Medical History/update forms.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="6443">
@@ -757,9 +724,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="321">
           <caret line="55" selection-start-line="55" selection-end-line="55" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -770,20 +734,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Flask/medical_history/hospitals.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="57" column="33" selection-start-line="57" selection-start-column="33" selection-end-line="57" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Flask/medical_history/hospitals.py" />
     <entry file="file://$PROJECT_DIR$/Flask/main/routes.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="154">
           <caret line="33" column="17" selection-start-line="33" selection-start-column="17" selection-end-line="33" selection-end-column="17" />
-          <folding>
-            <element signature="e#0#29#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -794,57 +749,60 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Flask/users/routes.py">
+    <entry file="file://$PROJECT_DIR$/Flask/medical_history/forms.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="172" selection-start-line="172" selection-end-line="172" />
-          <folding>
-            <element signature="e#0#79#0" expanded="true" />
-            <element signature="e#738#1499#0" />
-            <element signature="e#1568#2392#0" />
-            <element signature="e#2564#2920#0" />
-            <element signature="e#3008#3501#0" />
-            <element signature="e#3598#4360#0" />
-            <element signature="e#4366#4419#0" />
-            <marker date="1548143879755" expanded="true" signature="1319:1328" ph="..." />
-          </folding>
+        <state relative-caret-position="289">
+          <caret line="20" column="23" selection-start-line="20" selection-start-column="23" selection-end-line="20" selection-end-column="23" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Flask/medical_history/forms.py">
+    <entry file="file://$PROJECT_DIR$/Flask/appointment/routes.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="20" column="23" selection-start-line="20" selection-start-column="23" selection-end-line="20" selection-end-column="23" />
-          <folding>
-            <element signature="e#0#40#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="188">
+          <caret line="10" column="39" selection-start-line="10" selection-start-column="39" selection-end-line="10" selection-end-column="39" />
+          <caret line="17" column="39" selection-start-line="17" selection-start-column="39" selection-end-line="17" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Flask/appointment/config.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Flask/appointment/google_maps_api_key.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Flask/appointment/forms.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Flask/users/routes.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-663">
+          <caret line="6" column="29" lean-forward="true" selection-start-line="6" selection-start-column="29" selection-end-line="6" selection-end-column="29" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Flask/Models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="70" column="31" selection-start-line="70" selection-start-column="31" selection-end-line="70" selection-end-column="31" />
+        <state relative-caret-position="304">
+          <caret line="176" column="50" selection-start-line="176" selection-start-column="4" selection-end-line="176" selection-end-column="50" />
           <folding>
             <element signature="e#73#113#0" expanded="true" />
             <element signature="e#417#2071#0" />
-            <element signature="e#2720#3196#0" />
-            <element signature="e#3229#3733#0" />
-            <element signature="e#3775#4276#0" />
-            <element signature="e#4309#4643#0" />
-            <element signature="e#4691#4919#0" />
-            <element signature="e#4952#5180#0" />
-            <marker date="1548218377775" expanded="true" signature="1770:1973" ph="..." />
-            <marker date="1548218377775" expanded="true" signature="4930:5425" ph="..." />
-            <marker date="1548218377775" expanded="true" signature="5164:5425" ph="..." />
+            <marker date="1548223110566" expanded="true" signature="6075:6080" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Flask/medical_history/routes.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-527">
-          <caret line="14" column="15" selection-start-line="14" selection-start-column="15" selection-end-line="14" selection-end-column="15" />
+        <state relative-caret-position="236">
+          <caret line="161" column="41" selection-start-line="161" selection-start-column="41" selection-end-line="161" selection-end-column="41" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+            <element signature="e#730#3334#0" />
+            <element signature="e#3459#6057#0" />
+            <element signature="e#6207#6839#0" />
+            <marker date="1548228877824" expanded="true" signature="7491:7496" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
