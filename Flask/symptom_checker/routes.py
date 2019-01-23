@@ -6,15 +6,22 @@ symptom_checker = Blueprint('symptom_checker', __name__)
 symptom_database = sqlite3.connect("../site.db")
 
 
-@symptom_checker.route("/Symptom Checker", methods = ['POST', 'GET'])
+@symptom_checker.route("/Symptom_Checker", methods=['POST', 'GET'])
 def symptom_check():
     form = Symptom_Checker_Form()
     if form.validate_on_submit():
+
         symptom_checked_box = request.form.get("answers")
         print(symptom_checked_box)
         # return redirect(url_for('main.index'))
     return render_template("Symptom Checker/Symptom Checker.html", title="Symptom Checker", form=form)
 
+
+@symptom_checker.route("/symptom", methods=['POST', 'GET'])
+def symptom():
+
+    symptom_checked_box = request.form.get("answer")
+    return render_template("Symptom Checker/Symptom.html", title="Symptom Checker",test3=symptom_checked_box)
 
 # <--- To take the data and put it at the symptom part at Symptom.html --->
 # def select_answer:
