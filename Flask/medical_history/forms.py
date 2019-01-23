@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
-from wtforms import SubmitField, StringField, TextAreaField, DateField, SelectField
-from wtforms.validators import DataRequired, ValidationError, Optional
-
+from wtforms import SubmitField, StringField, TextAreaField, DateField, SelectField, IntegerField, FloatField
+from wtforms.validators import DataRequired, ValidationError, Optional, Length, NumberRange
+from Flask.medical_history.hospitals import choices
 
 class Personal_Profile_Form(FlaskForm):
     full_name = StringField("Full Name",
@@ -15,6 +15,12 @@ class Personal_Profile_Form(FlaskForm):
     sex = SelectField("Sex", choices=[('Not Set', "Not Set"), ('Male', 'Male'), ('Female', 'Female'), ('Others', 'Others')], validators=[])
 
     address = TextAreaField("Address", validators=[])
+
+    height = FloatField("Height in meters", validators=[NumberRange(min=0, max=2.72)])
+
+    weight = FloatField("Weight in kg", validators=[NumberRange(min=0, max=635)])
+
+    heart_rate = IntegerField("Resting Heart rate (Beats per minute)", validators=[NumberRange(min=23, max=150)])
 
     submit = SubmitField('Update')
 
@@ -31,7 +37,7 @@ class Personal_Profile_Form(FlaskForm):
 
 class Previous_Admissions_Form(FlaskForm):
     reason = StringField("Reason for Admission", validators=[DataRequired()])
-    place = TextAreaField("Place", validators=[DataRequired()])
+    place = SelectField("Place", coerce=str, validators=[DataRequired()])
     date = DateField('Admission Date', format='%d/%m/%Y')
     comment = TextAreaField("Comment", validators=[])
     submit = SubmitField("Update")
@@ -40,14 +46,17 @@ class Previous_Admissions_Form(FlaskForm):
 class Previous_Surgeries_Form(FlaskForm):
     surgery_type = StringField('Surgery Type', validators=[])
     date = DateField('Date', format='%d/%m/%Y')
-    place = TextAreaField("Place", validators=[])
+    place = SelectField("Place", coerce=str, validators=[])
     comment = TextAreaField("Comment", validators=[])
     submit = SubmitField("Update")
 
 class Blood_Transfusion_History_Form(FlaskForm):
-    blood_type = StringField('Blood Type', validators=[])
-    date = DateField('Date', format='%d/%m/%Y')
-    place = TextAreaField("Place", validators=[])
+    blood_type = SelectField("Blood Type", choices=[('O-', "O-"), ('O+', 'O+'),
+                                                    ('A-', 'A-'), ('A+', 'A+'),
+                                                    ('B-', 'B-'), ('B+', 'B+'),
+                                                    ('AB-', 'AB-'), ('AB+', 'AB+')], validators=[])
+    date = DateField('Date', format='%d/%m/%Y', description='The date')
+    place = SelectField("Place", coerce=str, validators=[])
     comment = TextAreaField("Comment", validators=[])
     submit = SubmitField("Update")
 

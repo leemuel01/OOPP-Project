@@ -1,16 +1,16 @@
 {% extends "layout.html" %}
 
 {% block content %}
-
+<br>
+<br>
 {% if title == "Update Personal Details" %}
 <div class="container">
     <form action="" method="post">
-
         {{ form.hidden_tag() }}
         <!-- Adds a CSRF token to help with security -->
         <fieldset class="form-group">
             <legend class="border-bottom mb-4">Personal Profile</legend>
-
+            
             <div class="form-group">
                 {{ form.full_name.label(class="form-control-label") }}
                 {% if form.full_name.errors %}
@@ -92,6 +92,8 @@
             </div>
 
 
+
+           
         </fieldset>
 
         {{ form.submit(class="btn btn-success btn-block col-12") }}
@@ -102,8 +104,6 @@
     
 <div class="container-fluid">
     {% elif title in ["Update Admissions", "Update Surgeries", "Update Blood Transfusions"] %}
-    <br>
-    <br>
     <div class="row justify-content-around col-12">
         <div class="col-4">
 
@@ -318,7 +318,6 @@
 
         <div class="col-5">
             <form action="" method="POST">
-
                 {{ form.hidden_tag() }}
                 <!-- Adds a CSRF token to help with security -->
                 <fieldset class="form-group">
@@ -451,7 +450,7 @@
 
 
 
-    {% elif title in ["Update Allergies", "Update Vaccinations"] %}
+    {% elif title in ["Update Allergies", "Update Vaccinations", "Update Illnesses"] %}
 
     <div class="row justify-content-around col-12">
         {% if title == "Update Allergies"%}
@@ -601,7 +600,7 @@
                         contracted on {{
                         current_user.illnesses[i].date.strftime('%d/%m/%Y') }}
 
-                        {% if current_user.illnesses[i].comments != '' %}
+                        {% if current_user.illnesses[i].comments and current_user.illnesses[i].comments != '' %}
                         ({{ current_user.illnesses[i].comments }})
                         {% endif %}
                     </p>
@@ -651,7 +650,6 @@
         {% endif %}
         <div class="col-5">
             <form action="" method="post">
-
                 {{ form.hidden_tag() }}
                 <!-- Adds a CSRF token to help with security -->
                 <fieldset class="form-group">
@@ -745,14 +743,17 @@
     </div>
 </div>
 {% endif %}
+
 <div class="col-12">
     <br>
 </div>
+
 <div class="col-12">
-    <a href="{{ url_for('users.profile_reminder') }}">
+    <a href="{{ url_for('users.profile_history') }}">
         <button class="btn btn-info col-12">
             Back
         </button>
     </a>
 </div>
+
 {% endblock %}

@@ -14,3 +14,6 @@ https://github.com/kamillamagna/ICD-10-CSV
 
 Medical History:
 https://upload.wikimedia.org/wikipedia/commons/a/ad/Hx_in_PEDz.pdf
+
+Datepicker:
+https://gijgo.com/datepicker

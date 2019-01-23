@@ -4,7 +4,24 @@ from flask import Blueprint, render_template, flash
 from Flask import db
 from Flask.Models import User
 
+
+
+from flask import Flask, render_template
+from flask_bootstrap import Bootstrap
+from flask_wtf import Form
+from wtforms.fields import DateField
+
 main = Blueprint('main', __name__)
+
+
+class MyForm(Form):
+    date = DateField(id='datepick')
+
+@main.route('/test')
+def test():
+    form = MyForm()
+
+    return render_template('text.html', form=form)
 
 
 @main.route("/", methods=['GET', 'POST'])

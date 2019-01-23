@@ -7,6 +7,7 @@ from Flask import db
 from Flask.Models import Blood_Transfusions, Allergies, Surgeries, Admissions, Personal_Profile, Vaccinations, Illnesses
 from Flask.medical_history.forms import Blood_Transfusion_History_Form, Allergy_History_Form, Previous_Surgeries_Form, \
     Previous_Admissions_Form, Personal_Profile_Form, Vaccine_History_Form, Previous_Illnesses_Form
+from Flask.medical_history.hospitals import choices
 
 medical_history = Blueprint('medical_history', __name__)
 
@@ -16,6 +17,9 @@ def Personal_Details():
     form = Personal_Profile_Form()
 
     if form.validate_on_submit():
+        age = int(datetime.datetime.today().year) - int(form.birthday.data.year)
+        bmi = form.weight.data / (form.height.data ** 2)
+        # flash(f"{.year()}")
         if current_user.personal_profile == []:
 
             history = Personal_Profile(full_name=form.full_name.data,
@@ -23,6 +27,11 @@ def Personal_Details():
                                        birthday=form.birthday.data,
                                        sex=form.sex.data,
                                        address=form.address.data,
+                                       age= age,
+                                       height=form.height.data,
+                                       weight=form.weight.data,
+                                       heart_rate=form.heart_rate.data,
+                                       bmi= bmi,
                                        user_id=current_user.id)
 
             db.session.add(history)
@@ -33,6 +42,12 @@ def Personal_Details():
             current_user.personal_profile[0].birthday = form.birthday.data
             current_user.personal_profile[0].sex = form.sex.data
             current_user.personal_profile[0].address = form.address.data
+
+            current_user.personal_profile[0].age = age
+            current_user.personal_profile[0].height = form.height.data
+            current_user.personal_profile[0].weight = form.weight.data
+            current_user.personal_profile[0].heart_rate = form.heart_rate.data
+            current_user.personal_profile[0].bmi = bmi
 
         db.session.commit()
 
@@ -45,6 +60,9 @@ def Personal_Details():
         form.birthday.data = current_user.personal_profile[0].birthday
         form.sex.data = current_user.personal_profile[0].sex
         form.address.data = current_user.personal_profile[0].address
+        form.height.data = current_user.personal_profile[0].height
+        form.weight.data = current_user.personal_profile[0].weight
+        form.heart_rate.data = current_user.personal_profile[0].heart_rate
 
     return render_template('Medical History/edit personal details.html', title="Update Personal Details", form=form)
 
@@ -61,6 +79,8 @@ def Update_Record(record):
                }
 
     form = records[record][1]
+    if records[record][0] in [Admissions, Blood_Transfusions, Surgeries]:
+        form.place.choices = [(i, i) for i in choices]
     model = records[record][0]
     if form.validate_on_submit():
         if record == "Admissions":
@@ -107,93 +127,8 @@ def Update_Record(record):
 
     return render_template('Medical History/update forms.html', title=f"Update {record}", form=form)
 
-# @medical_history.route("/Update <string:record>", methods=['POST', 'GET'])
-# @login_required
-# def Update_Record(record):
-#     records = {"Admissions": [Admissions, Previous_Admissions_Form()],
-#                "Illnesses": [Illnesses, Previous_Illnesses_Form()],
-#                "Surgeries": [Surgeries, Previous_Surgeries_Form()],
-#                "Blood Transfusions": [Blood_Transfusions, Blood_Transfusion_History_Form()],
-#                "Allergies": [Allergies, Allergy_History_Form()],
-#                "Vaccinations": [Vaccinations, Vaccine_History_Form()]
-#                }
-#
-#     form = records[record][1]
-#     database = records[record][0]
-#
-#     if record == "Admissions":
-#         if form.validate_on_submit():
-#             admission = Admissions(reason=form.reason.data,
-#                                    date=form.date.data,
-#                                    place=form.place.data,
-#                                    comments=form.comment.data,
-#                                    user_id=current_user.id)
-#
-#
-#             db.session.add(admission)
-#             db.session.commit()
-#             flash(f'Your personal details have been updated', 'success')
-#             return redirect(url_for('medical_history.Update_Record', record=record))
-#         else:
-#             form.date.data = datetime.datetime.utcnow()
-#     elif record == "Surgeries":
-#         if form.validate_on_submit():
-#             surgery = Surgeries(date=form.date.data,
-#                                 surgery_type=form.surgery_type.data,
-#                                 place=form.place.data,
-#                                 comments=form.comment.data,
-#                                 user_id=current_user.id)
-#
-#
-#             db.session.add(surgery)
-#             db.session.commit()
-#             flash(f'Your personal details have been updated', 'success')
-#             return redirect(url_for('medical_history.Update_Record', record=record))
-#         else:
-#             form.date.data = datetime.datetime.utcnow()
-#     elif record == "Blood Transfusions":
-#         if form.validate_on_submit():
-#
-#             transfusion = Blood_Transfusions(date=form.date.data,
-#                                              blood_type=form.blood_type.data,
-#                                              place=form.place.data,
-#                                              comments=form.comment.data,
-#                                              user_id=current_user.id)
-#
-#             db.session.add(transfusion)
-#             db.session.commit()
-#             flash(f'Your personal details have been updated', 'success')
-#             return redirect(url_for('medical_history.Update_Record', record=record))
-#         else:
-#             form.date.data = datetime.datetime.utcnow()
-#     elif record == "Allergies":
-#         if form.validate_on_submit():
-#             allergies = Allergies(date=form.date.data,
-#                                   allergy=form.allergy_type.data,
-#                                   user_id=current_user.id)
-#
-#             db.session.add(allergies)
-#             db.session.commit()
-#             flash(f'Your personal details have been updated', 'success')
-#             return redirect(url_for('medical_history.Update_Record', record=record))
-#         else:
-#             form.date.data = datetime.datetime.utcnow()
-#     elif record == "Vaccinations":
-#         if form.validate_on_submit():
-#             vaccinations = Vaccinations(date=form.date.data,
-#                                   vaccine=form.vaccine_type.data,
-#                                   user_id=current_user.id)
-#
-#             db.session.add(vaccinations)
-#             db.session.commit()
-#             flash(f'Your personal details have been updated', 'success')
-#             return redirect(url_for('medical_history.Update_Record', record=record))
-#         else:
-#             form.date.data = datetime.datetime.utcnow()
-#     else:
-#         form.date.data = datetime.datetime.utcnow()
-#
-#     return render_template('Medical History/update forms.html', title=f"Update {record}", form=form)
+
+
 
 @medical_history.route("/Update_<string:record>/<int:item_id>", methods = ['POST', 'GET'])
 @login_required
