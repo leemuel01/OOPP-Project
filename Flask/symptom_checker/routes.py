@@ -16,6 +16,22 @@ def symptom_check():
     return render_template("Symptom Checker/Symptom Checker.html", title="Symptom Checker", form=form)
 
 
+def symptom_change_question():
+    symptom_question_password = []
+    symptom_qa_loop_set = 0
+    symptom_qa_database = sqlite3.connect("flask/site.db")
+    symptom_checked_box = request.form.get("answer")
+    symptom_question_password.append(symptom_checked_box)
+    data_symptom_qa_loop_password = symptom_qa_database.execute('SELECT symptom_qa_password FROM symptom_qa WHERE id=?', (symptom_checked_box))
+    for i in data_symptom_qa_loop_password:
+        data_symptom_qa_loop_password = i[symptom_qa_loop_set]
+        if data_symptom_qa_loop_password == symptom_question_password:
+            return render_template("Symptom Checker/Symptom Checker.html", title="Symptom Checker")
+        else:
+            symptom_qa_loop_set += 1
+
+
+
 @symptom_checker.route("/symptom", methods=['POST', 'GET'])
 def symptom():
     symptom_database = sqlite3.connect("flask/site.db")
@@ -28,6 +44,7 @@ def symptom():
         data_symptom_treatment = r[0]
     return render_template("Symptom Checker/Symptom.html", title="Symptom Checker", test3=data_symptom_answer,
                            test4=data_symptom_treatment)
+
 
 # <--- To take the data and put it at the symptom part at Symptom.html --->
 # def select_answer:
