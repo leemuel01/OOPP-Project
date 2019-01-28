@@ -3,43 +3,15 @@
 {% block content %}
     <div class="container">
             <div class="col-8">
-                    <form action="" method="post">
-            
-                        {{ form.hidden_tag() }} <!-- Adds a CSRF token to help with security -->
-                        
-                        <fieldset class="form-check">
-                            <legend class="border-bottom mb-4">Answer</legend>
-            
-                            <div class="form-group">
-                                {{ form.answers.label(class="form-check-labell") }}
-            
-                                {% if form.answers.errors %}
-                                
-                                    {{ form.answers(class="form-check form-check-lg is-invalid") }}
-            
-                                    <div class="invalid-feedback">
-                                        {% for error in form.answers.errors %}
-                                            <span>{{ error }}</span>
-                                        {% endfor %}
-                                    </div>
-                                
-                                {% else %}
-                                    
-                                    {{ form.answers(class="form-check form-check-lg") }}
-            
-                                {% endif %}
-                            </div>
-            
-
-                        </fieldset>
-                        <br>
-                        <br>
-                        <br>
-                        <div>
-                            {{ form.submit(class="btn btn-success btn-block col-12") }}
-                        </div>
-
-                    </form>
+                <form action="symptom_change_question" method="post">
+                    <h2>{{ symptom_question_html }}</h2>
+                    <input type="radio" name="answer" value="1">{{ symptom_answer_one_html }}<br>
+                    <input type="radio" name="answer" value="2">{{ symptom_answer_two_html }}<br>
+                    <input type="radio" name="answer" value="3">{{ symptom_answer_three_html }}<br>
+                    <input type="radio" name="answer" value="4">{{ symptom_answer_four_html }}<br>
+                    <input type="radio" name="answer" value="5">{{ symptom_answer_five_html }}<br>
+                    <input type="submit">
+                </form>
                 </div>
 
     </div>

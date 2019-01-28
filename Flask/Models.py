@@ -169,6 +169,30 @@ class Content(db.Model):
 
     def __repr__(self):
         return f"Content('{self.subject}')"
+
+
+class Symptom(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    symptom_answer = db.Column(db.String(60), nullable=False)
+    symptom_treatment = db.Column(db.String(250), nullable=False)
+    symptom_password = db.Column(db.String(60), nullable=False, unique=True)
+
+    def __repr__(self):
+        return f"Symptom('{self.symptom_answer}', '{self.symptom_treatment}', '{self.symptom_password}')"
+
+
+class Symptom_qa(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    question = db.Column(db.String(250), nullable=False)
+    answer_1 = db.Column(db.String(250), nullable=False)
+    answer_2 = db.Column(db.String(250), nullable=False)
+    answer_3 = db.Column(db.String(250), nullable=False)
+    answer_4 = db.Column(db.String(250), nullable=False)
+    answer_5 = db.Column(db.String(250), nullable=False)
+
+    def __repr__(self):
+        return f"Symptom_qa('{self.question}', '{self.answer_1}', '{self.answer_2}', '{self.answer_3}'" \
+f", '{self.answer_4}', '{self.answer_5}')"
 # endregion
 
 class Trivia(db.Model):

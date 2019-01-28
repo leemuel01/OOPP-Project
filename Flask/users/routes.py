@@ -39,6 +39,7 @@ def register():
 @users.route("/Login", methods = ['POST', 'GET'])
 def login():
     if current_user.is_authenticated:
+
         return redirect(url_for('main.index'))
 
     form = Login_Form()
@@ -113,7 +114,7 @@ def reset_token(token):
         db.session.commit()
 
         flash(f'Your password has been reset! You are now able to log in.', 'success')
-        return redirect(url_for("users.users"))
+        return redirect(url_for("users.login"))
 
     return render_template("Users/Reset Token.html", title="Reset Password", form=form)
 
