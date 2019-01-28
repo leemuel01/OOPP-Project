@@ -1,0 +1,66 @@
+{% extends "layout.html" %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="../../static/css/medical_teacher.css"/>
+<div class="container-fluid">
+	<div class="row justify-content-center">
+		<img src="..." class="img-fluid">
+		<p>how to cure light fever</P>
+
+
+	</div>
+
+	<div class="row justify-content-center">
+		<img src="..." class="img-fluid">
+		<P>drink more water</p>
+
+	</div>
+
+	<div class="row justify-content-center">
+
+		<table>
+			<tr>
+				<th>OTHER<th>
+			</tr>
+			<tr>
+				<td>
+					<ul>
+						<li></li>
+				</td>
+			</tr>
+		</table>
+	</div>
+</div>
+     <form action="/handle_data" method="post">
+
+         <legend class="border-bottom mb-4">Leave a comment or any better way of helping</legend>
+         <input id="post_comment" type="text" name="project" class="form-group">
+            <div class="form-group">
+
+            </div>
+
+
+        <button>
+            SUBMIT
+        </button>
+     </form>
+    <div>
+        {% for i in range(display_review|length) %}
+            <div>
+                {{ display_review[i][4] }}
+                {{ display_review[i][5] }}
+            </div>
+
+            <div class="display_review_content">
+                {{ display_review[i][1] }}
+            </div>
+
+            <div class="display_review_date">
+                {{ display_review[i][2] }}
+            </div>
+
+            <hr>
+        {% endfor %}
+
+    </div>
+
+{% endblock %}
