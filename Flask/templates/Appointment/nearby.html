@@ -2,8 +2,9 @@
 {% block content %}
 <div class="container-fluid">
     <div class="row justify-content-center">
-        <div class="col-6 ">
+        <div class="col-12 ">
             <div class="jumbotron jumbotron-fluid text-center">
+                <div class="card-columns">
                 Here are the available hospitals near you:
                 {% for i in range(display_result_list|length) %}
                     <div class="card" style="width: 18rem;">
@@ -19,6 +20,7 @@
                             <a href="{{ display_result_list[i][5] }}" class="btn btn-primary">View Queue Watch</a>
                         </div>
                     </div>
+                </div>
                 {% endfor %}
             </div>
         </div>
