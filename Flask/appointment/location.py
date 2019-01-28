@@ -62,7 +62,7 @@ class LocationSearch(Config):
         simple_count = 0
         for i in self.__places_nearby_hospital_result.json()["results"]:
             simple_count += 1
-            # simulation of number of people in queue, assuming it takes 15mins per person and urls
+            # simulation of number of people in queue and urls, assuming it takes 15mins per person with only 1 room
             simulate_queue = random.randrange(3,200)
             simulate_waiting_time = simulate_queue * 15
             simulate_appointment_url = "https://www."+i["name"].replace(" ","")+".com/appointment"
