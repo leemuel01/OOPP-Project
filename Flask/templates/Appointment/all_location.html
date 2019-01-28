@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-12 ">
+            <div class="jumbotron jumbotron-fluid text-center">
+            <p><a href="appointment.html" class="btn btn-primary float-left">Back</a></p>
+                <p>Here are all the avaliable medical locations: </p>
+            <div class="card-columns">
+                {% for i in display_all_location %}
+                    <div class="card border border-primary">
+                        <img class="card-img-top img-fluid p-5" src="{{ i[3] }}" alt="Location image">
+                        <div class="card-body">
+                            <h4 class="card-title">{{ i[2] }}</h4>
+                            <p class="card-text">Current Queue: {{ i[6] }} patients</p>
+                            <p class="card-text">Estimated Waiting Time: {{ i[7]//60 }} Hours and {{ i[7]%60 }} Minutes</p>
+                            <p><a href="/locations/{{ i[0] }}" class="btn btn-primary">More Information</a> </p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

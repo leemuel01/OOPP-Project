@@ -1,15 +1,62 @@
 {% extends "layout.html" %}
 {% block content %}
-<div class="container-fluid">
-    <form name="nearbyform" class="form-inline justify-content-center" action="nearby.html" method="post">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/signup.css') }}" />
 
-        <div class="form-group">
+<div class="container-fluid row justify-content-center">
+    <div class="col-12">
+        <br>
+        <br>
+    </div>
 
-            <label for="postalcode">Enter Postal Code:</label>
-            <input type="text" class="form-control ml-1" name="Postal_Code" aria-describedby="helpId" placeholder="123456">
+    <div id="sign_up" class="col-8 row justify-content-center">
+        <h1 class="col-12 text-center">
+            Book an appointment by
+        </h1>
+
+        <hr class="col-11">
+
+        <a href="/all_location" class="btn btn-primary btn-lg col-5">
+            <div class="col-12 text-center">
+                <br>
+                <img src="{{ url_for('static', filename='images/Assets/Hospital.png') }}" alt="" class="img-fluid rounded mx-auto d-block w-50">
+                <br>
+                <h3 class="col-12 text-center">
+                    Viewing all location:
+                </h3>
+            </div>
+        </a>
+        <h1 class="col-2 text-center">
+            <br>
+            <br>
+            <br>
+            Or
+        </h1>
+
+        <div class="col-5">
+            <img src="{{ url_for('static', filename='images/Assets/Magnifying Glass.png') }}" alt="" class="img-fluid rounded mx-auto d-block w-50">
+            <h4 class="col-12 text-center">
+                Searching the location:
+            </h4>
+
+            <form name="nearbyform" class="" action="nearby.html" method="post">
+
+                <div class="form-group text-center">
+                    <input type="text" class="form-control form-control-lg" name="Postal_Code" aria-describedby="helpId"
+                        placeholder="Enter Address or Postal code">
+                </div>
+
+                <button type="submit" class="btn btn-primary col-12 btn-lg">Submit</button>
+            </form>
         </div>
 
-        <button type="submit" class="btn btn-primary ml-2">Submit</button>
-    </form>
+
+        <div class="col-12">
+            <br>
+            <br>
+        </div>
+
+
+    </div>
+
 </div>
 {% endblock %}
