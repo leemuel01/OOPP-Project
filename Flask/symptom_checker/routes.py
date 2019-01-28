@@ -52,7 +52,6 @@ def symptom_change_question():
     symptom_change_question_list_length = (len(symptom_change_question_list))
     symptom_qa_database = sqlite3.connect("flask/site.db")
     symptom_checked_box = request.form.get("answer")
-    symptom_answer_password.append(symptom_checked_box)
     symptom_set_question = symptom_qa_database.execute('SELECT question FROM symptom_qa WHERE id=?', (symptom_change_question_list_length,))
     symptom_set_answer_one = symptom_qa_database.execute('SELECT answer_1 FROM symptom_qa WHERE id=?', (symptom_change_question_list_length,))
     symptom_set_answer_two = symptom_qa_database.execute('SELECT answer_2 FROM symptom_qa WHERE id=?', (symptom_change_question_list_length,))
@@ -72,6 +71,7 @@ def symptom_change_question():
     for f in symptom_set_answer_five:
         symptom_set_answer_five = f[0]
     if symptom_change_question_list_length <= 5:
+        symptom_answer_password.append(symptom_checked_box)
         symptom_change_question_list.append(symptom_checked_box)
         return render_template("Symptom Checker/Symptom Checker.html", title="Symptom Checker", symptom_question_html=symptom_set_question,
                                symptom_answer_one_html=symptom_set_answer_one, symptom_answer_two_html=symptom_set_answer_two,
@@ -81,18 +81,18 @@ def symptom_change_question():
     if len(symptom_answer_password) == 5:
         for m in symptom_get_answer_password:
             if m[0] == symptom_answer_password:
-                data_symptom_answer = symptom_qa_database.execute('SELECT symptom_answer FROM symptom WHERE id=?', ())
-
-    else:
-        symptom_change_question_list = ['a']
+                data_symptom_answer = symptom_qa_database.execute('SELECT symptom_answer FROM symptom WHERE id=?', (m[0],))
+                for n in data_symptom_answer:
+                    data_symptom_answer = n[0]
+                data_symptom_treatment = symptom_qa_database.execute('SELECT symptom_treatment FROM symptom WHERE id=?', (m[0],))
+                for o in data_symptom_treatment:
+                    data_symptom_treatment = o[0]
+            else:
+                data_symptom_answer = symptom_qa_database.execute('SELECT symptom_answer FROM symptom WHERE id=5',)
+                data_symptom_treatment = symptom_qa_database.execute('SELECT symptom_treatment FROM symptom WHERE id=5',)
+    if symptom_change_question_list_length >= 6:
         return render_template("Symptom Checker/Symptom.html", title="Symptom", symptom_reply_answer=data_symptom_answer,
                                symptom_reply_answer_treatment=data_symptom_treatment)
-
-
-@symptom_checker.route("/symptom_change_question", methods=['POST', 'GET'])
-def symptom_find_answer_password():
-    symptom_answer_database = sqlite3.connect("flask/site.db")
-    symptom_checked_box = request.form.get("answer")
 
 
 # def symptom_change_question():
