@@ -2,8 +2,6 @@ import requests
 import random
 from Flask.appointment.config import Config
 
-# remember to allow different types of healthlocation e.g hospital and clinic
-# also, to clean up and reorganise
 
 """
 consider auto location get
@@ -54,7 +52,7 @@ class LocationSearch(Config):
         self.set_result_lat_long()
         self.__places_nearby_hospital_result = requests.get("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="
                                                + self.__result_latitude+","+self.__result_longitude
-                                               + "&rankby=distance&type=hospital&keyword=general+hospital&key="
+                                               + "&rankby=distance&type=hospital|doctor&keyword=general+hospital&key="
                                                + self.get_api_key())
 
     def nearby_hospital_update_result(self):
@@ -62,7 +60,7 @@ class LocationSearch(Config):
         simple_count = 0
         for i in self.__places_nearby_hospital_result.json()["results"]:
             simple_count += 1
-            # simulation of number of people in queue and urls, assuming it takes 15mins per person with only 1 room
+            # simulation of number of people in queue and urls, assuming it takes 15mins per person
             simulate_queue = random.randrange(3,200)
             simulate_waiting_time = simulate_queue * 15
             simulate_appointment_url = "https://www."+i["name"].replace(" ","")+".com/appointment"
