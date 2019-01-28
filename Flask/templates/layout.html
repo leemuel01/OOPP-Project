@@ -144,6 +144,17 @@
             maxDate: today,
             minDate: '12/12/1903'
         });
+
+        $('input[name="reminder_date"]').datetimepicker({
+            datepicker: { showOtherMonths: true, calendarWeeks: true },
+            showRightIcon: false,
+            uiLibrary: 'bootstrap4',
+
+            format: 'dd/mm/yyyy HH:MM',
+            minDate: today,
+            modal: true,
+            footer: true
+        });
     </script>
 </body>
 

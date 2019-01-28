@@ -1,12 +1,14 @@
+import datetime
+
 from flask import Blueprint, redirect, url_for, render_template, request, flash
 from flask_login import login_user, logout_user, login_required, current_user
 from flask_wtf import Form
 from wtforms import DateField
 
 from Flask import bcrypt, db
-from Flask.Models import User
+from Flask.Models import User, Reminders
 from Flask.users.forms import Registration_Form, Login_Form, Request_Reset_Form, Reset_Password_Form, \
-    Update_Account_Form
+    Update_Account_Form, Reminder_Form
 from Flask.users.functions import send_reset_email, save_picture, send_authenticate_email, del_unauthenticated
 
 import time
@@ -120,29 +122,39 @@ def reset_token(token):
 
 
 
-
-
-# @users.route("/Profile", methods = ['POST', 'GET'])
-# @login_required
-# def account():
-#     image_files = url_for('static', filename=f"images/Profile_Picture/{current_user.image_file}")
-#
-#     return render_template("Users/profile.html", title="Profile",
-#                            image_file=image_files)
-    
 @users.route("/Profile", methods = ['POST', 'GET'])
 @users.route("/Profile/Reminder", methods = ['POST', 'GET'])
 @login_required
 def profile_reminder():
     image_files = url_for('static', filename=f"images/Profile_Picture/{current_user.image_file}")
-    return render_template("Users/profile.html", title="Reminder", image_file=image_files)
+    form = Reminder_Form()
+
+    if form.validate_on_submit():
+        data = Reminders(reminder=form.reminder.data,
+                         date=form.reminder_date.data,
+                         user_id=current_user.id)
+
+
+        db.session.add(data)
+        db.session.commit()
+
+    return render_template("Users/profile.html", title="Reminder", image_file=image_files, form=form)
+
+@users.route("/<string:record>/<int:item_id>", methods = ['POST', 'GET'])
+@login_required
+def delete_item(record, item_id):
+    item = Reminders.query.get_or_404(item_id)
+
+    db.session.delete(item)
+    db.session.commit()
+    flash(f'The record has been successfully deleted!', 'success')
+    return redirect(url_for('users.profile_reminder', record=record))
 
 @users.route("/Profile/History", methods = ['POST', 'GET'])
 @login_required
 def profile_history():
     image_files = url_for('static', filename=f"images/Profile_Picture/{current_user.image_file}")
     return render_template("Users/profile.html", title="History", image_file=image_files)
-
 
 
 @users.route("/Profile/Edit", methods = ['POST', 'GET'])

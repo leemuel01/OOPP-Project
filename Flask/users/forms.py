@@ -1,8 +1,8 @@
 from flask_login import current_user
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileAllowed
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, FileField
-from wtforms.validators import DataRequired, Length, EqualTo, Email, ValidationError
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, FileField, DateField, DateTimeField
+from wtforms.validators import DataRequired, Length, EqualTo, Email, ValidationError, Optional
 
 from Flask.Models import User
 
@@ -97,6 +97,10 @@ class Reset_Password_Form(FlaskForm):
 
     submit = SubmitField('Reset Password')
 
+class Reminder_Form(FlaskForm):
+    reminder = StringField('Reminder', validators=[])
+    reminder_date = DateTimeField('Date', format='%d/%m/%Y %H:%M', validators=[Optional()])
+    submit = SubmitField("Add")
 
 
 

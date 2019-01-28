@@ -128,7 +128,7 @@ def Update_Record(record):
         return redirect(url_for('medical_history.Update_Record', record=record))
 
     else:
-        form.date.data = datetime.datetime.utcnow()
+        form.date.data = datetime.datetime.now()
 
     return render_template('Medical History/update forms.html', title=f"Update {record}", form=form)
 
@@ -148,6 +148,8 @@ def delete_item(record, item_id):
     db.session.commit()
     flash(f'The record has been successfully deleted!', 'success')
     return redirect(url_for('medical_history.Update_Record', record=record))
+
+
 
 @medical_history.route("/Print")
 @login_required

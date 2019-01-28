@@ -25,10 +25,11 @@ class User(db.Model, UserMixin):
 
     authenticated = db.Column(db.Boolean, nullable=False, default=False)
 
-    delete_time = db.Column(db.DateTime, nullable=False, default=(datetime.utcnow() + timedelta(minutes=30)))
+    delete_time = db.Column(db.DateTime, nullable=False, default=(datetime.now() + timedelta(minutes=30)))
 
     personal_profile = db.relationship('Personal_Profile', backref='person')
 
+    reminders = db.relationship('Reminders', backref="person")
 
     admissions = db.relationship('Admissions', backref="person")
     illnesses = db.relationship('Illnesses', backref="person")
@@ -76,13 +77,24 @@ class Personal_Profile(db.Model):
     def __repr__(self):
         return f"Personal_Profile('{self.age}', '{self.sex}', '{self.address}', '{self.full_name}', '{self.nric}')"
 
+class Reminders(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    reminder = db.Column(db.String, nullable=False)
+    date = db.Column(db.DateTime, nullable=False, default=datetime.now())
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+
+    def __repr__(self):
+        return f"Previous_Admissions('{self.reminder}','{self.date}', '{self.user_id}', '{self.id}')"
+
+
+
 # region Past Medical History
 class Admissions(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     reason = db.Column(db.String(100), nullable=False)
     place = db.Column(db.String(100), nullable=True)
-    date = db.Column(db.DateTime, nullable=True, default=datetime.utcnow())
+    date = db.Column(db.DateTime, nullable=True, default=datetime.now())
     comments = db.Column(db.String(100), nullable=True)
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
@@ -95,7 +107,7 @@ class Surgeries(db.Model):
 
     surgery_type = db.Column(db.String(100), nullable=True)
 
-    date = db.Column(db.DateTime, nullable=True, default=datetime.utcnow)
+    date = db.Column(db.DateTime, nullable=True, default=datetime.now)
 
     place = db.Column(db.String(100), nullable=True)
 
@@ -111,7 +123,7 @@ class Blood_Transfusions(db.Model):
 
     blood_type = db.Column(db.String(100), nullable=True)
 
-    date = db.Column(db.DateTime, nullable=True, default=datetime.utcnow)
+    date = db.Column(db.DateTime, nullable=True, default=datetime.now)
 
     place = db.Column(db.String(100), nullable=True)
 
@@ -133,7 +145,6 @@ class Allergies(db.Model):
 
     def __repr__(self):
         return f"Previous_Admissions('{self.allergy}','{self.date_diagnosed}')"
-# endregion
 
 class Vaccinations(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -148,13 +159,18 @@ class Illnesses(db.Model):
     date = db.Column(db.DateTime, nullable=True)
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+# endregion
+
+
+
+
 # region Teammates' database model
 
 #review
 class Post_review(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.String(), nullable=False)
-    date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow())
+    date_posted = db.Column(db.DateTime, nullable=False, default=datetime.now())
 
     def __repr__(self):
         return f"Post_review('{self.content}', '{self.date_posted}')"
@@ -193,9 +209,12 @@ class Symptom_qa(db.Model):
     def __repr__(self):
         return f"Symptom_qa('{self.question}', '{self.answer_1}', '{self.answer_2}', '{self.answer_3}'" \
 f", '{self.answer_4}', '{self.answer_5}')"
-# endregion
 
 class Trivia(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     image = db.Column(db.String(50), nullable=False)
     type = db.Column(db.String(20), nullable=True)
+
+# endregion
+
+

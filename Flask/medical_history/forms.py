@@ -62,8 +62,6 @@ class Blood_Transfusion_History_Form(FlaskForm):
 
 
 
-
-
 class Allergy_History_Form(FlaskForm):
     allergy_type = StringField('Allergy', validators=[])
     date = DateField('Admission Date', format='%d/%m/%Y')

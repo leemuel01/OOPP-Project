@@ -26,10 +26,7 @@ def test():
 
 @main.route("/", methods=['GET', 'POST'])
 def index():
-
-    db.create_all()
-
-    expired_users = User.query.filter(User.delete_time<=datetime.utcnow())
+    expired_users = User.query.filter(User.delete_time<=datetime.now())
     for i in expired_users:
         if i.authenticated == False:
             db.session.delete(i)
