@@ -7,6 +7,10 @@ from Flask.appointment.config import Config
 consider auto location get
 Note: As of Chrome 50, the Geolocation API only works on secure contexts (HTTPS). 
 If your site is hosted on a non-secure origin (such as HTTP), any requests for the user's location no longer function.
+
+Queue watch
+https://www.nup.com.sg/Pages/QueueViewer/nup_queueviewerlist.aspx
+https://www.nhgp.com.sg/smile.aspx
 """
 
 
@@ -46,6 +50,8 @@ class LocationSearch(Config):
     def get_result_lat_long(self):
         return "Latitude: "+ self.__result_latitude +" Longitude: "+ self.__result_longitude
 
+    # need key word to filter as google places shows all locations that people have
+    # tagged as hospital which might not be actual hospital locations
     def find_nearby_hospital(self):
         self.set_api_key()
         self.run_places_api_location_input()
@@ -61,6 +67,8 @@ class LocationSearch(Config):
         for i in self.__places_nearby_hospital_result.json()["results"]:
             simple_count += 1
             # simulation of number of people in queue and urls, assuming it takes 15mins per person
+            # simulate queue watch url as theres no automated way of getting those
+            # to update urls manually
             simulate_queue = random.randrange(3,200)
             simulate_rooms = random.randrange(1,15)
             simulate_waiting_time = round(simulate_queue * 15 / simulate_rooms)
@@ -84,11 +92,12 @@ class LocationSearch(Config):
             database.execute("UPDATE healthlocation SET gmap_name=?,gmap_photo=? WHERE gmap_place_id=?",(i["name"],photo_ref_url,i["place_id"]))
 
             # append info into obj list to display
-            nearby_hospital_array_loop = [simple_count,i["place_id"],i["name"],photo_ref_url,simulate_appointment_url,simulate_queue_watch_url,simulate_queue,simulate_waiting_time]
+            nearby_hospital_array_loop = [simple_count,i["place_id"],i["name"],photo_ref_url,simulate_appointment_url,simulate_queue_watch_url,simulate_queue,simulate_waiting_time,simulate_rooms]
             self.__places_nearby_hospital_list.append(nearby_hospital_array_loop)
         #  need to .commit to save sql data
         database.commit()
         database.close()
+        self.run_list_sql()
 
         """
             
@@ -112,6 +121,18 @@ class LocationSearch(Config):
         self.nearby_hospital_update_result()
         print(self.__places_nearby_hospital_list)
         return self.__places_nearby_hospital_list
+
+    def run_list_sql(self):
+        database = self.database_connection()
+        count = 0
+        for i in self.__places_nearby_hospital_list:
+
+            place_id = i[1]
+            sql_id = database.execute("SELECT id FROM healthlocation WHERE gmap_place_id = ?",(place_id,))
+            for j in sql_id:
+                print (j[0])
+                self.__places_nearby_hospital_list[count].append(int(j[0]))
+            count +=1
 
 
 

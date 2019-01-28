@@ -1,24 +1,32 @@
 {% extends "layout.html" %}
-{% block content %}
+{% block content %}<script>
+function goBack() {
+  window.history.back();
+}</script>
 <div class="container-fluid">
     <div class="row justify-content-center">
         <div class="col-12 ">
             <div class="jumbotron jumbotron-fluid text-center">
-                <p><a href="../all_location" class="btn btn-primary float-left">Back</a></p>
+                <p><a onclick="goBack()" class="btn btn-primary float-left">Back</a></p>
                 <div class="container text-center">
-             {% for i in display_location_info %}
-                 <div class="card">
-                     <img class="card-img-top img-fluid%" src="{{ i[3] }}" alt="Location image">
-                     <div class="card-body">
-                         <h4 class="card-title">{{ i[2] }}</h4>
-                         <p class="card-text">Current Queue: {{ i[6] }} patients</p>
-                         <p class="card-text">Estimated Waiting Time: {{ i[7]//60 }} Hours and {{ i[7]%60 }} Minutes</p>
-                         <p><a href="{{ i[4] }}" class="btn btn-primary">Book appointment</a> </p>
-                         <p><a href="{{ i[5] }}" class="btn btn-primary">View Queue Watch</a></p>
-                     </div>
-                 </div>
-             {% endfor %}
+                    {% for i in display_location_info %}
+                        <div class="card">
+                            <img class="card-img-top img-fluid p-5 " src="{{ i[3] }}" alt="Location image">
+                            <div class="card-body">
+                                <h4 class="card-title">{{ i[2] }}</h4>
+                                <p class="card-text">Current Queue: {{ i[6] }} patients</p>
+                                <p class="card-text">Estimated Waiting Time: {{ i[7]//60 }} Hours and {{ i[7]%60 }} Minutes</p>
+                                <iframe width="100%" height="600" frameborder="0" style="border:0"
+                            src="https://www.google.com/maps/embed/v1/place?key={{ api_key_loc }}&q=place_id:{{ i[1] }}" allowfullscreen>
+                                </iframe>
+                                <p><a href="{{ i[4] }}" class="btn btn-primary">Book appointment</a> </p>
+                                <p><a href="{{ i[5] }}" class="btn btn-primary">View Queue Watch</a></p>
+                            </div>
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
-        </div>
+         </div>
+    </div>
+</div>
 {% endblock %}

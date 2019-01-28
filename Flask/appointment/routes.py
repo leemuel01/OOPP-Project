@@ -13,18 +13,20 @@ def appointments():
 @appointment.route("/nearby.html", methods = ['POST', 'GET'])
 def nearby():
     postal_code = request.form.get("Postal_Code")
-    test4 = LocationSearch(postal_code)
-    test4.display_nearby_result()
+    nearby = LocationSearch(postal_code)
+    nearby.display_nearby_result()
 
-    return render_template("Appointment/nearby.html", title="nearby", display_result_list= test4.display_nearby_result())
+    return render_template("Appointment/nearby.html", title="nearby", display_result_list= nearby.display_nearby_result())
 
 @appointment.route("/locations/<location_id>",methods = ['POST', 'GET'])
 def locations(location_id):
     location_config = Config()
     database = location_config.database_connection()
     location_information = database.execute("SELECT * FROM healthlocation WHERE id = ?",(location_id,))
+    location_config.set_api_key()
+    api_key = location_config.get_api_key()
 
-    return render_template("Appointment/location.html", display_location_info = location_information)
+    return render_template("Appointment/location.html", display_location_info = location_information, api_key_loc=api_key)
 
 @appointment.route("/all_location",methods = ['POST', 'GET'])
 def all_location():
