@@ -137,6 +137,7 @@ def Update_Record(record):
 @login_required
 def delete_item(record, item_id):
     records = {"Admissions": [Admissions, Previous_Admissions_Form()],
+               "Illnesses": [Illnesses, Previous_Illnesses_Form()],
                "Surgeries": [Surgeries, Previous_Surgeries_Form()],
                "Blood Transfusions": [Blood_Transfusions, Blood_Transfusion_History_Form()],
                "Allergies": [Allergies, Allergy_History_Form()],

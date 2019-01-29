@@ -84,7 +84,7 @@ class Reminders(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
     def __repr__(self):
-        return f"Previous_Admissions('{self.reminder}','{self.date}', '{self.user_id}', '{self.id}')"
+        return f"Previous_Admissions('{self.reminder}','{self.date}', '{self.user_id}', '{self.id       }')"
 
 
 
