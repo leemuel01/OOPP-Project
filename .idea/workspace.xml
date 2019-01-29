@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c439e86f-cd57-4d86-a59a-b238d22b113e" name="Default Changelist" comment="Jesus christ I've been editing the wrong files no wonder things were not working.">
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/.idea/OOPP-Project.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/OOPP-Project.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
@@ -16,6 +17,12 @@
       <change beforePath="$PROJECT_DIR$/Notes &amp; Resources/Sources.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Notes &amp; Resources/Sources.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/run.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flask/symptom_checker/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/Flask/symptom_checker/routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flask/templates/Symptom Checker/Symptom Checker.html" beforeDir="false" afterPath="$PROJECT_DIR$/Flask/templates/Symptom Checker/Symptom Checker.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flask/templates/Symptom Checker/Symptom.html" beforeDir="false" afterPath="$PROJECT_DIR$/Flask/templates/Symptom Checker/Symptom.html" afterDir="false" />
+>>>>>>> 78adebe1b71b69584f0c5a48d15225ce52bda1a1
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -24,9 +31,15 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
+<<<<<<< HEAD
     <SUITE FILE_PATH="coverage/OOPP_Project$functions.coverage" NAME="functions Coverage Results" MODIFIED="1548780171710" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Flask/reminder" />
     <SUITE FILE_PATH="coverage/OOPP_Project$test.coverage" NAME="test Coverage Results" MODIFIED="1548776882108" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/OOPP_Project$run.coverage" NAME="run Coverage Results" MODIFIED="1548783873751" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+=======
+    <SUITE FILE_PATH="coverage/OOPP_Project$run.coverage" NAME="run Coverage Results" MODIFIED="1548769220186" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/OOPP_Project$Student.coverage" NAME="Student Coverage Results" MODIFIED="1543143159892" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/OOPP Project" />
+    <SUITE FILE_PATH="coverage/OOPP_Project$test.coverage" NAME="test Coverage Results" MODIFIED="1546407128464" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+>>>>>>> 78adebe1b71b69584f0c5a48d15225ce52bda1a1
     <SUITE FILE_PATH="coverage/OOPP_Project$Flask.coverage" NAME="Flask Coverage Results" MODIFIED="1544285366155" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/OOPP_Project$Student.coverage" NAME="Student Coverage Results" MODIFIED="1543143159892" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/OOPP Project" />
   </component>
@@ -48,13 +61,14 @@
     <session id="504248517">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="5" />
+          <entry key="project.closed" value="7" />
           <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.3" value="1" />
           <entry key="project.open.time.4" value="2" />
+          <entry key="project.open.time.5" value="1" />
           <entry key="project.open.time.6" value="1" />
           <entry key="project.open.time.7" value="1" />
-          <entry key="project.opened" value="6" />
+          <entry key="project.opened" value="7" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -74,13 +88,13 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="html" value="556" />
-          <entry key="py" value="2236" />
+          <entry key="py" value="2245" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="HTML" value="556" />
-          <entry key="Python" value="2236" />
+          <entry key="Python" value="2245" />
         </counts>
       </usages-collector>
     </session>
@@ -169,8 +183,13 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Flask/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="165">
               <caret line="86" lean-forward="true" selection-start-line="86" selection-end-line="86" />
+=======
+            <state relative-caret-position="68">
+              <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+>>>>>>> 78adebe1b71b69584f0c5a48d15225ce52bda1a1
               <folding>
                 <element signature="e#0#40#0" expanded="true" />
                 <marker date="1548783873736" expanded="false" signature="917:1938" ph="..." />
@@ -180,10 +199,26 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/Flask/reminder/functions.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="153">
               <caret line="9" selection-start-line="9" selection-end-line="11" selection-end-column="40" />
+=======
+        <entry file="file://$PROJECT_DIR$/Flask/templates/Symptom Checker/Symptom Checker.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="4" column="31" selection-start-line="4" selection-start-column="31" selection-end-line="4" selection-end-column="31" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Flask/templates/Symptom Checker/Symptom.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="51">
+              <caret line="3" column="16" selection-start-line="3" selection-start-column="16" selection-end-line="3" selection-end-column="16" />
+>>>>>>> 78adebe1b71b69584f0c5a48d15225ce52bda1a1
             </state>
           </provider>
         </entry>
@@ -304,9 +339,8 @@
         <option value="$PROJECT_DIR$/Flask/medical_teacher/routes.py" />
         <option value="$PROJECT_DIR$/Flask/Models.py" />
         <option value="$PROJECT_DIR$/Flask/medical_history/routes.py" />
-        <option value="$PROJECT_DIR$/Flask/templates/Symptom Checker/Symptom Checker.html" />
-        <option value="$PROJECT_DIR$/Flask/templates/Symptom Checker/Symptom.html" />
         <option value="$PROJECT_DIR$/Flask/symptom_checker/routes.py" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/Flask/reminder/__init__.py" />
         <option value="$PROJECT_DIR$/Flask/users/routes.py" />
         <option value="$PROJECT_DIR$/run.py" />
@@ -315,6 +349,10 @@
         <option value="$PROJECT_DIR$/Flask/reminder/forms.py" />
         <option value="$PROJECT_DIR$/Flask/reminder/functions.py" />
         <option value="$PROJECT_DIR$/Flask/__init__.py" />
+=======
+        <option value="$PROJECT_DIR$/Flask/templates/Symptom Checker/Symptom.html" />
+        <option value="$PROJECT_DIR$/Flask/templates/Symptom Checker/Symptom Checker.html" />
+>>>>>>> 78adebe1b71b69584f0c5a48d15225ce52bda1a1
       </list>
     </option>
   </component>
@@ -540,15 +578,26 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
+<<<<<<< HEAD
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49209487" visible="true" weight="0.2261745" />
+=======
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49209487" visible="true" weight="0.22547974" />
+>>>>>>> 78adebe1b71b69584f0c5a48d15225ce52bda1a1
       <window_info id="Structure" order="1" sideWeight="0.5079051" side_tool="true" weight="0.29932886" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32907802" />
+<<<<<<< HEAD
       <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49932885" visible="true" weight="0.4326241" />
+=======
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49932885" weight="0.43336946" />
+>>>>>>> 78adebe1b71b69584f0c5a48d15225ce52bda1a1
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -567,12 +616,12 @@
       <window_info anchor="right" id="Database" order="4" weight="0.3295302" />
     </layout>
     <layout-to-restore>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49209487" visible="true" weight="0.33489934" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49209487" visible="true" weight="0.22547974" />
       <window_info id="Structure" order="1" sideWeight="0.5079051" side_tool="true" weight="0.29932886" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32907802" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49932885" visible="true" weight="0.4283688" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49932885" visible="true" weight="0.43336946" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -582,7 +631,7 @@
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50067115" side_tool="true" weight="0.32907802" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.32765958" />
-      <window_info anchor="bottom" id="Python Console" order="12" />
+      <window_info anchor="bottom" id="Python Console" order="12" weight="0.32907802" />
       <window_info anchor="bottom" id="SVN Repositories" order="13" weight="0.32907802" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -791,22 +840,30 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/Flask/templates/Symptom Checker/Symptom Checker.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
           <caret line="13" column="59" selection-start-line="13" selection-start-column="59" selection-end-line="13" selection-end-column="59" />
+=======
+    <entry file="file://$PROJECT_DIR$/run.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" selection-start-line="6" selection-end-line="6" />
+>>>>>>> 78adebe1b71b69584f0c5a48d15225ce52bda1a1
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Flask/templates/Symptom Checker/Symptom.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
-          <caret line="3" column="12" selection-start-line="3" selection-start-column="12" selection-end-line="3" selection-end-column="12" />
+          <caret line="3" column="16" selection-start-line="3" selection-start-column="16" selection-end-line="3" selection-end-column="16" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Flask/config.py">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="204">
           <caret line="12" column="21" selection-start-line="12" selection-start-column="21" selection-end-line="12" selection-end-column="34" />
         </state>
@@ -839,13 +896,22 @@
           <folding>
             <element signature="e#4786#4995#0" />
           </folding>
+=======
+        <state relative-caret-position="68">
+          <caret line="4" column="31" selection-start-line="4" selection-start-column="31" selection-end-line="4" selection-end-column="31" />
+>>>>>>> 78adebe1b71b69584f0c5a48d15225ce52bda1a1
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Flask/symptom_checker/routes.py">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="419">
           <caret line="37" selection-start-line="37" selection-end-line="37" />
+=======
+        <state relative-caret-position="68">
+          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+>>>>>>> 78adebe1b71b69584f0c5a48d15225ce52bda1a1
           <folding>
             <element signature="e#0#79#0" expanded="true" />
           </folding>
