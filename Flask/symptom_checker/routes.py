@@ -30,7 +30,7 @@ def symptom_check():
         check_symptom_empty=symptom_obj.fetchone()
         if check_symptom_empty is None:
             error_message = "Please see a doctor for your symptoms"
-            return render_template("Symptom Checker/Symptom.html", title="Symptom Checker", test3=error_message)
+            return render_template("Symptom Checker/Symptom.html", title="Symptom Checker", error_msg=error_message)
         else:
             # run once more or else fetchone will make object empty for some reason
             symptom_obj = database.execute("SELECT * FROM symptom where symptom_password = ?", (symptom_string,))
