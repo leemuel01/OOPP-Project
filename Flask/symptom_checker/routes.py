@@ -81,15 +81,17 @@ def symptom_change_question():
     if len(symptom_answer_password) == 5:
         for m in symptom_get_answer_password:
             if m[0] == symptom_answer_password:
-                data_symptom_answer = symptom_qa_database.execute('SELECT symptom_answer FROM symptom WHERE id=?', (m[0],))
+                symptom_for_if_loop = symptom_answer_password[m]
+                data_symptom_answer = symptom_qa_database.execute('SELECT symptom_answer FROM symptom WHERE id=?', (symptom_for_if_loop,))
                 for n in data_symptom_answer:
                     data_symptom_answer = n[0]
-                data_symptom_treatment = symptom_qa_database.execute('SELECT symptom_treatment FROM symptom WHERE id=?', (m[0],))
+                data_symptom_treatment = symptom_qa_database.execute('SELECT symptom_treatment FROM symptom WHERE id=?', (symptom_for_if_loop,))
                 for o in data_symptom_treatment:
                     data_symptom_treatment = o[0]
             else:
-                data_symptom_answer = symptom_qa_database.execute('SELECT symptom_answer FROM symptom WHERE id=5',)
-                data_symptom_treatment = symptom_qa_database.execute('SELECT symptom_treatment FROM symptom WHERE id=5',)
+                data_symptom_unknown = 5
+                data_symptom_answer = symptom_qa_database.execute('SELECT symptom_answer FROM symptom WHERE id=?', (data_symptom_unknown,))
+                data_symptom_treatment = symptom_qa_database.execute('SELECT symptom_treatment FROM symptom WHERE id=?', (data_symptom_unknown,))
     if symptom_change_question_list_length >= 6:
         return render_template("Symptom Checker/Symptom.html", title="Symptom", symptom_reply_answer=data_symptom_answer,
                                symptom_reply_answer_treatment=data_symptom_treatment)
