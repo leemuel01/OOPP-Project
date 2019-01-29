@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c439e86f-cd57-4d86-a59a-b238d22b113e" name="Default Changelist" comment="Jesus christ I've been editing the wrong files no wonder things were not working.">
-      <change beforePath="$PROJECT_DIR$/Flask/site.db" beforeDir="false" afterPath="$PROJECT_DIR$/Flask/site.db" afterDir="false" />
-    </list>
+    <list default="true" id="c439e86f-cd57-4d86-a59a-b238d22b113e" name="Default Changelist" comment="Jesus christ I've been editing the wrong files no wonder things were not working." />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -515,7 +513,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49209487" visible="true" weight="0.3067114" />
       <window_info id="Structure" order="1" sideWeight="0.5079051" side_tool="true" weight="0.29932886" />
