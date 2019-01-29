@@ -17,3 +17,6 @@ https://upload.wikimedia.org/wikipedia/commons/a/ad/Hx_in_PEDz.pdf
 
 Datepicker:
 https://gijgo.com/datepicker
+
+Flask Threading:
+https://www.edureka.co/community/30828/how-do-you-add-a-background-thread-to-flask-in-python

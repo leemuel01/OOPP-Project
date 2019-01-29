@@ -36,7 +36,7 @@
                         </div>
 
                         <div class="modal-footer">
-                            <a href="{{ url_for('users.delete_item', record='Reminders',  item_id=current_user.reminders[i].id) }}">
+                            <a href="{{ url_for('reminder.delete_item', record='Reminders',  item_id=current_user.reminders[i].id) }}">
                                 <button class="btn btn-danger col-12"> Yes </button>
                             </a>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal"> No </button>

@@ -121,40 +121,12 @@ def reset_token(token):
     return render_template("Users/Reset Token.html", title="Reset Password", form=form)
 
 
-
-@users.route("/Profile", methods = ['POST', 'GET'])
-@users.route("/Profile/Reminder", methods = ['POST', 'GET'])
-@login_required
-def profile_reminder():
-    image_files = url_for('static', filename=f"images/Profile_Picture/{current_user.image_file}")
-    form = Reminder_Form()
-
-    if form.validate_on_submit():
-        data = Reminders(reminder=form.reminder.data,
-                         date=form.reminder_date.data,
-                         user_id=current_user.id)
-
-
-        db.session.add(data)
-        db.session.commit()
-
-    return render_template("Users/profile.html", title="Reminder", image_file=image_files, form=form)
-
-@users.route("/<string:record>/<int:item_id>", methods = ['POST', 'GET'])
-@login_required
-def delete_item(record, item_id):
-    item = Reminders.query.get_or_404(item_id)
-
-    db.session.delete(item)
-    db.session.commit()
-    flash(f'The record has been successfully deleted!', 'success')
-    return redirect(url_for('users.profile_reminder', record=record))
-
 @users.route("/Profile/History", methods = ['POST', 'GET'])
 @login_required
 def profile_history():
     image_files = url_for('static', filename=f"images/Profile_Picture/{current_user.image_file}")
     return render_template("Users/profile.html", title="History", image_file=image_files)
+
 
 
 @users.route("/Profile/Edit", methods = ['POST', 'GET'])
@@ -172,7 +144,7 @@ def profile_edit():
 
         db.session.commit()
         flash('Your account has been updated!', 'success')
-        return redirect(url_for('users.profile_reminder'))
+        return redirect(url_for('reminder.profile_reminder'))
 
     elif request.method == 'GET':
         form.username.data = current_user.username
