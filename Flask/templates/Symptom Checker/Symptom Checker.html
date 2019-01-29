@@ -3,16 +3,19 @@
 {% block content %}
     <div class="container">
             <div class="col-8">
-                <form action="symptom_change_question" method="post">
-                    <h2>{{ symptom_question_html }}</h2>
-                    <input type="radio" name="answer" value="1">{{ symptom_answer_one_html }}<br>
-                    <input type="radio" name="answer" value="2">{{ symptom_answer_two_html }}<br>
-                    <input type="radio" name="answer" value="3">{{ symptom_answer_three_html }}<br>
-                    <input type="radio" name="answer" value="4">{{ symptom_answer_four_html }}<br>
-                    <input type="radio" name="answer" value="5">{{ symptom_answer_five_html }}<br>
+                {% for i in q_list %}
+                <form action="Symptom_Checker" method="post">
+                    <h2> {{ i[1] }}</h2>
+                    <input type="radio" name="answer" value="1"> {{ i[2] }} <br>
+                    <input type="radio" name="answer" value="2"> {{ i[3] }} <br>
+                    <input type="radio" name="answer" value="3"> {{ i[4] }} <br>
+                    <input type="radio" name="answer" value="4"> {{ i[5] }} <br>
+                    <input type="radio" name="answer" value="5"> {{ i[6] }} <br>
+                    <input type="hidden" name="answer_list" value="{{ a_list }}">
                     <input type="submit">
                 </form>
                 </div>
+                {% endfor %}
 
     </div>
 

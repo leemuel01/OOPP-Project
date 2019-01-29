@@ -14,13 +14,13 @@
                 </p>
 
                 {% if current_user.is_authenticated %}
-                <a class=" col-12" href="{{ url_for('users.profile_reminder') }}">
+                <a class="col-12" href="{{ url_for('reminder.profile_reminder') }}">
                     <button class="btn btn-info col-12">
                         Profile
                     </button>
                 </a>
                 {% else %}
-                <a class=" col-12" href="{{ url_for('users.register') }}">
+                <a class="col-12" href="{{ url_for('users.register') }}">
                     <button class="btn btn-info col-12">
                         Sign up
                     </button>
@@ -97,7 +97,7 @@
     <br>
     <div class="row justify-content-around">
         <div class="col-2 contactbg">
-
+            <img src="../static/images/Profile_Picture/ac9a1f9a5cbf2fd3.png" class="img-fluid mx-auto d-block w-100" alt="" srcset="">
         </div>
 
         <div class="col-2 contactbg">
@@ -120,40 +120,44 @@
     <br>
 </div>
 
-<div class="container-fluid" id="bottomnav">
-    <br>
-    <br>
-    <h3> About MedFriend </h3>
-    <ul>
-        <li>
-            <a class="" href="{{ url_for('appointment.appointments') }}">Appointment</a>
-        </li>
+<div class="container-fluid row" id="bottomnav">
 
-        <li>
-            <a class="" href="{{ url_for('symptom_checker.symptom_check') }}">Symptom Checker</a>
-        </li>
+    <div class="col-10">
+        <h3> About MedFriend </h3>
+        <ul>
+            <li>
+                <a class="" href="{{ url_for('appointment.appointments') }}">Appointment</a>
+            </li>
 
-        <li>
-            <a class="" href="{{ url_for('trivia.main_page') }}">Medical Trivia</a>
-        </li>
+            <li>
+                <a class="" href="{{ url_for('symptom_checker.symptom_check') }}">Symptom Checker</a>
+            </li>
 
-        <li>
-            <a class="" href="{{ url_for('medical_teacher.teacher') }}">Medical Tutor</a>
-        </li>
+            <li>
+                <a class="" href="{{ url_for('trivia.main_page') }}">Medical Trivia</a>
+            </li>
 
-        <li>
-            <a class="" href="{{ url_for('feedback.form_page') }}">Feedback</a>
-        </li>
-    </ul>
-    <br>
-    <br>
-    <p>
-        Copyright ©2019 All rights reserved
-    </p>
+            <li>
+                <a class="" href="{{ url_for('medical_teacher.teacher') }}">Medical Tutor</a>
+            </li>
 
+            <li>
+                <a class="" href="{{ url_for('feedback.form_page') }}">Feedback</a>
+            </li>
+        </ul>
+        <br>
+        <br>
+        <p>
+            Copyright ©2019 All rights reserved
+        </p>
 
-
-
+    </div>
+    <div class="col-3 row justify-content-start">
+        <img style="width: 40px; height:40px;" src="../static/images/icons/Facebook.png" class="col" alt="" srcset="">
+        <img style="width: 40px; height:40px;" src="../static/images/icons/Instagram.png" class="col" alt="" srcset="">
+        <img style="width: 40px; height:40px;" src="../static/images/icons/Twitter.png" class="col" alt="" srcset="">
+        <img style="width: 40px; height:40px;" src="../static/images/icons/linkedin.png" class="col" alt="" srcset="">
+    </div>
 
 
 
