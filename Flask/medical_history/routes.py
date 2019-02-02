@@ -151,13 +151,14 @@ def delete_item(record, item_id):
     return redirect(url_for('medical_history.Update_Record', record=record))
 
 
+#Printing HTML to PDF uses pdfkit and wkhtmltopdf
 
 @medical_history.route("/Print")
 @login_required
 def print_pdf():
     rendered = render_template('Medical History/pdf.html')
 
-    config = pdfkit.configuration(wkhtmltopdf='wkhtmltopdf/bin/wkhtmltopdf.exe') #path to app
+    config = pdfkit.configuration(wkhtmltopdf='wkhtmltopdf/bin/wkhtmltopdf.exe') #path to wkhtmltopdf app
     pdf = pdfkit.from_string(rendered, False, configuration=config)
 
     response = make_response(pdf)
