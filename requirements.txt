@@ -51,7 +51,7 @@ Pyphen==0.9.5
 PySocks==1.6.8
 python-dateutil==2.7.5
 pytz==2018.9
-PyYAML==3.13
+PyYAML==5.4
 requests==2.21.0
 six==1.11.0
 SQLAlchemy==1.2.14
